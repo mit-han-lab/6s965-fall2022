@@ -1,7 +1,7 @@
 # Guidelines for Scribe Duties
 
 ## General Guidelines
-For 6.S965 class, each student is required to scribe for a few lectures. The scribe duties cover 5% of final grade.
+For 6.S965 class, each student is required to scribe for a few lectures. The notes should be well-written, stand alone reference, so that the reader **does not** need to go back to the lecture video or slides. The scribe duties cover 5% of final grade.
 
 ### Preparation
 Please [fork](https://help.github.com/articles/fork-a-repo/)  the course repository. All your notes will be first pushed to your fork of the repository.
@@ -17,7 +17,7 @@ Please [fork](https://help.github.com/articles/fork-a-repo/)  the course reposit
 The due date for each note is 1 week after the lecture. To submit the notes for review, please do as follows:
 
  1. Create  [a pull request](https://help.github.com/articles/about-pull-requests/)  (PR) into the master branch of the course repository.
- 2. Make sure you title your pull request  `Lecture <dd>: <lecture title>`.
+ 2. Make sure you title your pull request as `Lecture <dd>: <lecture title>`.
  3. TAs will review your notes and approve or request changes. Please update your notes according to TAs' requests.
  4. Once TAs are satisfied with the quality of the scribed notes, your PR will be merged.
  5. Once the PR is merged, authors of the submitted notes get credit.
@@ -34,7 +34,6 @@ $$\texttt{MACs}_{\texttt{conv}} = c_o \cdot c_i \cdot k_h \cdot k_w \cdot h_o \c
 
 > You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
 
-### Code Blocks
-
-
 ### Citations
+
+Citations are important. You should cite the work as `[[first author's surname *et al.*, year of publication]](url to the arXiv or pdf version of the work)`. For example, magnitude-based pruning prunes the synapses with the lowest magnitude [[Han *et al.*, 2015]](https://papers.nips.cc/paper/2015/hash/ae0eb3eed39d2bcef4622b2499a05fe6-Abstract.html).

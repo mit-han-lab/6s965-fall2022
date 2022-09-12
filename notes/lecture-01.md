@@ -13,6 +13,8 @@
 
 This is a template of the lecture note.
 
+![ImageNet Top-1 Accuracy vs. Deep Learning Model Computation Demands](figures/lecture-01/accuracy-vs-macs.png)
+
 ## Overview of the Course Information
 
 This is a template of the lecture note.
