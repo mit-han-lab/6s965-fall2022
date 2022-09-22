@@ -31,7 +31,7 @@ $c_o$: Output Channels
 
 | Tensors             | Shapes       |
 | ------------------- | ------------ |
-| Input Features $X$  | $ (n, c_i)$  |
+| Input Features $X$  | $(n, c_i)$  |
 | Output Features $Y$ | $(n, c_o)$   |
 | Weights $W$         | $(c_o, c_i)$ |
 | bias $b$            | $(c_o, )$    |
@@ -42,7 +42,7 @@ The output neuron is connected to input neurons in the receptive field.
 
 | Tensors             | Shapes of 1-D Conv | Shapes of 2-D Conv     |
 | ------------------- | ------------------ | ---------------------- |
-| Input Features $X$  | $ (n, c_i, w_i)$   | $(n, c_i, h_i, w_i)$   |
+| Input Features $X$  | $(n, c_i, w_i)$    | $(n, c_i, h_i, w_i)$   |
 | Output Features $Y$ | $(n, c_o, w_o)$    | $(n, c_o, h_o, w_o)$   |
 | Weights $W$         | $(c_o, c_i,k_w)$   | $(c_o, c_i, k_h, k_w)$ |
 | bias $b$            | $(c_o, )$          | $(c_o, )$              |
@@ -59,7 +59,7 @@ Padding can keep the output feature map size the same as the  input feature map 
 
 - Zero padding pads the input boundaries with zero.
   
-  $h_0 + h_i + 2p-k_h + 1$
+  $h_o + h_i + 2p-k_h + 1$
 
 - Other: Reflection Padding, replication padding, constant padding.
 
@@ -149,7 +149,7 @@ Latency = $max(T_{operation}, T_{memory})$
 
 ### Energy consumption
 
-Data movement - > more memory reference -> more energys
+Data movement -> more memory reference -> more energys
 
 DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Add
 
@@ -201,7 +201,7 @@ MAC: $a = a+b\times c$
 
 #### FLOP: Floating Point Operation
 
-- One floatingfloating-point FLOPs
+- One floating-point MAC = Two FLOPs
 
 e.g. AlexNet has 724 MACs, so the total number of floating point operations will be 1.4G FLOPs.
 
