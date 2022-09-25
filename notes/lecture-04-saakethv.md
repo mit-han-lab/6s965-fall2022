@@ -134,30 +134,28 @@ Because NNs are nonconvex, we overparameterize them so they can be trained to co
 - Quantization: Approximate weights as 4-bit instead of 32-bit
 - Parallelize with specialized processing elements (PEs) and extra metadata (indices of nonzero elements)
 
-EIE achieves *significant* speedup and energy efficiency over traditional compression techniques [[Han et al., FPGA 2017]](https://arxiv.org/abs/1612.00694)
+EIE achieves *significant* speedup and energy efficiency over traditional compression techniques 
 - Now, it's commercialized in NVIDIA GPUs
 
 ### Load Imbalance
 
 Question: Can we codesign the pruning algorithm and efficient inference?
 - **Load imbalance**: some PEs might have more work than others due to imbalanced nonzero entries in each part of the matrix
-- *Balancing* pruning means distributing the sparsity more evenly across PEs
+- *Balancing* pruning means distributing the sparsity more evenly across PEs [[Han et al., FPGA 2017]](https://arxiv.org/abs/1612.00694)
     - Doesn't decrease accuracy
     - Faster than load imbalanced networks
 
-![Load balancing improves speed](figures/lecture-04/saakethv/balance.png)
+![Load balancing maintains accuracy](figures/lecture-04/saakethv/balancea.png) ![Load balancing improves speed](figures/lecture-04/saakethv/balance.png)
 
 ### M:N Sparsity
 
 - In every group of N elements, at least M have to be 0
-- Common use case: 2:4 sparsity
+- Common use case: 2:4 sparsity [[Mishra et al., arXiv 2021]](https://arxiv.org/abs/2104.08378)
     - Compress matrix in half by pushing all nonzero elements to left
     - Store 2-bit index for each element
 - M:N sparse matrix multiplication implemented on NVIDIA tensor cores
 
 ![2:4 sparsity computation](figures/lecture-04/saakethv/mton.png)
-
-## References
 
 
 
