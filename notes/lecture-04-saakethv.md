@@ -144,8 +144,11 @@ Question: Can we codesign the pruning algorithm and efficient inference?
 - *Balancing* pruning means distributing the sparsity more evenly across PEs [[Han et al., FPGA 2017]](https://arxiv.org/abs/1612.00694)
     - Doesn't decrease accuracy
     - Faster than load imbalanced networks
+<p align="middle">
+<img src="figures/lecture-04/saakethv/balancea.png" width="48%">
+<img src="figures/lecture-04/saakethv/balance.png" width="48%">
+</p>
 
-![Load balancing maintains accuracy](figures/lecture-04/saakethv/balancea.png) ![Load balancing improves speed](figures/lecture-04/saakethv/balance.png)
 
 ### M:N Sparsity
 
