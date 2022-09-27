@@ -124,7 +124,7 @@ Question: Can we train a sparse neural network from scratch?
 ## System Support for Sparsity
 
 Because NNs are nonconvex, we overparameterize them so they can be trained to convergence
-- Bad for inference, especually if memory is constrained
+- Bad for inference, especially if memory is constrained
 - Therefore we need model compression for both faster and more power efficient inference
 
 **EIE** (**E**fficient **I**nference **E**ngine) [[Han et al., ISCA 2016]](https://arxiv.org/pdf/1602.01528.pdf): First accelerator for sparse DNN models
