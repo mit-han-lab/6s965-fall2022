@@ -40,7 +40,7 @@
     - Example - 10 million weights may be two large to store on a phone or conveniently transfer to a phone, especially over Cellular Data
 - Model execution time
     - The scaling behavior of execution time with respect to model size is a function of the arithmetic operations comprising the neural network
-- model inference energy
+- Model inference energy
 - Example - large RL policy DNNs for protein folding, gameplay, etc. may consume thousands of dollars of GPU or TPU time
 
 
