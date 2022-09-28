@@ -10,7 +10,7 @@
 | Description | Review of data types in computer systems, introduction to quantization in neural networks, and introduction to three common quantization methods. |
 
 ## Motivation
-- Memory (and movement in memory) is expensive (in terms of energy consumption).
+- Memory (and movement in memory) is expensive (in terms of energy consumption). [[Horowitz, M., IEEE ISSCC 2014]](https://ieeexplore.ieee.org/document/6757323)
 - Lower bit-width operations are cheaper.
 - We actually don't need all of the precision high bit-width offers anyway, so we can make 
 deep learning more efficient by using lower bit-widths.
@@ -48,7 +48,7 @@ $$(-1)^{\text{sign}} \times (1 + \text{fraction}) \times 2^{\text{exponent - 127
 ## Quantization
 - We define quantization as the process of constraining an input from a continuous or otherwise large set of values to a discrete or smaller set.
 
-### K-Means-based Weight Quantization
+### K-Means-based Weight Quantization [[Han et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149v5.pdf)
 - Choose a cluster index bit-width, $B$.
 - Run K-Means clustering on the weight matrix to find $2^B$ clusters.
 - Store matrix of $B$-bit integer indexes (same size as weight matrix) and $B$-length "codebook" of centroids (in floating-point precision).
@@ -56,7 +56,7 @@ $$(-1)^{\text{sign}} \times (1 + \text{fraction}) \times 2^{\text{exponent - 127
 - Since weights occur with different frequencies, Huffman coding can be used to optimally encode the weights for fast access.
 - However, all computation and memory access is still floating-point.
 
-### Linear Quantization
+### Linear Quantization [[Jacob et al. CVPR 2018]](https://arxiv.org/pdf/1712.05877.pdf)
 - Find the two parameters ($S$ and $Z$) that create an affine mapping of integers ($q$) to real numbers ($r$), such that:
 $$r = S(q-Z)$$
 - $Z$ sets the zero point, and is stored as an integer.
