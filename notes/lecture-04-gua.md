@@ -46,7 +46,7 @@ We saw that the previous approach has a major caveat of not being able to consid
 
 **Agent**: We use a DDPG (off-policy, actor-critic) agent as follows: at each timestep, the agent receives a state $s_t$ representing layer $t$ of the environment. The agent outputs ab action $a_t \in [0, 1)$, and the layer is compressed using some algorithm (like channel pruning) to sparsity ratio $a_t$. The agent then moves to layer $t+1$ with a new state $s_{t+1}$. After the final layer, the model is evaluated on the validation set, and the agent receives a reward.
 
-**Reward**: One possible reward is $R_{err} = -Error$, encouraging the model to prune to a low validation loss. However, this doesn't incentivize model size reduction. Therefore, one way to achieve such reduction is by limiting the action space: allow arbitrary actions for the first few layers, and then constrain $a_t$ for later layers. Other possible rewards include $R_{\text{FLOPs}} = -Error \cdot \log(\text{FLOPs})$ or $R_{\text{Param}} = -Error \cdot \log(\#\text{Param})$.
+**Reward**: One possible reward is $R_{err} = -Error$, encouraging the model to prune to a low validation loss. However, this doesn't incentivize model size reduction. Therefore, one way to achieve such reduction is by limiting the action space: allow arbitrary actions for the first few layers, and then constrain $a_t$ for later layers. Other possible rewards include $R_{\text{FLOPs}} = -Error \cdot \log(\text{FLOPs})$ or $R_{\text{Param}} = -Error \cdot \log(\\text{Number of Params})$.
 
 A figure summary of the algorithm is below:
 
