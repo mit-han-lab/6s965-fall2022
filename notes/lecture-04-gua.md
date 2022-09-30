@@ -111,7 +111,7 @@ How? Via an iterative magnitude pruning approach. Assume that you want $p\%$ of 
 
 ![](https://i.imgur.com/g6cMq8i.png)
 
-Later, the authors found that resetting weights to $\textbf{W}_0$ only works for small tasks like MNIST and CIFAR, failing on deeper networks [[Frankle, et al. 2019]](https://arxiv.org/pdf/1903.01611.pdf). Instead, they reset the weights to the values after a small number of training iterations (in this case $t=6$). (https://arxiv.org/pdf/1903.01611.pdf)
+Later, the authors found that resetting weights to $\textbf{W}_0$ only works for small tasks like MNIST and CIFAR, failing on deeper networks [[Frankle, et al. 2019]](https://arxiv.org/pdf/1903.01611.pdf). Instead, they reset the weights to the values after a small number of training iterations (in this case $t=6$).
 ![](https://i.imgur.com/ef9vQty.png)
 
 ## Section 4: System Support for Sparsity
