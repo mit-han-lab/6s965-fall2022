@@ -79,4 +79,11 @@ For inference time, it might seem counterintuitive that it speeds up, as the cod
 
 The second main type of Quantization is Linear Quantization - where you want an affine map from integers to a real-numbered interval.
 $$r = S(q - z)$$
+In this equation, $S$ is the scale factor, and is generally a floating-point number; $q$ is the quantized version of $r$, and therefore an integer; and $Z$ is an integer of the same type that is chosen such that it maps to zero.
 
+### Finding the Values
+
+Let $r_\min, r_\max$ be the minimum and maximum of all the original weights; and let $q_\min, q_\max$ be the minimum and maximum of the quantized range (which is generally $-2^n, 2^n-1$ for some $n$). Then, we would approximately want $r_\min = S(q_\min - Z)$ and $r_\max = S(q_\max - Z)$. Subtracting the second from the first gives $r_\max - r_\min = S(q_\max - q_\min)$, which gives us:
+$$S = \frac{r_\max - r_\min}{q_\max - q_\min}$$
+
+For the zero offset, we would like
