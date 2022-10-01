@@ -2,12 +2,12 @@
 
 ## Note Information
 
-| Title       | Basics of Neural Networks                                                                     |
-| ----------- | --------------------------------------------------------------------------------------------- |
-| Lecturer    | Song Han                                                                                      |
-| Date        | 09/13/2022                                                                                    |
-| Note Author | Guangxuan Xiao (xgx)                                                                          |
-| Description | Reviewing the basics of deep learning and introducing efficiency metrics for neural networks. |
+| Title       | Basics of Neural Networks                                                                |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| Lecturer    | Song Han                                                                                 |
+| Date        | 09/13/2022                                                                               |
+| Note Author | Guangxuan Xiao (xgx)                                                                     |
+| Description | Review the basics of deep learning and introduce efficiency metrics for neural networks. |
 
 ## Terminology of Neural Networks
 
