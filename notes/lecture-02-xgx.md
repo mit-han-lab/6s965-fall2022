@@ -77,7 +77,7 @@ Strided Convulution Layers increase the receptive field without increasing the l
 
 $h_o = \frac{h_i + 2p-k_h}{s}+1$, where s is the stride and p is the padding.
 
-#### Group Convolution Layer
+#### Group convolution layer
 
 A group of narrower convolutions.
 
