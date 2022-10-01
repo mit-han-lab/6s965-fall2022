@@ -121,11 +121,11 @@ Transformer is composed of multiple self-attention layers, which find the relati
 
 ## Popular CNN architectures
 
-- AlexNet [[Krizhevsky *et al.*, 2012]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks): the first architecture to adopt an architecture with consecutive convolutional layers (conv layer 3, 4, and 5).
+- AlexNet [[Krizhevsky *et al.*, 2012]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks) is the first architecture to adopt an architecture with consecutive convolutional layers (conv layer 3, 4, and 5).
 
-- ResNet [[He *et al.*, 2015]](https://arxiv.org/abs/1512.03385): introduce a residual connection to allow gradient flow.
+- ResNet [[He *et al.*, 2015]](https://arxiv.org/abs/1512.03385) introduce a residual connection to allow gradient flow.
 
-- MobileNetV2 [[Sandler *et al.*, 2018]](https://arxiv.org/abs/1801.04381): depth-wise convolution
+- MobileNetV2 [[Sandler *et al.*, 2018]](https://arxiv.org/abs/1801.04381) introduces depthwise convolution to effectively reduce the computation cost.
 
 ## Efficiency metrics for deep learning
 
@@ -187,7 +187,7 @@ A multiply-accumulate (MAC) operation is $a = a+b\times c$. Here is the number o
 
 - Depthwise convolution: $k_w \times k_h \times h_o \times w_o \times c_o$
 
-- AlexNet has 724MACs
+- As an example, AlexNet has 724M MACs.
 
 #### FLOP: floating point operation
 
