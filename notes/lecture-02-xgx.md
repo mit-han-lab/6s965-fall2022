@@ -36,7 +36,7 @@ $c_o$: Output Channels
 | Weights $W$         | $(c_o, c_i)$ |
 | bias $b$            | $(c_o, )$    |
 
-### Convolution Layer
+### Convolution layer
 
 The output neuron is connected to input neurons in the receptive field.
 
