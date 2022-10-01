@@ -13,45 +13,39 @@
 
 Synapses = Weights = Parameters: Connection intensities in neural nets.
 
-Neurons  = Features = Activations: Input / intermediate / Output values in neural nets.
+Neurons  = Features = Activations: Input / intermediate / output values in neural nets.
 
 ## Popular neural network layers
 
-### Fully-connected layer (Linear layer)
+### Fully-connected layer (linear layer)
 
 The output neuron is connected to all input neurons.
 
-$y_i = \sum_j w_{ij}x_j+b_i$
-
-$n$: Batch size,
-
-$c_i$: Input Channels
-
-$c_o$: Output Channels
+$y_i = \sum_j w_{ij}x_j+b_i$, where $n$ is the batch size, $c_i$ is the number of input channels, and $c_o$ is the number of output channels.
 
 | Tensors             | Shapes       |
 | ------------------- | ------------ |
 | Input Features $X$  | $(n, c_i)$  |
 | Output Features $Y$ | $(n, c_o)$   |
 | Weights $W$         | $(c_o, c_i)$ |
-| bias $b$            | $(c_o, )$    |
+| Bias $b$            | $(c_o, )$    |
 
 ### Convolution layer
 
-The output neuron is connected to input neurons in the receptive field.
+The output neuron is only connected to input neurons in the receptive field.
 
 | Tensors             | Shapes of 1-D Conv | Shapes of 2-D Conv     |
 | ------------------- | ------------------ | ---------------------- |
 | Input Features $X$  | $(n, c_i, w_i)$    | $(n, c_i, h_i, w_i)$   |
 | Output Features $Y$ | $(n, c_o, w_o)$    | $(n, c_o, h_o, w_o)$   |
 | Weights $W$         | $(c_o, c_i,k_w)$   | $(c_o, c_i, k_h, k_w)$ |
-| bias $b$            | $(c_o, )$          | $(c_o, )$              |
+| Bias $b$            | $(c_o, )$          | $(c_o, )$              |
 
 - Multiplications needed to calculate a single output element equals the size of the convolution kernels.
 
 - How to calculate output height and width?
 
-$h_o = h_i - k_h + 1$
+  $h_o = h_i - k_h + 1$
 
 #### Padding
 
@@ -59,21 +53,21 @@ Padding can keep the output feature map size the same as the  input feature map 
 
 - Zero padding pads the input boundaries with zero.
   
-  $h_o + h_i + 2p-k_h + 1$
+  $h_o = h_i + 2p-k_h + 1$
 
 - Other: reflection padding, replication padding, constant padding.
 
 #### Receptive Field
 
-- In convolution , each output elelment depends on $k_h \times k_w$  in the input.
+- In convolution, each output element depends on $k_h \times k_w$ in the input.
 
-- Each successive convulution adds $k-1$ to the receptive field size.
+- Each successive convolution adds $k-1$ to the receptive field size.
 
 - With L layers the receptive field size is $L (k-1) + 1$.
 
-#### Strided Convulution Layer
+#### Strided convulution layer
 
-Strided Convulution Layers increase the receptive field without increasing the layer.
+Strided convulution layers increase the receptive field without increasing the layer.
 
 $h_o = \frac{h_i + 2p-k_h}{s}+1$, where s is the stride and p is the padding.
 
@@ -97,13 +91,13 @@ Weights: $(c, k_h, k_w)$
 
 ### Pooling layer
 
-Downsample the feature map to a smaller size, and graduallyreduceg the size of the feature maps.
+Pooling layers are used to downsample the feature map and gradually reduce the size of feature maps.
 
 Usually, the stride is the same as the kernel size.
 
 ### Normalization layer
 
-Normalizing the features makes training faster
+Normalizing the features makes the model optimization faster
 
 - The normalization layer normalized the features as follows
   
@@ -117,31 +111,27 @@ Normalizing the features makes training faster
 
 Non-linear functions
 
-- most efficient: ReLU
+- ReLU is efficient, and quantization-friendly, but has zero gradients for negative inputs.
 
-- ReLU problem: input lower than zero will have 0 gradient
-
-- Quantization friendly: ReLU
-
-- GeLU, Swish, hard swish: hard to quantize
+- GeLU, Swish, and Hardswish are more effective but hard to be quantized.
 
 ### Transformers
 
-Attention: finding the relationship between each token, problem $O(n^2)$ complexity and when $n$ is very large it will be very slow.
+Transformer is composed of multiple self-attention layers, which find the relationship between tokens. The computational complexity of self-attention is $O(n^2)$, where $n$ is the token size. Therefore, it will be very slow with large token size.
 
 ## Popular CNN Architectures
 
-- AlexNet: the first architecture to adopt an architecture with consecutive convolutional layers (conv layer 3, 4, and 5).
+- AlexNet [[Krizhevsky *et al.*, 2012]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks): the first architecture to adopt an architecture with consecutive convolutional layers (conv layer 3, 4, and 5).
 
-- ResNet: introduce a residual connection to allow gradient flow.
+- ResNet [[He *et al.*, 2015]](https://arxiv.org/abs/1512.03385): introduce a residual connection to allow gradient flow.
 
-- MobileNetV2: depth-wise convolution
+- MobileNetV2 [[Sandler *et al.*, 2018]](https://arxiv.org/abs/1801.04381): depth-wise convolution
 
 ## Efficiency metrics for deep learning
 
-Core: Computation and memory
+The two core metrics are **Computation and Memory**.
 
-Three Dimensions: Storage, Latency, and Energy
+Three dimensions of consideration are **Storage, Latency, and Energy**.
 
 ### Latency
 
@@ -163,7 +153,7 @@ DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Ad
 
 - Grouped Convolution: $c_o c_i k_h k_w / g$
 
-- Depth-wise convolution: $c_o k_w k_h$
+- Depthwise convolution: $c_o k_w k_h$
 
 #### Model size
 
@@ -183,7 +173,7 @@ DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Ad
 
 #### MACs: Multiply-Accumulate Operations
 
-MAC: $a = a+b\times c$
+A multiply-accumulate (MAC) operation is $a = a+b\times c$. Here is the number of MACs for some common operators:
 
 - Matrix-vector multiplication (MV): $m\times n$
 
@@ -197,14 +187,14 @@ MAC: $a = a+b\times c$
 
 - Depthwise Convolution: $k_w \times k_h \times h_o \times w_o \times c_o$
 
-- AlexNet have 724MACs
+- AlexNet has 724MACs
 
 #### FLOP: Floating Point Operation
 
-- One floating-point MAC = Two FLOPs
+- One floating-point multiply-accumulate (MAC) operation corresponds to two floating-point operations (FLOP): multiply and add.
 
 e.g. AlexNet has 724 MACs, so the total number of floating point operations will be 1.4G FLOPs.
 
-- Floating Point Operation Per Second (FLOPS)
+- Floating point operation per second (FLOPS)
   
   $FLOPS = \frac{FLOP}{second}$
