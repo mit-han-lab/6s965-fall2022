@@ -49,7 +49,7 @@ The output neuron is only connected to input neurons in the receptive field.
 
 #### Padding
 
-Padding can keep the output feature map size the same as the  input feature map size.
+Padding keeps the output feature map size the same as the input feature map size.
 
 - Zero padding pads the input boundaries with zero.
   
@@ -57,7 +57,7 @@ Padding can keep the output feature map size the same as the  input feature map 
 
 - Other: reflection padding, replication padding, constant padding.
 
-#### Receptive Field
+#### Receptive field
 
 - In convolution, each output element depends on $k_h \times k_w$ in the input.
 
@@ -85,9 +85,9 @@ Weights: $(c, k_h, k_w)$
 
 #### Other convolution layers
 
-- Transposed Convolution: super-resolution, segmentation, backprop.
+- Transposed convolution can be used to upsample the feature map (e.g., in super-resolution and segmentation).
 
-- Dilated Convolution
+- Dilated convolution can be used to increase the receptive field with dilated convolution kernels.
 
 ### Pooling layer
 
@@ -109,7 +109,7 @@ Normalizing the features makes the model optimization faster
 
 ### Activation function
 
-Non-linear functions
+Activation functions are usually non-linear.
 
 - ReLU is efficient, and quantization-friendly, but has zero gradients for negative inputs.
 
@@ -119,7 +119,7 @@ Non-linear functions
 
 Transformer is composed of multiple self-attention layers, which find the relationship between tokens. The computational complexity of self-attention is $O(n^2)$, where $n$ is the token size. Therefore, it will be very slow with large token size.
 
-## Popular CNN Architectures
+## Popular CNN architectures
 
 - AlexNet [[Krizhevsky *et al.*, 2012]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks): the first architecture to adopt an architecture with consecutive convolutional layers (conv layer 3, 4, and 5).
 
@@ -143,15 +143,15 @@ Data movement -> more memory reference -> more energys
 
 DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Add
 
-### Memory related
+### Memory-related metrics
 
-#### Number of Parameters
+#### Number of parameters
 
 - Linear: $c_0 \times c_i$
 
 - Convolution: $c_o c_i k_h k_w$
 
-- Grouped Convolution: $c_o c_i k_h k_w / g$
+- Grouped convolution: $c_o c_i k_h k_w / g$
 
 - Depthwise convolution: $c_o k_w k_h$
 
@@ -159,9 +159,9 @@ DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Ad
 
 - $Model Size = NumOfParameters \times BitWidth$
 
-- e.g. AlexNet 61M parameters, using fp32 = 244MB, using int8 = 61MB
+For example, AlexNet has 61M parameters, so its model size would be 244MB (with FP32) and 61MB (with INT8).
 
-#### Total / Peak activation
+#### Total and peak activation
 
 - Imbalanced memory distribution of MobileNet: the bottleneck is the peak (inference) and sum (training)
 
@@ -169,9 +169,9 @@ DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Ad
 
 - MCUNet: Activation getting smaller, weights getting larger because the channel is increasing and the resolution is decreasing.
 
-### Computation related
+### Computation-related metrics
 
-#### MACs: Multiply-Accumulate Operations
+#### MACs: multiply-accumulate operations
 
 A multiply-accumulate (MAC) operation is $a = a+b\times c$. Here is the number of MACs for some common operators:
 
@@ -183,17 +183,17 @@ A multiply-accumulate (MAC) operation is $a = a+b\times c$. Here is the number o
 
 - Convolution: $c_i\times k_w \times k_h \times h_o \times w_o \times c_o$
 
-- Grouped Convolution: $c_i\times k_w \times k_h \times h_o \times w_o \times c_o / g$
+- Grouped convolution: $c_i\times k_w \times k_h \times h_o \times w_o \times c_o / g$
 
-- Depthwise Convolution: $k_w \times k_h \times h_o \times w_o \times c_o$
+- Depthwise convolution: $k_w \times k_h \times h_o \times w_o \times c_o$
 
 - AlexNet has 724MACs
 
-#### FLOP: Floating Point Operation
+#### FLOP: floating point operation
 
 - One floating-point multiply-accumulate (MAC) operation corresponds to two floating-point operations (FLOP): multiply and add.
 
-e.g. AlexNet has 724 MACs, so the total number of floating point operations will be 1.4G FLOPs.
+For instance, AlexNet has 724M MACs, corresponding to 1.4G FLOP.
 
 - Floating point operation per second (FLOPS)
   
