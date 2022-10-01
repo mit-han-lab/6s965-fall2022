@@ -15,7 +15,7 @@ Synapses = Weights = Parameters: Connection intensities in neural nets.
 
 Neurons  = Features = Activations: Input / intermediate / Output values in neural nets.
 
-## Popular Neural Network Layers
+## Popular neural network layers
 
 ### Fully-connected layer (Linear layer)
 
