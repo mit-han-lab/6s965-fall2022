@@ -101,7 +101,7 @@ Downsample the feature map to a smaller size, and graduallyreduceg the size of t
 
 Usually, the stride is the same as the kernel size.
 
-### Normalization Layer
+### Normalization layer
 
 Normalizing the features makes training faster
 
