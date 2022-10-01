@@ -9,7 +9,7 @@
 | Note Author | Guangxuan Xiao (xgx)                                                                     |
 | Description | Review the basics of deep learning and introduce efficiency metrics for neural networks. |
 
-## Terminology of Neural Networks
+## Terminology of neural networks
 
 Synapses = Weights = Parameters: Connection intensities in neural nets.
 
