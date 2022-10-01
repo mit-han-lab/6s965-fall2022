@@ -137,7 +137,7 @@ Attention: finding the relationship between each token, problem $O(n^2)$ complex
 
 - MobileNetV2: depth-wise convolution
 
-## Efficiency metrics for Deep learning
+## Efficiency metrics for deep learning
 
 Core: Computation and memory
 
