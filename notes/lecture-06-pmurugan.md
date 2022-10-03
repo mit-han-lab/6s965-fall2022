@@ -1,24 +1,34 @@
-# Efficient ML Notes 9/27
+# Lecture 06: Quantization Part II
 
-# Quantization Part II
+## Note Information
 
-### Administrative Info
+| Title       | Quantization Part II                                                                                            |
+|-------------|-----------------------------------------------------------------------------------------------------------------|
+| Lecturer    | Song Han                                                                                                        |
+| Date        | 09/27/2022                                                                                                      |
+| Note Author | Pranav Murugan (pmurugan)                                                                                       |
+| Description | Exploring techniques for post-training quantization as well as training a quantized model. Introduces binary and ternary quantization. |
 
-Lab 2 Out, due Oct 18
-
-# Review of K-Means and Linear Quantization
+# Review of K-Means and Linear Quantization [link to Lec05 Notes]
 
 ### K-Means
 
-Have quantized weights with floating-point operations with lookup table
+- Define quantized weights with K-means clustering of the values in the weight matrix [[Han, et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149.pdf)
+- Map from quantized weights to centroids with a lookup table
+- An example of a gradient operation on a quantized tensor is below:
 
 ### Linear
 
-Have integer quantized weights with affine map from real to integer weights
+- Have integer quantized weights with affine map from real to integer weights [[Jacob et al., CVPR 2018]](https://arxiv.org/pdf/1712.05877.pdf)
 
-Map q_min and q_max to r_min and r_max, with zero point Z and scale S
+- Map $q_{min}$ and $q_{max}$ to $r_{min}$ and $r_{max}$, with zero point $Z$ and scale $S$
+- The transformation from the quantized to non-quantized parameters is thus $$r = S(q - Z)$$
+- To minimize the number of nonzero operations, we typically make the following assumptions for a fully-connected layer $Y = WX +b$:
 
-[linear quantization assumptions]
+$$Z_W = Z_b = 0,$$
+$$S_b = S_WS_X.$$
+
+where $Z_W$ is the zero point of the weights, $Z_b$ is the zero point of the bias, and $S_b, S_W, S_X$ are the scale factors of the bias, weights and input respectively.
 
 Do bulk of operations in N-bit integer with 32-bit conversion for overflow
 
