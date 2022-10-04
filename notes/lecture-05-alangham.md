@@ -46,7 +46,7 @@ $$(-1)^{\text{sign}} \times (1 + \text{fraction}) \times 2^{\text{exponent - 127
   - AMD 24-bit Float (AMD FP24)
   
 ## Quantization
-- We define quantization as the process of constraining an input from a continuous or otherwise large set of values to a discrete or smaller set.
+We define quantization as the process of constraining an input from a continuous or otherwise large set of values to a discrete or smaller set.
 
 ### K-Means-based Weight Quantization [[Han et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149v5.pdf)
 - Choose a cluster index bit-width, $B$.
