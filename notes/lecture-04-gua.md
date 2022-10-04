@@ -36,7 +36,7 @@ The idea behind this first approach is that different layers are expected to hav
 
 This method isn't optimal because it treats layers independently and doesn't consider their interactions, but the method is very robust and easy to implement in practice.
 
-### AMC: AutoML for Model Compression [[He, et al. 2018]](https://arxiv.org/pdf/1802.03494.pdf)
+### AMC: AutoML for Model Compression [[He et al., 2018]](https://arxiv.org/pdf/1802.03494.pdf)
 
 We saw that the previous approach has a major caveat of not being able to consider the interactions between different layers. The next approach, AMC (AutoML for Model Compression), treats pruning as a reinforcement learning problem. 
 
