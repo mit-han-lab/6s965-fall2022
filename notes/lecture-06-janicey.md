@@ -22,7 +22,7 @@ How should we get the optimal linear quantization parameters (S, Z)?
 ![Per-channel versus Per-tensor quantization example](figures/lecture-06/janicey/fig1.png)
 The figure above comes from [[Han, 2022]](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec06-Quantization-II.pdf), demonstrating how reconstructed error can be much smaller if we use per-channel quantization, which can lead to better model accuracy.
 
-- However, not all hardware supports this, and there might be unnecessary overhead. These days, per channel quantization is quite popular in real life applications. 
+However, not all hardware supports this, and there might be unnecessary overhead. These days, per-channel quantization is quite popular in real-life applications. 
 
 #### Weight Equalization
 - Key idea: rescaling weights to equalize the weight ranges of different output channels, so that we can potentially still use per-tensor weight quantization. 
