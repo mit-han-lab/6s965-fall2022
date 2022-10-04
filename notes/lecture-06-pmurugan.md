@@ -36,7 +36,7 @@ where $Z_W$ is the zero point of the weights, $Z_b$ is the zero point of the bia
 
 ![Quantized fully connected layer](figures/lecture-06/pmurugan/linear-quantization-fc.png)
 
-_How are the parameters $S$ and $Z$ determined?_
+*How are the parameters S and Z determined?*
 - One way is asymmetric quantization, shown below
 ![Asymmetric linear quantization](figures/lecture-06/pmurugan/asymmetric_linear_quantization.png)
 - Another way is symmetric quantization, shown below.
@@ -62,9 +62,15 @@ The drawback of per-channel quantization is that it requires more specialized ha
 ### Weight Equalization
 ![Weight equalization](figures/lecture-06/pmurugan/weight_equalization.png)
 
-Let us first consider two adjacent layers in the model, shown above. We want to scale the layer $W^{(i)}_{oc=j}$ by a scale factor $s^{-1}$ and the corresponding $W^{(i+1)}_{ic=j}$ by $s$ so that the weights have a similar magnitude and the activation is maximally preserved. Such a transformation requires the activation function to be linear (so that successive multiplications of the scaled weight tensors result in the scaling factors cancelling out). Thus, ReLU activations are commonly used because they satisfy *positive scaling equivariance* -- that is, $\text{ReLU}(s\cdot x) = s\cdot \text{ReLU}(x)$ for $s > 0$. 
+Let us first consider two adjacent layers in the model, shown above. We want to scale the layer $W^{(i)}\_{oc=j}$ by a scale factor $s^{-1}$ and the corresponding $W^{(i+1)}\_{ic=j}$ by $s$ so that the weights have a similar magnitude and the activation is maximally preserved. Such a transformation requires the activation function to be linear (so that successive multiplications of the scaled weight tensors result in the scaling factors cancelling out). Thus, ReLU activations are commonly used because they satisfy *positive scaling equivariance* -- that is, $\text{ReLU}(s\cdot x) = s\cdot \text{ReLU}(x)$ for $s > 0$. 
 
-To make weight ranges as close as possible throughout the model, we set $$s_j = \frac{1}{r^{(i+1)}_{ic=j}}\sqrt{r^{(i)}_{oc=j}\cdot r^{(i+1)}_{ic=j}}$$ where $r^{(i)}_{oc=j}$ is the weight range of output channel $j$ in layer $i$, and $r^{(i+1)}_{ic=j}$ is the weight range of input channel $j$ in layer $i+1$. For a linear activation, we can verify straightforwardly that $$\frac{r^{(i)}_{oc=j}}{s}=r^{(i+1)}_{ic=j}\cdot s.$$
+To make weight ranges as close as possible throughout the model, we set 
+
+$$s_j = \frac{1}{r^{(i+1)}\_{ic=j}}\sqrt{r^{(i)}\_{oc=j}\cdot r^{(i+1)}\_{ic=j}}$$ 
+
+where $r^{(i)}\_{oc=j}$ is the weight range of output channel $j$ in layer $i$, and $r^{(i+1)}\_{ic=j}$ is the weight range of input channel $j$ in layer $i+1$. For a linear activation, we can verify straightforwardly that 
+
+$$\frac{r^{(i)}\_{oc=j}}{s}=r^{(i+1)}\_{ic=j}\cdot s.$$
 
 This approach is limited because it best with activations that are linear or near-linear. Also, the scaling operations act in a greedy manner; thus, multiple passes are necessary to propagate changes throughout the model. This approach does not require retraining [[Nagel et al., ICCV 2019]](https://arxiv.org/pdf/1906.04721.pdf).
 
@@ -73,7 +79,9 @@ This approach is limited because it best with activations that are linear or nea
 Another method of weight quantization is simply rounding the floating point values. Why Adaptive Rounding? The philosophy is that rounding to the nearest integer is not necessarily optimal, since weights are often correlated with each other. The best rounding scheme is the one that reconstructs the original activation the best [[Nagel et al., PMLR 2020]](http://proceedings.mlr.press/v119/nagel20a/nagel20a.pdf).
 
 Essentially, we learn a tensor $\mathbf{V}$ that chooses between rounding up or down for each weight element. More specifically, we find $\mathbf{V}$ that satisfies
-$$\argmin_{\mathbf{V}}||\mathbf{W}\mathbf{x} - \lfloor\lfloor \mathbf{W}\rfloor + \mathbf{h}(\mathbf{V})\rceil\mathbf{x}||^2_F + \lambda f_{reg}(\mathbf{V})$$
+
+$$\text{argmin}\_{\mathbf{V}}||\mathbf{W}\mathbf{x} - \lfloor\lfloor \mathbf{W}\rfloor + \mathbf{h}(\mathbf{V})\rceil\mathbf{x}||^2_F + \lambda f_{reg}(\mathbf{V})$$
+
 where:
 - $\mathbf{x}$ is the input to the layer, $\mathbf{W}$ are the un-quantized weights, and $\mathbf{V}$ has the same shape as $\mathbf{W}$
 - we also supply the elementwise function $\mathbf{h}: \mathbb{R}\rightarrow [0,1]$, such as a rectified sigmoid. 
@@ -83,10 +91,10 @@ where:
 
 We need to collect activation statistics to effectively quantize activations. There are many ways of doing so:
 
-1. During training, we can use an exponential moving average (EMA) approach [[Jacob et al., CVPR 2018]](https://arxiv.org/pdf/1712.05877.pdf). In this approach, the range of the activations of the model are observed (with a greater weight assigned to later training cycles). Mathematically, the EMA activation range at epoch $t$, $\hat{r}^{(t)}_{\text{max, min}}$, is defined in terms of the actual range of activations at epoch $t$, $r^{(t)}_{\text{max, min}}$, as $$\hat{r}^{(t)}_{\text{max, min}} = \alpha r^{(t)}_{\text{max, min}} + (1-\alpha)\hat{r}^{(t-1)}_{\text{max, min}}$$ for some empirically tunable parameter $\alpha \in (0,1)$.
+1. During training, we can use an exponential moving average (EMA) approach [[Jacob et al., CVPR 2018]](https://arxiv.org/pdf/1712.05877.pdf). In this approach, the range of the activations of the model are observed (with a greater weight assigned to later training cycles). Mathematically, the EMA activation range at epoch $t$, $\hat{r}^{(t)}\_{\text{max, min}}$, is defined in terms of the actual range of activations at epoch $t$, $r^{(t)}\_{\text{max, min}}$, as $$\hat{r}^{(t)}\_{\text{max, min}} = \alpha r^{(t)}\_{\text{max, min}} + (1-\alpha)\hat{r}^{(t-1)}\_{\text{max, min}}$$ for some empirically tunable parameter $\alpha \in (0,1)$.
 2. We can also use a calibration batch after training to directly estimate the dynamic range of activations. We use the mean of the min and max of each sample to minimize effect of outliers. To construct this calibration batch, we usually picka a representative sample at random from the training set (e.g. 100 images). To quantize the observed range of activations, we can follow one of three methods.
-    1. We can uniformly map the range [$\bar{r}_{min}$, $\bar{r}_{max}$] to the quantized range [$q_{min}$, $q_{max}$] as in the weight quantization above.
-    2. We can minimize the MSE between inputs $\mathbf(X)$ and reconstructed quantized inputs $Q(\mathbf{X})$, as $$\min_{|r|_{max}}\mathbb{E}\left[(\mathbf{X} - Q(\mathbf{X}))^2\right].$$ We can often assume a Gaussian or Laplace distribution with parameters estimated from the input distribution, for which the optimal clipping values $|r|_{max}$ can be determined numerically (e.g. $|r|_{max} = 2.83b$ for 2 bit quantization of a Laplace distribution with parameter $b$) [[Banner et al., NeurIPS 2019]](https://proceedings.neurips.cc/paper/2019/hash/c0a62e133894cdce435bcb4a5df1db2d-Abstract.html).
+    1. We can uniformly map the range \[ $\bar{r}\_{min}$, $\bar{r}\_{max}$\] to the quantized range \[ $q\_{min}$, $q\_{max}$\] as in the weight quantization above.
+    2. We can minimize the MSE between inputs $\mathbf(X)$ and reconstructed quantized inputs $Q(\mathbf{X})$, as $$\min_{|r|\_{max}}\mathbb{E}\left[(\mathbf{X} - Q(\mathbf{X}))^2\right].$$ We can often assume a Gaussian or Laplace distribution with parameters estimated from the input distribution, for which the optimal clipping values $|r|\_{max}$ can be determined numerically (e.g. $|r|\_{max} = 2.83b$ for 2 bit quantization of a Laplace distribution with parameter $b$) [[Banner et al., NeurIPS 2019]](https://proceedings.neurips.cc/paper/2019/hash/c0a62e133894cdce435bcb4a5df1db2d-Abstract.html).
     3. We can also minimize the loss of information from quantization, measured by the Kullback-Leibler divergence between the distributions of initial and quantized inputs. In this case, however, we need to identify intuitively where to clip large activations to minimize KL divergence (see figure below) [[Szymon Migacz, 2017]](https://on-demand.gputechconf.com/gtc/2017/presentation/s7310-8-bit-inference-with-tensorrt.pdf). Widely used in TensorRT.
 
 ![KL divergence clipping](figures/lecture-06/pmurugan/KL_divergence_clipping.png)
@@ -146,12 +154,15 @@ We can also introduce floating point scaling factor of the binarized matrix, whi
 If both activations and weights are binarized, operations are significantly simplified, so that matrix operations are replaced with bit operations (e.g. multiplication ⇒ XNOR). Binarized matrices use $\pm 1$ as the binary values, so some care has to be taken to design fast computer operations (for which binary values are $\{0,1\}$).
 
 For a given layer $i$, the output of a binary matrix multiplication is given by 
+
 $$
-\begin{aligned}
+\begin{align}
 y_i &= \sum_j W_{ij}\cdot x_j\\
 &= -n + 2\sum_j W_{ij}\text{ xnor }x_j\\
 &= -n + \text{popcount}(W_i\text{ xnor }x)\ll 1.
-\end{aligned}$$ 
+\end{align}
+$$
+
 This final operation is very efficient to perform on computer hardware [[Rastegari et al., ECCV 2016]](https://arxiv.org/pdf/1603.05279.pdf).
 
 ![Binary accuracy](figures/lecture-06/pmurugan/binary_quantization_accuracy.png)
@@ -171,7 +182,7 @@ r_t&r > \Delta\\
 \end{cases}
 $$
 
-where $\Delta = 0.7\times \mathbb{E}(|r|)$ and $r_t = \mathbb{E}_{|r| > \Delta}(|r|)$. The quantization threshold is set to 0.7 empirically. The scaling factor $\Delta$ is, in effect, the L1 norm of nonzero elements [[Li et al., NIPS 2016]](https://arxiv.org/pdf/1605.04711.pdf).
+where $\Delta = 0.7\times \mathbb{E}(|r|)$ and $r_t = \mathbb{E}\_{|r| > \Delta}(|r|)$. The quantization threshold is set to 0.7 empirically. The scaling factor $\Delta$ is, in effect, the L1 norm of nonzero elements [[Li et al., NIPS 2016]](https://arxiv.org/pdf/1605.04711.pdf).
 
 Although ternary quantization requires 2 bits (so one bit representation is wasted, in a sense), the symmetry and zero centroid enables implementation with less complex hardware multipliers.
 
