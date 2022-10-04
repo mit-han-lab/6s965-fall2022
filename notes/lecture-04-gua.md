@@ -64,7 +64,7 @@ Finally, compared to MobileNet, AMC is able to achieve 2x speedup without much a
 
 ![](https://i.imgur.com/cORLJdN.png)
 
-### NetAdapt: A rule-based iterative/progressive method [[Yang, et al. 2018]](https://arxiv.org/pdf/1804.03230.pdf)
+### NetAdapt: A rule-based iterative/progressive method [[Yang et al., 2018]](https://arxiv.org/pdf/1804.03230.pdf)
 
 Another approach, NetAdapt, finds per-layer pruning ratios to meet a global resource constraint like latency or energy consumption. At a high level, at each iteration, NetAdapt generates many network proposals (A, B, ..., Z in the figure) and evaluates them with respect to the budget. These metrics are then used to come up with proposals at the next iteration, and so on.
 
@@ -80,7 +80,7 @@ Because of the iterative nature, we get a series of models with varying resource
 ## Section 2: Fine-tuning/Training
 
 ### Iterative pruning
-After pruning, the model's performance may decrease. One way to mitigate this is to fine-tune the pruned neural network, allowing for higher pruning ratios. As a heuristic, when fine-tuning, a learning rate of 1/10 to 1/100 of the original learning rate is used. We can iteratively prune and fine-tune for even better performance [[Han, et al. 2015]](https://arxiv.org/pdf/1506.02626.pdf):
+After pruning, the model's performance may decrease. One way to mitigate this is to fine-tune the pruned neural network, allowing for higher pruning ratios. As a heuristic, when fine-tuning, a learning rate of 1/10 to 1/100 of the original learning rate is used. We can iteratively prune and fine-tune for even better performance [[Han et al., 2015]](https://arxiv.org/pdf/1506.02626.pdf):
 
 ![](https://i.imgur.com/BahfG1V.png)
 
@@ -88,16 +88,16 @@ After pruning, the model's performance may decrease. One way to mitigate this is
 
 When training neural networks or fine-tuning quantized neural networks, regularization is added to penalize non-zero parameters and encourage smaller parameters. The most common regularizers are L1, $L' = L(\mathbf{x}; \mathbf{W}) + \lambda |\mathbf{W}|_1$) and L2, $L' = L(\mathbf{x}; \mathbf{W}) + \lambda \|\mathbf{W}\|^2$. 
 
-Some examples are that magnitude-based fine-grained pruning uses L2 regularization on weights, while network slimming [[Liu, et al. 2017]](https://arxiv.org/abs/1708.06519) applies smooth L1 regularization on channel scaling factors.
+Some examples are that magnitude-based fine-grained pruning uses L2 regularization on weights, while network slimming [[Liu et al., 2017]](https://arxiv.org/abs/1708.06519) applies smooth L1 regularization on channel scaling factors.
 
 
 ### ADMM
 
-A final method for network pruning, which was not covered in lecture, is due to [[Zhang, et al. 2018]](arxiv.org/pdf/1804.03294.pdf) and applies classical optimization techniques to the model pruning problem. We can write pruning as $$\arg \min_{\mathbf{W}_P} L(\mathbf{x}; \mathbf{W}_P) + g(\mathbf{W}_P), \quad g(\mathbf{W}_p) = \begin{cases} 0 & \|\mathbf{W}_P\|_0 \le N \\ \infty & otherwise \end{cases}.$$ This can be written as $$ \arg \min_{\mathbf{W}_P } L(\mathbf{x}; \mathbf{W}_P) + g(\mathbf{Z}) \quad \text{s.t.} \quad \mathbf{W_P} = \mathbf{Z}.$$
+A final method for network pruning, which was not covered in the lecture, is due to [[Zhang et al., 2018]](arxiv.org/pdf/1804.03294.pdf) and applies classical optimization techniques to the model pruning problem. We can write pruning as $$\arg \min_{\mathbf{W}_P} L(\mathbf{x}; \mathbf{W}_P) + g(\mathbf{W}_P), \quad g(\mathbf{W}_p) = \begin{cases} 0 & \|\mathbf{W}_P\|_0 \le N \\ \infty & otherwise \end{cases}.$$ This can be written as $$ \arg \min_{\mathbf{W}_P } L(\mathbf{x}; \mathbf{W}_P) + g(\mathbf{Z}) \quad \text{s.t.} \quad \mathbf{W_P} = \mathbf{Z}.$$
 
 The idea is then to write out the augmented Lagrangian and apply ADMM. We refer interested readers to the paper.
 
-## Section 3: The Lottery Ticket Hypothesis [[Frankle et al. 2019]](https://arxiv.org/pdf/1803.03635.pdf)
+## Section 3: The Lottery Ticket Hypothesis [[Frankle et al., 2019]](https://arxiv.org/pdf/1803.03635.pdf)
 
 The lottery ticket hypothesis is as follows: *A randomly-initialized, dense neural network contains a subnetwork that is initialized such that—when trained in isolation—it can match the test accuracy of the original network after training for at most the same number of iterations.*
 
@@ -116,7 +116,7 @@ Later, the authors found that resetting weights to $\textbf{W}_0$ only works for
 
 ## Section 4: System Support for Sparsity
 
-### EIE: Efficient Inference Engine [[Han, et al. 2016]](https://arxiv.org/pdf/1602.01528.pdf)
+### EIE: Efficient Inference Engine [[Han et al., 2016]](https://arxiv.org/pdf/1602.01528.pdf)
 EIE is the first DNN accelerator for sparse, compressed models. 
 
 EIE takes advantage of sparse weights (10x less computation, 5x less memory), sparse activations (3x less computation), and weight sharing with 4-bit weights (8x less memory). 
@@ -125,8 +125,8 @@ EIE takes advantage of sparse weights (10x less computation, 5x less memory), sp
 ![](https://i.imgur.com/113Rnld.png)
 Say we have 4 processing engines, PE0 through PE3. Physically, we keep virtual weights, relative indices, and column pointers. Below, we see an example for PE0. In the first row (green), we see the nonzero weights $w_{0, 0}, w_{0, 1}, w_{4, 2}, ...$. In the second row (orange), we see the relative indices of each weight with respect to the previous weight (starting at the top left, columns first, then rows). Finally, in the last row, we see a cumulative sum of the number of nonzero weights in each column. This representation makes it easy to exploit activation sparsity to do the forward pass: we simply multiply each nonzero activation by all of the nonzero elements in the corresponding column.
 
-**Architecture**
-The EIE architecture is shown below:
+**Architecture**:
+The EIE architecture is shown below.
 ![](https://i.imgur.com/eDyii0m.png)
 
 The architecture of each PE is shown here. We refer readers to the paper for a more detailed description of each component.
@@ -134,7 +134,7 @@ The architecture of each PE is shown here. We refer readers to the paper for a m
 
 Compared to CPU and GPU, EIE achieves better speedup, FLOP reduction, throughput, and energy efficiency.
 
-### Accelerating Recurrent Neural Networks [[Han, et al. 2017]](https://arxiv.org/pdf/1612.00694.pdf)
+### Accelerating Recurrent Neural Networks [[Han et al., 2017]](https://arxiv.org/pdf/1612.00694.pdf)
 
 First, one observation is that PE's are unbalanced: some have more nonzero weights than others. Therefore, one trick is to apply load balancing, so that nonzero weights are distributed across PE's.
 ![](https://i.imgur.com/txLEsO6.png)
@@ -150,8 +150,8 @@ The hardware architecture consists of memory units, sparse matrix multiplication
 
 ![](https://i.imgur.com/EFvyY22.png)
 
-### M:N Sparsity [[Mishra, et al. 2021]](https://arxiv.org/pdf/2104.08378.pdf)
-M:N sparsity means that out of every $N$ consecutive weights, $M$ are nonzero. A common case is 2;4 sparsity, shown below. Instead of storing each value, we just need to store the nonzero data values, as well as 2-bit indices representing which 2 elements in each consecutive block of 4 are nonzero.
+### M:N Sparsity [[Mishra et al., 2021]](https://arxiv.org/pdf/2104.08378.pdf)
+M:N sparsity means that out of every $N$ consecutive weights, at most $M$ are nonzero. A common case is 2:4 sparsity, shown below. Instead of storing each value, we just need to store the nonzero data values, as well as 2-bit indices representing which 2 elements in each consecutive block of 4 are nonzero.
 ![](https://i.imgur.com/P5dgcd6.png)
 
 System support for this type of sparsity is also relatively straightforward, shown below. Note that only half the multiplications need to be done.
