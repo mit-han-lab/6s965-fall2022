@@ -116,7 +116,7 @@ Types of Binarization:
 - Deterministic Binarization: directly computes the bit value based on a threshold, usually 0, resulting in a sign function. 
 - Stochastic Binarization: probability of -1 or +1 is determined by some function using global statistics or the value of input data. 
     - e.g. in Binary Connect(BC), probability is determined by a hard sigmoid function. 
-    - this becomes harder to impelement as it requires the hardware to generate random bits when quantizing
+    - this becomes harder to implement as it requires the hardware to generate random bits when quantizing
 
 Minimizing Quantization Error in Binarization 
 - Can scale by a constant value. Binary Weight Network (BWN) does this and performs significantly better than BinaryConnect. 
