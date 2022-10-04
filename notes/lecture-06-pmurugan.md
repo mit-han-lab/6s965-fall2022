@@ -9,7 +9,7 @@
 | Note Author | Pranav Murugan (pmurugan)                                                                                       |
 | Description | This lecture explores techniques for post-training quantization as well as training a quantized model, and introduces binary and ternary quantization. |
 
-## Review of K-Means and Linear Quantization [link to Lec05 Notes]
+## Review of K-Means and Linear Quantization [[Link to Lecture 05 Notes]](https://github.com/mit-han-lab/6s965-fall2022/blob/main/notes/lecture-05-alangham.md)
 
 ### K-Means
 
