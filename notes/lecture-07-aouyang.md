@@ -53,7 +53,6 @@
     - 
       ![fire module](./figures/lecture-07/aouyang/fire-module.png)
     - The model size decreased by 50x-510x compared to AlexNet, but the latency did not decrease since latency is not only related to FLOPS
-  
 - **ResNet50**: 
   - Introduces the **bypass layer**
     - Very popular in deep neural networks today
@@ -71,18 +70,15 @@
   - Depthwise convolution can be used to capture spatial information
   - Use 1x1 convolution to merge information across different channels
     - image [source](https://www.researchgate.net/figure/Depthwise-separable-convolutions_fig1_358585116)![depthwise1x1](./figures/lecture-07/aouyang/depthwise1x1.png)
-
 - **MobileNetV2**: inverted bottleneck block
   - Depthwise convolution has a much lower capacity compared to normal convolution, so we can increase the depthwise convolution's input and output channels to improve its capacity.
     - ![inverted bottleneck block](./figures/lecture-07/aouyang/inverted-block.png)
 
   - The cost is still affordable because depthwise convolution’s cost only grows linearly. 
   - Popular when first trying to deploy on mobile edge devices, but with more hardware accelerators there's a trend of shifting back to using more resnet-like architectures without the depthwise convolutions
-
 - **ShuffleNet**: 1x1 group convolution & channel shuffle
   - Further reduces the cost by replacing 1x1 convolution with 1x1 group convolutions. Information across different groups are exchanged via channel shuffling
     - ![channel shuffle](./figures/lecture-07/aouyang/channel-shuffle.png)
-
 - Figure: accuracy-efficiency trade-off of different network architectures on the ImageNet benchmark
   - ![imagenet tradeoff](./figures/lecture-07/aouyang/imagenet1.png)
 - We've looked at many manually designed neurtal networks. There are many decisions to be made, such as the number of channels, number of layers, number of kernels, connectivity, and resolution. Furthermore, getting the accuracy metrics of these models is very slow because we have to train these models. 
