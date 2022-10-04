@@ -66,5 +66,5 @@ $$\mathbf{q_Y} = \frac{S_W S_X}{S_Y} (\mathbf{q_W}\mathbf{q_X} - \mathbf{Z_W}\ma
 - We can approximate $\mathbf{Z_W}$ as 0, since the trained weights tend to be zero-mean, and we can precompute $\mathbf{Z_X}\mathbf{q_W}$.
 - Quantization can either be symmetric (at the cost of one quantization slot) or asymmetric (requires more complex implementation).
 - The matrix multiplication given previously can be extended with a bias term ($\mathbf{Y} = \mathbf{W}\mathbf{X} + \mathbf{b}$) for the following:
-$$S_Y (\mathbf{q_Y} - \mathbf{Z_Y}) = S_W S_X (\mathbf{q_W}\mathbf{q_X} - \mathbf{Z_X}\mathbf{q_W} + \mathbf{q_b}$$
+$$S_Y (\mathbf{q_Y} - \mathbf{Z_Y}) = S_W S_X (\mathbf{q_W}\mathbf{q_X} - \mathbf{Z_X}\mathbf{q_W} + \mathbf{q_b} )$$
 - This allows fully-connected layers and convolutional layers to compute with integers rather than floating-point precision.
