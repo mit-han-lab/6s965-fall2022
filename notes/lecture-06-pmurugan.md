@@ -190,12 +190,10 @@ $$
 
 Both of these techniques further recover accuracy compared to binary quantization methods [[Zhu et al., ICLR 2017]](https://arxiv.org/abs/1612.01064).
 
-
+![Ternary accuracy](figures/lecture-06/pmurugan/ternary_accuracies.png)
 
 # Mixed-Precision Quantization
 
 Becoming more popular, now supported by some NVidia GPUs.
 
-Can have different precisions for each layer, enables better accuracy and more quantized layers. However, has a large design space. Can use automated quantization methods with Actor-Critic models to optimize quantization factors.
-
-Depthwise vs Pointwise bit allocations
+We can have different precisions for each layer, which enables better accuracy and more quantized layers. However, selecting the proper quantization parameters has a large design space. We can use automated quantization methods with Actor-Critic models to optimize quantization factors. This Hardware-aware Automated Quantization (HAQ) tool improves accuracy in comparison to a uniformly quantized model, and learns qualitatively different policies depending on the hardware application that is running the model [[Wang et al., CVPR 2019]](https://arxiv.org/abs/1811.08886).
