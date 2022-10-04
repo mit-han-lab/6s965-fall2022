@@ -28,7 +28,8 @@ However, not all hardware supports this, and there might be unnecessary overhead
 - Key idea: rescaling weights to equalize the weight ranges of different output channels, so that we can potentially still use per-tensor weight quantization. 
 
 ![Visualization of weight distribution and weight equalization objective](figures/lecture-06/janicey/fig2.png)
-The figure above comes from [[Markus et al., ICCV 2019]](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec06-Quantization-II.pdf), demonstrating how different output channel weights can be, and how they could be equalized.
+
+The figure above comes from [[Markus et al., ICCV 2019]](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec06-Quantization-II.pdf), demonstrating how different output channel weights can be and how they could be equalized.
 
 - Pick a scaling factor $s$, where for each $s_i$ per layer, we divide layer $i$ by s, and scale up layer $i+1$ by s. This should maintain equivariance. 
 
