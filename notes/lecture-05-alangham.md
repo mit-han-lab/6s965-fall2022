@@ -38,7 +38,7 @@ can cover a much larger range (important for NN training since gradients have la
 - A 32-bit floating-point number specified by IEEE 754 consists of a sign bit, 8 exponent 
 bits, and 23 fraction bits.
 - The decimal value stored is the following:
-$$(-1)^{\text{sign}} \times (1 + \text{fraction}) \times 2^{\text{exponent - 127}})$$
+$$(-1)^{\text{sign}} \times (1 + \text{fraction}) \times 2^{\text{exponent - 127}}$$
 - Many floating-point specifications exist, such as:
   - IEEE FP32, IEEE FP16
   - Brain Float (BF16)
