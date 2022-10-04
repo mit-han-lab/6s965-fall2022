@@ -17,7 +17,7 @@ How should we get the optimal linear quantization parameters (S, Z)?
 
 #### Per-Tensor vs Per-Channel Quantization
 - There often exist large differences in weights for different channels (which can lead to significant accuracy drops in smaller models). There could be large differences in ranges of weights for different output channels, or outlier weights that make all remaining weights less precise after quantization. 
-- Solution: we can use per channel quantization
+- Solution: we can use per-channel quantization
 
 ![Per-channel versus Per-tensor quantization example](figures/lecture-06/janicey/fig1.png)
 The figure above comes from [[Han, 2022]](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec06-Quantization-II.pdf), demonstrating how reconstructed error can be much smaller if we use per-channel quantization, which can lead to better model accuracy.
