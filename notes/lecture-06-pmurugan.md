@@ -7,13 +7,13 @@
 | Lecturer    | Song Han                                                                                                        |
 | Date        | 09/27/2022                                                                                                      |
 | Note Author | Pranav Murugan (pmurugan)                                                                                       |
-| Description | Exploring techniques for post-training quantization as well as training a quantized model. Introduces binary and ternary quantization. |
+| Description | This lecture explores techniques for post-training quantization as well as training a quantized model, and introduces binary and ternary quantization. |
 
-# Review of K-Means and Linear Quantization [link to Lec05 Notes]
+## Review of K-Means and Linear Quantization [link to Lec05 Notes]
 
 ### K-Means
 
-- Define quantized weights with K-means clustering of the values in the weight matrix [[Han, et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149.pdf)
+- Define quantized weights with K-means clustering of the values in the weight matrix [[Han et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149.pdf)
 - Map from quantized weights to centroids with a lookup table
 - An example of a gradient operation on a quantized tensor is below:
 
@@ -43,9 +43,9 @@ where $Z_W$ is the zero point of the weights, $Z_b$ is the zero point of the bia
 ![Symmetric linear quantization](figures/lecture-06/pmurugan/symmetric_linear_quantization.png)
 Symmetric quantization is easier to accelerate since the $Z = 0$ restriction reduces the number of required operations; however, this comes at the expense of slightly reduced expressive power since one bit is unused.
 
-# Post-Training Quantization (PTQ)
+## Post-Training Quantization (PTQ)
 
-## 1. Weight Quantization
+### 1. Weight Quantization
 
 We can use single scale $S$ for whole tensor (Per-Tensor Quantization), by setting $|r_{max}| = |W_{max}|$. It works well enough for large models, but has poor accuracy for small models.
 
@@ -59,7 +59,7 @@ The drawback of per-channel quantization is that it requires more specialized ha
 
 *Can we make weight ranges similar to each other so that per-tensor weight quantization will work?*
 
-### Weight Equalization
+#### Weight Equalization
 ![Weight equalization](figures/lecture-06/pmurugan/weight_equalization.png)
 
 Let us first consider two adjacent layers in the model, shown above. We want to scale the layer $W^{(i)}\_{oc=j}$ by a scale factor $s^{-1}$ and the corresponding $W^{(i+1)}\_{ic=j}$ by $s$ so that the weights have a similar magnitude and the activation is maximally preserved. Such a transformation requires the activation function to be linear (so that successive multiplications of the scaled weight tensors result in the scaling factors cancelling out). Thus, ReLU activations are commonly used because they satisfy *positive scaling equivariance* -- that is, $\text{ReLU}(s\cdot x) = s\cdot \text{ReLU}(x)$ for $s > 0$. 
@@ -74,7 +74,7 @@ $$\frac{r^{(i)}\_{oc=j}}{s}=r^{(i+1)}\_{ic=j}\cdot s.$$
 
 This approach is limited because it best with activations that are linear or near-linear. Also, the scaling operations act in a greedy manner; thus, multiple passes are necessary to propagate changes throughout the model. This approach does not require retraining [[Nagel et al., ICCV 2019]](https://arxiv.org/pdf/1906.04721.pdf).
 
-### Adaptive Rounding
+#### Adaptive Rounding
 
 Another method of weight quantization is simply rounding the floating point values. Why Adaptive Rounding? The philosophy is that rounding to the nearest integer is not necessarily optimal, since weights are often correlated with each other. The best rounding scheme is the one that reconstructs the original activation the best [[Nagel et al., PMLR 2020]](http://proceedings.mlr.press/v119/nagel20a/nagel20a.pdf).
 
@@ -87,7 +87,7 @@ where:
 - we also supply the elementwise function $\mathbf{h}: \mathbb{R}\rightarrow [0,1]$, such as a rectified sigmoid. 
 - $f_{reg}$ regularizes $\mathbf{V}$ to encourage $\mathbf{h}(\mathbf{V})$ to be binary.
 
-## 2. Activation quantization
+### 2. Activation quantization
 
 We need to collect activation statistics to effectively quantize activations. There are many ways of doing so:
 
@@ -99,7 +99,7 @@ We need to collect activation statistics to effectively quantize activations. Th
 
 ![KL divergence clipping](figures/lecture-06/pmurugan/KL_divergence_clipping.png)
 
-## 3. Bias quantization
+### 3. Bias quantization
 
 A common assumption is that quantization error of a layer is unbiased, but according to [[Nagel et al., ICCV 2019]](https://arxiv.org/pdf/1906.04721.pdf) this is not necessarily true.
 
@@ -107,7 +107,7 @@ Quantization error can induce bias in subsequent layers, shifting the input dist
 
 Smaller models seem to not respond as well to post training quantization, presumably because of their smaller representational capacity. Bias correction can help for smaller models.
 
-## Performance comparison
+### Performance comparison
 
 ![Quantization performances](figures/lecture-06/pmurugan/activation_quantization_accuracies.png)
 
@@ -115,11 +115,11 @@ As we can see in the table above, in larger models quantization works quite well
 
 Now that we know how to quantized an already-trained model, *how can we improve the performance of quantized models?*
 
-# Quantization-Aware Training (QAT)
+## Quantization-Aware Training (QAT)
 
 We want to propagate gradients through the model and through quantization operations. For K-means quantization, this is relatively straightfoward; we can pool gradient updates for each centroid and update the centroid value. Learning the index has minimal benefit, so it stays fixed through finetuning [[Han et al., ICLR 2016]](https://arxiv.org/pdf/1510.00149.pdf).
 
-## QAT with Linear quantization
+### QAT with Linear quantization
 
 ![QAT with linear quantization](figures/lecture-06/pmurugan/QAT.png)
 
@@ -135,13 +135,13 @@ Quantized models also achieve a higher accuracy at a given latency constraint co
 
 *Aside:* For an N-bit quantization, the memory usage goes as O(N) and computation goes as O(N^2); however, memory is usually much more expensive, so a balance has to be reached per-application.
 
-# Binary and Ternary Quantization
+## Binary and Ternary Quantization
 
 Instead of integer quantization, we can use binary weights or outputs to decrease memory and operation costs. Compared to full-float operations, using binary weights reduces memory overhead by 32x and computation by 2x (since we now just have to compute the sums and differences of real numbers). Using both binary inputs and weights we can reduce memory by 32x and computation by 58x compared to the float operations [[Courbariaux et al., NeurIPS 2015]](https://proceedings.neurips.cc/paper/2015/file/3e15cc11f979ed25912dff5b0669f2cd-Paper.pdf)[[Rastegari et al., ECCV 2016]](https://arxiv.org/pdf/1603.05279.pdf). 
 
 *How do we achieve this kind of speedup?*
 
-## Binarization of Weights
+### Binarization of Weights
 
 There are two main ways to binarize the weights of a model. Deterministic binarization is the simplest, and is just the sign function.
 
@@ -149,7 +149,7 @@ Stochastic binarization quantizes probabilistically. For example, Binary Connect
 
 We can also introduce floating point scaling factor of the binarized matrix, which improves accuracy significantly as the binarized matrix still preserves the norm of the original matrix.
 
-## Binary Activations and Weights
+### Binary Activations and Weights
 
 If both activations and weights are binarized, operations are significantly simplified, so that matrix operations are replaced with bit operations (e.g. multiplication ⇒ XNOR). Binarized matrices use $\pm 1$ as the binary values, so some care has to be taken to design fast computer operations (for which binary values are $\{0,1\}$).
 
@@ -169,7 +169,7 @@ This final operation is very efficient to perform on computer hardware [[Rastega
 
 Here, we can see that Binary Weight Networks can preserve much of the accuracy of the original model, and that introducing a scale factor in binary quantization can help recover some of the accuracy loss [[Courbariaux et al., NeurIPS 2015]](https://proceedings.neurips.cc/paper/2015/file/3e15cc11f979ed25912dff5b0669f2cd-Paper.pdf)[[Rastegari et al., ECCV 2016]](https://arxiv.org/pdf/1603.05279.pdf). This method thus trades a modest decrease in accuracy for large decreases in memory usage and computation.
 
-## Ternary Weight Networks (TWN)
+### Ternary Weight Networks (TWN)
 
 We can improve model accuracy by using a symmetric ternary quantization instead of a simpler binary quantization. In a TWN, the quantized weights are
 
@@ -186,7 +186,7 @@ where $\Delta = 0.7\times \mathbb{E}(|r|)$ and $r_t = \mathbb{E}\_{|r| > \Delta}
 
 Although ternary quantization requires 2 bits (so one bit representation is wasted, in a sense), the symmetry and zero centroid enables implementation with less complex hardware multipliers.
 
-## Trained Ternary Quantization (TTQ)
+### Trained Ternary Quantization (TTQ)
 
 Instead of having a fixed scale parameter $r_t$, TTQ learns positive and negative scale factors of quantization so the quantized weights are
 
@@ -203,7 +203,7 @@ Both of these techniques further recover accuracy compared to binary quantizatio
 
 ![Ternary accuracy](figures/lecture-06/pmurugan/ternary_accuracies.png)
 
-# Mixed-Precision Quantization
+## Mixed-Precision Quantization
 
 Becoming more popular, now supported by some NVidia GPUs.
 
