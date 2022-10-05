@@ -157,7 +157,9 @@ $$q = \begin{cases} w_p & \text{if } r > \Delta\\
 
 ## Mixed-Precision Quantization
 Uniform Quantization: Layers have uniform widths of weights and activations in the quantized model.
+
 Mixed-Precision Quantization: Layers can have uneven widths of weights and activations in the quantized model.
+
 - MPQ challenges us with a huge design space [[Wang et al., CVPR 2019]](https://arxiv.org/abs/1811.08886)
 -- design automation allows MPQ to outperform Uniform Quantization
 
