@@ -7,7 +7,7 @@
 | Lecturer    | Song Han                                                     |
 | Date        | 09/29/2022                                                   |
 | Note Author | Anne Ouyang (aouyang)                                        |
-| Description | Introduces basic concepts of neural network architectures and discusses the design principles of several typically manually-designed neural network architectures. It also introduces neural architecture search, an automatic technique for designing neural network architectures |
+| Description | Introduces basic concepts of neural network architectures and discusses the design principles of several typically manually-designed neural network architectures. Also introduces various strategies for neural architecture search, an automatic technique for designing neural network architectures |
 
 ## Neural Network Architecture
 
@@ -26,7 +26,7 @@
 #### Stages
 
 - A neural network architecture typically consists of the input stem, the head, and several stages
-- Early stages have larger feature map sizes becuase need to keep the width small to reduce the cost
+- Early stages have larger feature map sizes because need to keep the width small to reduce the cost
 - Late stages have smaller feature map sizes so we can increase the width.
 - **Downsample** is typically done in the first block through strided convolution or pooling to reduce the size of the feature map
 - **Residual / skip connections** ($F(x) + x$) are added between later blocks with the same and input dimensions. 
@@ -81,7 +81,7 @@
     - ![channel shuffle](./figures/lecture-07/aouyang/channel-shuffle.png)
 - Figure: accuracy-efficiency trade-off of different network architectures on the ImageNet benchmark
   - ![imagenet tradeoff](./figures/lecture-07/aouyang/imagenet1.png)
-- We've looked at many manually designed neurtal networks. There are many decisions to be made, such as the number of channels, number of layers, number of kernels, connectivity, and resolution. Furthermore, getting the accuracy metrics of these models is very slow because we have to train these models. 
+- We've looked at many manually designed neural networks. There are many decisions to be made, such as the number of channels, number of layers, number of kernels, connectivity, and resolution. Furthermore, getting the accuracy metrics of these models is very slow because we have to train these models. 
 - The design space is huge, so manual design of network architectures is unscalable. 
 - *Automatically designed models (asterisk) consistently outperform human designed models (circle)*
   - ![imagenet tradeoff 2](./figures/lecture-07/aouyang/imagenet2.png)
@@ -150,7 +150,7 @@
 - How do we design the search space?
   - There are several heuristics to narrow down the search space before performing the search
 
-- **RegNet**: uses the cummulative error distribution as a criterior for the search space quality
+- **RegNet**: uses the cumulative error distribution as a criterion for the search space quality
   - image [source](https://arxiv.org/abs/1905.13214)![regnet](./figures/lecture-07/aouyang/regnet.png)
   - The search space represented by the orange curve is the best since most of the models have less than 50% error. 
   - Problem with this approach is that we need to collect a lot of data on the neural network accuracies to generate the curves, which requires a lot of training time.
@@ -184,11 +184,11 @@
   - EfficientNet applies compound scaling on depth, width, and resolution to a starting network. 
     - **Compound scaling** means that we shouldn't push any of the hyperparameter choices to an extreme, but rather we need a systematic approach to scale different dimensions such that we can expand the total FLOPs of the new model by 2x.
 - **Random search**
-  - In Single-Path-One-Shot, random search can be competitive compared with advancedm ethods such as evolutionary architecture search given a good search space.
+  - In Single-Path-One-Shot, random search can be competitive compared with advanced methods such as evolutionary architecture search given a good search space.
 - **Reinforcement learning**
   - Overview of RL-based NAS
     - image [source](https://arxiv.org/abs/1611.01578)![RL based NAS](./figures/lecture-07/aouyang/rl-based-nas.png)
-  - The challenge is that accuracy is an non-differentiable objective –– how shoud we update the RNN parameters?
+  - The challenge is that accuracy is an non-differentiable objective –– how should we update the RNN parameters?
     - Solution: using is policy gradient method (REINFORCE) to update the parameters of the RNN controller (by turning p into a differentiable parameter
   - RL-based search strategy can be generalized to optimization problems with non-differentiable objectives
     - In ProxylessNAS, the architecture parameters are binarized to 0 and 1 values indicating whether a path should be activated. The binarization process is non-differentiable, and it's possible to use RL to approximate the gradient w.r.t the architecture parameters.
@@ -199,5 +199,20 @@
 - **Gradient-based search**
   - In DARTS (Differentiable Architecture Search), output at each node is represented as a weighted sum of outputs from different edges
     - image [source](https://arxiv.org/abs/1806.09055)![darts](./figures/lecture-07/aouyang/darts.png)
-  - Widely used recently
+    - Widely used recently
+    - Pro: the probability of different paths is differentiable
+    - Con: need to store a lot of activations in the memory
+  - ProxylessNAS alternatively updates weight parameters and architecture parameters by sampling the branches with the highest probabilities
+    - Gradients of the architecture parameters are calculated with continuous relaxation
+  - We can also take latency into account for gradient-based search
+    - F is a latency prediction model (typically a regressor or lookup table). We can calculate an additional gradient for the architecture parameters from the latency penalty term
+      - Expected latency is a weighted sum of the latency of different building blocks based on the latency prediction model
+    - Search for a model that is small and fast!
 - **Evolutionary search**
+  - Most useful and the easiest to use approach in NAS
+  - Given a network, we can mutate it (e.g. changing the depth, number of layers, number of channels, crossover...)
+    - Mutation on depth
+      - e.g. changing from (stage 1 depth = 3, stage 2 depth = 3) to (stage 1 depth = 4, stage 2 depth = 2)
+    - Mutation on operator
+      - e.g. changing 3x3 kernels to 5x5 kernels
+    - **Crossover**: randomly choose one operator among two choices (from the parents) for each layer
