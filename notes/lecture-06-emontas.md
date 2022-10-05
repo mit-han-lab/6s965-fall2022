@@ -7,13 +7,16 @@
 | Lecturer    | Song Han                                                                                                        |
 | Date        | 09/27/2022                                                                                                      |
 | Note Author | Enrique Montas (emontas)|
-| Description | Introduce Post-Training Quantization, Introduce Quantization-Aware Training, Introduce binary and ternary quantization, Introduce automatic mixed-precision quantization|
+| Description | This lecture introduces post-training quantization, quantization-aware training, binary and ternary quantization, and automatic mixed-precision quantization. |
+
 
 ## Post Training Quantization
-Question: How should we get the optimal linear quantization peramters (__S__ caling, __Z__ ero point)?
+Question: How should we get the optimal linear quantization parameters (__S__ caling, __Z__ ero point)?
+
 
 ### Weight Quantization
-#### Semetric Linear Quantization on Weights
+#### Symmetric Linear Quantization on Weights
+
 - $$|r|_{max} = |\mathbf{W}|_{max}$$
 - Using a *single* scale *S* for whole weight tensor (**Pre-Tensor Quantization**)
 -- sufficient for large models
@@ -139,13 +142,15 @@ Question: Can we push the precision to 1 bit?
 - Stochastic: use global statistics  or the value of the input data
 -- harder to implement because it requires the hardware to generate random bits while quantizing
 
-**Terinary Weight Networks:** [[Li et al., Arxiv 2016]](https://arxiv.org/abs/1605.04711) Weights $$\in [-1, 0, 1]$$
+**Ternary Weight Networks:** [[Li et al., Arxiv 2016]](https://arxiv.org/abs/1605.04711) Weights $$\in [-1, 0, 1]$$
+
 $$q = \begin{cases} r_t & \text{if } r > \Delta\\
         0 & \text{if } x |r| \leq \Delta, \text{where } \Delta = .7 \times\mathbb{E}(|r|), r_t=\mathbb{E}_{|r|>\Delta}(|r|)\\
         -r_t & \text{if } r < -\Delta
         \end{cases}$$
 
-**Trained Terinary Quantization:** [[Zhu et al., ICLR 2017]](https://arxiv.org/abs/1612.01064) Instead of using a fixed $$r_t$$, introduce two trainable parameters $$w_p, w_n$$ to represent the negative and positive scales.
+**Trained Ternary Quantization:** [[Zhu et al., ICLR 2017]](https://arxiv.org/abs/1612.01064) Instead of using a fixed $$r_t$$, introduce two trainable parameters $$w_p, w_n$$ to represent the negative and positive scales.
+
 $$q = \begin{cases} w_p & \text{if } r > \Delta\\
         0 & \text{if } x |r| \leq \Delta, \\
         -w_n & \text{if } r < -\Delta
