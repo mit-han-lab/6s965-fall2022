@@ -43,12 +43,12 @@ Heuristics are used to obtain an estimation of the performance of an architectur
 A good model should be **sensitive** to input perturbations.
 5. Add a compensation term for batch normalization layers:\
 Consider BN for layer $i$: $x_i = (x_i - \mu_i)/\sigma_i$\
-Calculate square mean: $\bar{\sigma}_i = \sqrt{\frac{\sum_j \sigma_{i,j}^2}{c_{\text{out}}}}$ where the sum $j$ is over output channels. \
+Calculate square mean: $\bar{\sigma}\_i = \sqrt{\frac{\sum_j \sigma_{i,j}^2}{c_{\text{out}}}}$ where the sum $j$ is over output channels. \
 Define $z_2 = \sum_i \log(\bar{\sigma_i})$ and **zen score** $z = z_1 + z_2$.
 
 The Zen-Score can be used as a proxy for the expressivity of the network and positively correlates with the network accuracy.
 
-Another example for a heuristic is GradSign [[Zhang and Jia, ICLR 2022]](https://www.cs.cmu.edu/~zhihaoj2/papers/gradsign-iclr22.pdf). The intuition for this heuristic is that a good model has **denser** sample-wise local minima for parameter $\theta$ (i.e. for single datapoints $x_i$), meaning that two local minima points $\theta_1^*$ and $\theta_2^*$ should be closer. This suggests that the probability that the gradients of different samples have the same sign is higher in figure (b). We can leverage this intuition to heuristically find better models using a small number of samples to compute gradient densities. The implementation of the algorithm is given below:
+Another example for a heuristic is GradSign [[Zhang and Jia, ICLR 2022]](https://www.cs.cmu.edu/~zhihaoj2/papers/gradsign-iclr22.pdf). The intuition for this heuristic is that a good model has **denser** sample-wise local minima for parameter $\theta$ (i.e. for single datapoints $x_i$), meaning that two local minima points $\theta_1^\*$ and $\theta\_2^\*$ should be closer. This suggests that the probability that the gradients of different samples have the same sign is higher in figure (b). We can leverage this intuition to heuristically find better models using a small number of samples to compute gradient densities. The implementation of the algorithm is given below:
 
 ![GradSign](figures/lecture-08/gradsign.png)
 
