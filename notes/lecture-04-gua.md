@@ -2,7 +2,7 @@
 
 ## Note Information
 
-| Title       | Introduction to TinyML and Efficient Deep Learning Computing                                                    |
+| Title       | Pruning and Sparsity (Part II)                                                    |
 |-------------|-----------------------------------------------------------------------------------------------------------------|
 | Lecturer    | Song Han                                                                                                        |
 | Date        | 09/20/2022                                                                                                      |
