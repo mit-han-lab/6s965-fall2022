@@ -52,7 +52,7 @@
   - **Fire modules** reduce the cost by using 1x1 convolutions
     - ![fire module](./figures/lecture-07/aouyang/fire-module.png)
     - The model size decreased by 50x-510x compared to AlexNet, but the latency did not decrease since latency is not only related to FLOPS
-- **ResNet50**: 
+- **ResNet**: 
   - Introduces the **bypass layer**
     - Very popular in deep neural networks today
     - It's possible to merge it into convolution layer
