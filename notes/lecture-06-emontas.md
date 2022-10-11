@@ -84,20 +84,19 @@ $$\hat{r}_{\min, \max}^{(t)} = \alpha\cdot r_{\min, \max}^{(t)}+(1-\alpha)\cdot\
 -- spend dynamic range on outliers hurts representation ability
 -- use *mean* of the min/max of each sample in the batches
 -- *minimize the mean-square-error* between inputs **X** and reconstructed quantized inputs $Q({X})$
-
 $$\min_{|r|_{max}}\mathbb{E}[({X}-Q({X}))^2]$$
 
 -- assume inputs are in Gaussian or Laplace distribution.
  in a Laplace distribution (0, *b*) optimal clipping values can be numerically computed as $$|r|_{\max} = 2.83b, 3.98b, 5.03b$$ for 2, 3, 4 bits.
--- the Laplace perameter *b* can be estimated from calibration input distribution.
--- *minimize loss of information* since integer models encode the same information as the origional floating-point model
+-- the Laplace parameter *b* can be estimated from calibration input distribution.
+-- *minimize loss of information* since integer models encode the same information as the original floating-point model,
 we can measure information loss with Kullback-Leibler divergence (relative information divergence):
--- for two discrete probability distributions *P,Q*
+-- for two discrete probability distributions *P, Q*
 
 $$D_{KL}(P||Q)=\sum_i^N P(x_i)\log\frac{P(x_i)}{Q(x_i)}$$
 
-
 *intuition: KL divergence measures the information lost when approximating a given encoding*
+
 
 ### Bias Quantization
 #### Quantized Bias Correction
