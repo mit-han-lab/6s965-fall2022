@@ -64,9 +64,8 @@ What is optimal? Rounding that reconstructs the original *activation* the best, 
 
 $$\arg\min_v||Wx-\widetilde Wx||^2_F + \lambda f_{reg}(V) \rightarrow \arg\min_v||Wx-\lfloor\lfloor{W}\rfloor + {h}({V})\rceil{x}||^2_F + \lambda f_{reg}({V})$$
 
-**x** is the input to the layer, **V** is a random variable of the same shape
-**h**() is a function to map the range to $$(0,1)$$, ie rectified sigmoid
-$$f_{reg}(\mathbf{V})$$ is regularization that encourages **h(V)** to be binary
+Here, **x** is the input to the layer, **V** is a random variable of the same shape, **h**() is a function to map the range to $(0,1)$, ie rectified sigmoid, and $f_{reg}(\mathbf{V})$ is regularization that encourages **h(V)** to be binary
+
 
 
 ### Activation Quantization
