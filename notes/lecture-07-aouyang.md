@@ -2,7 +2,7 @@
 
 ## Note Information
 
-| Title       | Introduction to TinyML and Efficient Deep Learning Computing |
+| Title       | Neural Architecture Search (Part I) |
 | ----------- | ------------------------------------------------------------ |
 | Lecturer    | Song Han                                                     |
 | Date        | 09/29/2022                                                   |
