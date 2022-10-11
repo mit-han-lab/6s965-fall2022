@@ -71,7 +71,7 @@ where $x$ is the input to the layer, $V$ is a random variable of the same shape,
 
 For two discrete probability distributions $P$ and $Q$: 
 
-$D_{KL}(P||Q) = \sum^{N}_{i}P(x_i)log\frac{P(x_i)}{Q(x_i)}$
+$D_{KL}(P||Q) = \sum_{i}^{N}P(x_i)log\frac{P(x_i)}{Q(x_i)}$
 
 ![Visualization of weight clipping after using KL Divergence optimization](figures/lecture-06/janicey/fig3.png)
 The figure above comes from [[Szymon Migacz, 2017]](https://on-demand.gputechconf.com/gtc/2017/presentation/s7310-8-bit-inference-with-tensorrt.pdf), showing an example of clipping weights on a certain layer of ResNet-152, after finding the optimal clipping point using KL Divergence optimization.
