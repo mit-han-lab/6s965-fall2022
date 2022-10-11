@@ -35,11 +35,7 @@ The figure above comes from [[Markus et al., ICCV 2019]](https://hanlab.mit.edu/
 
 Actual equations:
 
-$y^{(i+1)} = f(W^{(i+1)}x^{(i+1)} + b^{(i+1)})$ 
-
-$ = f(W^{(i+1)} * f(W^{(i)}x^{(i)} + b^{(i)}) + b^{(i+1)})$
-
-$ = f(W^{(i+1)}S * f(S^{-1}W^{(i)}x^{(i)} + S^{-1}b^{(i)}) + b^{(i+1)})$
+$$y^{(i+1)} = f(W^{(i+1)}x^{(i+1)} + b^{(i+1)}) = f(W^{(i+1)} * f(W^{(i)}x^{(i)} + b^{(i)}) + b^{(i+1)}) = f(W^{(i+1)}S * f(S^{-1}W^{(i)}x^{(i)} + S^{-1}b^{(i)}) + b^{(i+1)})$$
 
 where $S = diag(s)$, $s_j$ is the weight equalization scale factor of output channel $j$. $f$ has to be linear. 
 
