@@ -104,8 +104,9 @@ $$\mathbb{E}[\mathbf{\hat{y}-y}]\approx \frac{1}{N}\sum_n(Q\mathbf{(W)x_n})_j-(\
 - denote quantization error as $$\epsilon = Q(\mathbf{W})-\mathbf{W}$$
 $$\mathbb{E}[\mathbf{y}] = \mathbb{E}[\mathbf{Wx}] + \mathbb{E}[\epsilon x] - \mathbb{E}[\epsilon x]$$
 $$\mathbb{E}[\mathbf{y}] = \mathbb{E}[Q(\mathbf{Wx})] - \epsilon\mathbb{E}[x]$$
-where the $$- \epsilon\mathbb{E}[x]$$ term is absorbed into the bias parameter
-$$\mathbb{E}[x]$$ can be inferred from batch normalization
+where the $- \epsilon\mathbb{E}[x]$ term is absorbed into the bias parameter
+$\mathbb{E}[x]$ can be inferred from batch normalization
+
 
 Smaller models seem to not respond as well to post-training quantization, presumabley due to their smaller representational capacity.
 
