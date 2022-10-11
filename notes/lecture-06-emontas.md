@@ -17,7 +17,8 @@ Question: How should we get the optimal linear quantization parameters (__S__ ca
 ### Weight Quantization
 #### Symmetric Linear Quantization on Weights
 
-- $$|r|_{max} = |\mathbf{W}|_{max}$$
+- $$|r|_{max} = |{W}|_{max}$$
+
 - Using a *single* scale *S* for whole weight tensor (**Pre-Tensor Quantization**)
 -- sufficient for large models
 -- significant accuracy drops for small models
@@ -77,13 +78,16 @@ Here, **x** is the input to the layer, **V** is a random variable of the same sh
 #### Dynamic Range for Activation Quantization
 - Type 1: Durring training [[Jacob et al., CVPR 2018]](https://arxiv.org/abs/1712.05877)
 -- exponental moving averages (EMA) smooths observed ranges across thousands of training steps
-$$\hat{r}^{(t)}_{\min, \max} = \alpha\cdot r^{(t)}_{\min, \max}+(1-\alpha)\cdot\hat{r}^{(t-1)}_{\min, \max}$$
+$$\hat{r}_{\min, \max}^{(t)} = \alpha\cdot r_{\min, \max}^{(t)}+(1-\alpha)\cdot\hat{r}_{\min, \max}^{(t-1)}$$
+
 - Type 2: By running a few "calibration" batches of samples on the trained FP32 model [Neural Network Distiller](https://intellabs.github.io/distiller/algo_quantization.html) [[Banner et al., NeurIPS 2019]](https://arxiv.org/abs/1810.05723) [Szymon Migacz, 2017](https://on-demand.gputechconf.com/gtc/2017/presentation/s7310-8-bit-inference-with-tensorrt.pdf)
 -- spend dynamic range on outliers hurts representation ability
 -- use *mean* of the min/max of each sample in the batches
--- *minimize the mean-square-error* between inputs **X** and reconstructed quantized inputs $$Q(\mathbf{X})$$
-$$\min_{|r|_{max}}\mathbb{E}[(\mathbf{X}-Q(\mathbf{X}))^2]$$
--- assume inpits are in in Gaussian or Laplace distribution.
+-- *minimize the mean-square-error* between inputs **X** and reconstructed quantized inputs $Q({X})$
+
+$$\min_{|r|_{max}}\mathbb{E}[({X}-Q({X}))^2]$$
+
+-- assume inputs are in Gaussian or Laplace distribution.
  in a Laplace distribution (0, *b*) optimal clipping values can be numerically computed as $$|r|_{\max} = 2.83b, 3.98b, 5.03b$$ for 2, 3, 4 bits.
 -- the Laplace perameter *b* can be estimated from calibration input distribution.
 -- *minimize loss of information* since integer models encode the same information as the origional floating-point model
