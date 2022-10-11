@@ -36,7 +36,7 @@
 
 ## Manually-designed Neural Networks
 
-- **Alexnet**: uses large kernel in early convolution stages
+- **AlexNet**: uses large kernel in early convolution stages
   - e.g. 11x11 conv and 5x5 conv layers in the beginning
 - **VGG**: stacking multiple smaller kernels is better than using one large kernel
   - Only uses 3x3 convolution layers
