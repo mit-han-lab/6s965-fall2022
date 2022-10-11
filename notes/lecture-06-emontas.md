@@ -58,13 +58,15 @@ What is optimal? Rounding that reconstructs the origional *activation* the best,
 - short term tuning required, (almost) post-training quantization
 
 *Method:*
-- instead of $$\lfloor w\rceil$$, we want to choose from $$\{\lfloor w\rfloor, \lceil w\rceil\}$$ to get the best reconstruction.
-- we can take a learning-based method to find quantized value $$\widetilde{w} = \lfloor \lfloor w\rfloor+\delta\rceil, \delta\in [0,1]$$
-$$\text{argmin}_\mathbf{v}||\mathbf{Wx}-\mathbf{\widetilde Wx}||^2_F + \lambda f_{reg}(\mathbf{V})$$
+- instead of $\lfloor w\rceil$, we want to choose from $\{\lfloor w\rfloor, \lceil w\rceil\}$ to get the best reconstruction.
+- we can take a learning-based method to find quantized value $\widetilde{w} = \lfloor \lfloor w\rfloor+\delta\rceil, \delta\in [0,1]$ where
+
+$$\arg\min_v||Wx-\widetilde Wx||^2_F + \lambda f_{reg}(V)$$
 $$\rightarrow\text{argmin}_\mathbf{v}||\mathbf{Wx}-\lfloor\lfloor\mathbf{W}\rfloor + \mathbf{h}(\mathbf{V})\rceil\mathbf{x}||^2_F + \lambda f_{reg}(\mathbf{V})$$
 **x** is the input to the layer, **V** is a random variable of the same shape
 **h**() is a function to map the range to $$(0,1)$$, ie rectified sigmoid
 $$f_{reg}(\mathbf{V})$$ is regularization that encourages **h(V)** to be binary
+
 
 ### Activation Quantization
 #### Linear Quantization on Activations
