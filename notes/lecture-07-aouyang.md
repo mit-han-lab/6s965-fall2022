@@ -1,4 +1,4 @@
-# Lecture 07: Neural Architecture Search
+# Lecture 07: Neural Architecture Search (Part I)
 
 ## Note Information
 
