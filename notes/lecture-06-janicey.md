@@ -45,6 +45,7 @@ where $S = diag(s)$, $s_j$ is the weight equalization scale factor of output cha
 
 To make the weight ranges of different output channels match as closely as possible, we choose $s_j$ where
 $$s_j = \frac{1}{r^{(i+1)}_{ic=j}} \sqrt{r^{(i)}_{oc=j} \cdot r^{(i+1)}_{ic=j}},$$
+
 where $r^{(i)}_{oc=j}$ is the weight range of output channel $j$ in Layer $i$, and $r^{(i+1)}_{ic=j}$ is the weight range of input channel $j$ in layer $i+1$. 
 
 - Intuition, $1 * 100 = 10 * 10$, so taking the product of the two numbers, then the square root should give you the same product, and you just get two equalized input numbers now. 
