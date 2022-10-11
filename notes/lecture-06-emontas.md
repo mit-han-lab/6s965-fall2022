@@ -139,9 +139,10 @@ Question: Can we push the precision to 1 bit?
 
 | input | weight | operations | memory | computation |
 |---|---|---|---|---|
-|$$\mathbb{R}$$| $$\mathbb{R}$$ |+ $$\times$$| $$1\times$$ | $$1\times$$ |
-|$$\mathbb{R}$$| $$\mathbb{B}$$ |+ -| ~$$32\times$$ less | ~$$2\times$$ less |
-|$$\mathbb{B}$$| $$\mathbb{B}$$ |xnor, popcount | ~$$32\times$$ less | ~$$58\times$$ less |
+|$\mathbb{R}$| $\mathbb{R}$ |+ $\times$| $1\times$ | $1\times$ |
+|$\mathbb{R}$| $\mathbb{B}$ |+ -| ~$32\times$ less | ~$2\times$ less |
+|$\mathbb{B}$| $\mathbb{B}$ |xnor, popcount | ~$32\times$ less | ~$58\times$ less |
+
 
 **There are two types of Binarization:** [[Courbariaux et al., NeurIPS 2015]](https://arxiv.org/abs/1511.00363)  [[Courbariaux et al., Arxiv 2016]](https://arxiv.org/abs/1602.02830) [[Rastegari et al., ECCV 2016]](https://arxiv.org/abs/1603.05279)
 - Deterministic: direct computation usually results in sign function
