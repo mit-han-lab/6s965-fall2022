@@ -82,9 +82,7 @@ The figure above comes from [[Szymon Migacz, 2017]](https://on-demand.gputechcon
 
 Quantization error can be denoted as $\epsilon = Q(W) - W$
 
-$E[y] = E[Wx] + E[\epsilon x] - E[\epsilon x]$
-
-$ = E[Q(W)x] - \epsilon E[x]$
+$$E[y] = E[Wx] + E[\epsilon x] - E[\epsilon x] = E[Q(W)x] - \epsilon E[x],$$
 
 where $E[x]$ can be inferred from batch normalization, and the last term $\epsilon E[x]$ can be absorbed in the bias parameter. 
 
