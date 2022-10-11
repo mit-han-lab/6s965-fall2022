@@ -47,7 +47,7 @@ To make the weight ranges of different output channels match as closely as possi
 
 $$s_j = \frac{1}{r_{ic=j}^{(i+1)}} \sqrt{r_{oc=j}^{(i)} \cdot r_{ic=j}^{(i+1)}},$$
 
-where $r^{(i)}_{oc=j}$ is the weight range of output channel $j$ in Layer $i$, and $r^{(i+1)}_{ic=j}$ is the weight range of input channel $j$ in layer $i+1$. 
+where $r_{oc=j}^{(i)}$ is the weight range of output channel $j$ in layer $i$, and $r_{ic=j}^{(i+1)}$ is the weight range of input channel $j$ in layer $i+1$. 
 
 - Intuition, $1 * 100 = 10 * 10$, so taking the product of the two numbers, then the square root should give you the same product, and you just get two equalized input numbers now. 
 
