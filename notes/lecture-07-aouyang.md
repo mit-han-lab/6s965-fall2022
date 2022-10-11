@@ -46,7 +46,7 @@
       - pro: fewer parameters (small model size)
         - 3 * 3 + 3 * 3 = 18 < 5 * 5
       - drawback: introduces more layers, kernel calls, and more intermediate activation so potentially more latency
-- **Squeeze net**: 
+- **SqueezeNet**: 
   - Replaces the 3x3 convs with fire modules
   - Uses global average pooling in the head to reduce the cost of the head
   - **Fire modules** reduce the cost by using 1x1 convolutions
