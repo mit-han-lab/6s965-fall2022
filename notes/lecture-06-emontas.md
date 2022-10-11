@@ -23,7 +23,7 @@ Question: How should we get the optimal linear quantization parameters (__S__ ca
 -- significant accuracy drops for small models
 - Common failure causes
 -- large differences (>100x) in ranges of weights for different output channels
--- outlier weight values that cause precision loss of other wieghts after quantization
+-- outlier weight values that cause precision loss of other weights after quantization
 - Solution: **Per-Channel Quantization**
 -- different scaling and bias factors for different channels
 [[Markus et al., ICCV 2019]](https://arxiv.org/abs/1906.04721) [[Jacob et al., CVPR 2018]](https://arxiv.org/abs/1712.05877)
@@ -33,27 +33,28 @@ Question: How should we get the optimal linear quantization parameters (__S__ ca
 
 **Per-Tensor vs Per-Channel Quantization:**
 - Large differences in weight ranges for different output channels
--- Per-Channel Weigth Quantization will outperform Per-Tensor Weight Quantization
+-- Per-Channel Weight Quantization will outperform Per-Tensor Weight Quantization
 - Per-Channel Quantization is not supported on all hardware causing unnecessary overhead in computation when finding each channel's individual scale value
 -- the support for Per-Channel Quantization is increasing as its popularity in microcontrollers and use is vision models is growing
 
 Can we make weight ranges similar to each other such that per-tensor weight quantization will work? [[Markus et al., ICCV 2019]](https://arxiv.org/abs/1906.04721)
 
 #### Weight Equalization
-##### Rescaling to equalize the weigth ranges of different channels
+##### Rescaling to equalize the weight ranges of different channels
 **Key Idea: positive scaling equivarience** [[Markus et al., ICCV 2019]](https://arxiv.org/abs/1906.04721)
-- scaling down layer *i* wieghts $$W^{(i)}_{oc=a}$$ of output channel *oc=a* by *s*
-- scaling up layer *i+1* wieghts $$W^{(i+1)}_{ic=a}$$ of input channel *ic=a* by *s*
+- scaling down layer *i* weights $W_{oc=a}^{(i)}$ of output channel *oc=a* by *s*
+- scaling up layer *i+1* weights $W_{ic=a}^{(i+1)}$ of input channel *ic=a* by *s*
 
-To make weigth ranges of different output channels match as closely as possible,
+To make weight ranges of different output channels match as closely as possible,
 $$s_j =\frac{1}{r_{ic=j}^{(i+1)}}\sqrt{r_{oc=j}^{(i)} \cdot r_{ic=j}^{(i+1)}}$$
-where $$r_{oc=j}^{(i)}$$ is the weight range of *output* channel *j* in Layer *i*, and $$r_{ic=j}^{(2)}$$ is the weight range of *input* channel *j* in Layer $$i+1$$
+where $r_{oc=j}^{(i)}$ is the weight range of *output* channel *j* in layer *i*, and $r_{ic=j}^{(i + 1)}$ is the weight range of *input* channel *j* in layer $i+1$
 *note: f must be linear ie ReLU() is piece-wise linear, requires going throught the entire network 2 layers at a time*
 
-##### Adaptive Rounding for Weigth Quantization
+##### Adaptive Rounding for Weight Quantization
 **Rounding-to-nearest is suboptimal**
-*Philosophy:* Weights are corelated with eachother. Thus rounding each weight (to nearest) is suboptimal for rounding the entire tensor. [[Nagel et al., PMLR 2020]](https://arxiv.org/abs/2004.10568)
-What is optimal? Rounding that reconstructs the origional *activation* the best, which may be very different.
+*Philosophy:* Weights are correlated with each other. Thus rounding each weight (to the nearest) is suboptimal for rounding the entire tensor. [[Nagel et al., PMLR 2020]](https://arxiv.org/abs/2004.10568)
+
+What is optimal? Rounding that reconstructs the original *activation* the best, which may be very different.
 - only for weight quantization
 - short term tuning required, (almost) post-training quantization
 
