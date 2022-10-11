@@ -123,7 +123,7 @@ If both activations and weights are binarized:
 - Can be represented by a $xnor$ operation, multiplied by 2, then added to the number of terms. This involves a popcount equation and other simple operations, which is easy to implement on hardware. 
 
 Ternary Weight Networks (TWN)
-- Weights are quantized to +1, -1, and 0, using $delta = 0.7 * E(r)$ as a threshold to map out 3 distinct regions: $r > \Delta$, $|r| \leq \Delta$, and $r < -\Delta$. 
+- Weights are quantized to +1, -1, and 0, using $\Delta = 0.7 * E(r)$ as a threshold to map out 3 distinct regions: $r > \Delta$, $|r| \leq \Delta$, and $r < -\Delta$. 
 
 Trained Ternary Quantization (TTQ)
 - Instead of using a fixed scale $r_t$ for both ends we can use two trainable parameters $w_p$ and $w_n$ to represent the positive and negative scales, which achieve better performance than both BWN and TWN.
