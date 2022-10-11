@@ -56,7 +56,7 @@ where $r_{oc=j}^{(i)}$ is the weight range of output channel $j$ in layer $i$, a
 - We try to learn a parameter $delta$ between [0, 1] that optimizes rounding for each weight. 
 - Optimize the difference between the original $Wx$ and the reconstructed $\lfloor\lfloor W \rfloor + h(V)\rceil x$:
 
-$$\text{argmin}_v || Wx - \lfloor\lfloor W \rfloor + h(V)\rceil x ||^2_F + \lambda f_{reg}(V)$$
+$$\arg\min_v || Wx - \lfloor\lfloor W \rfloor + h(V)\rceil x ||^2_F + \lambda f_{reg}(V)$$
 
 where $x$ is the input to the layer, $V$ is a random variable of the same shape, $h()$ is a function to map the range to (0, 1), and $f_{reg}(V)$ is a regularization that encourages $h(V)$ to be binary. 
 
