@@ -53,7 +53,7 @@ where $r_{oc=j}^{(i)}$ is the weight range of output channel $j$ in layer $i$, a
 #### Adaptive Rounding
 - Key idea: rounding to nearest number is not always optimal. The best rounding for each individual weight may not be the best rounding for the whole tensor, because weights interact with each other. 
 - Learn the rounding that reconstructs the original activation the best. 
-- We try to learn a parameter $delta$ between [0, 1] that optimizes rounding for each weight. 
+- We try to learn a parameter $\Delta$ between [0, 1] that optimizes rounding for each weight. 
 - Optimize the difference between the original $Wx$ and the reconstructed $\lfloor\lfloor W \rfloor + h(V)\rceil x$:
 
 $$\arg\min_v || Wx - \lfloor\lfloor W \rfloor + h(V)\rceil x ||^2_F + \lambda f_{reg}(V)$$
