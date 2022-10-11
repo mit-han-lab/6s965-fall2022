@@ -93,7 +93,9 @@ $$\min_{|r|_{max}}\mathbb{E}[({X}-Q({X}))^2]$$
 -- *minimize loss of information* since integer models encode the same information as the origional floating-point model
 we can measure information loss with Kullback-Leibler divergence (relative information divergence):
 -- for two discrete probability distributions *P,Q*
+
 $$D_{KL}(P||Q)=\sum_i^N P(x_i)\log\frac{P(x_i)}{Q(x_i)}$$
+
 
 *intuition: KL divergence measures the information lost when approximating a given encoding*
 
