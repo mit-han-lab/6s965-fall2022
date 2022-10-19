@@ -1,6 +1,6 @@
-#Lecture 10: Knowledge Distillation
+# Lecture 10: Knowledge Distillation
 
-##Note Information
+## Note Information
 
 | Title       | Knowledge Distillation                                                                           |
 | ----------- | -------------------------------------------------------------------------------------------------------- |
@@ -13,7 +13,7 @@
 
 [Video](https://www.youtube.com/watch?v=tT9Lnt6stwA&feature=youtu.be&ab_channel=MITHANLab)
 
-##Outline of this lecture
+## Outline of this lecture
 
 - introduce knowledge distillation
 
@@ -25,7 +25,7 @@
 
 - network augmentation
 
-##What Is Knowledge Distillation
+## What Is Knowledge Distillation
 
 [Distilling the Knowledge in a Neural Network](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec10-Knowledge-Distillation.pdf)
 
@@ -37,7 +37,7 @@ Problem: tiny models underfit large datasets
 
 Goal: Distill knowledge from large, cloud-trained models to "edge" models
 
-**Gen Structure + Example**
+### Knowledge Distillation (KD) Gen Structure + Example
 
 Relies on *teacher* and *student* model
 
@@ -59,9 +59,9 @@ A temperature loss function smooths the probability output
 
 * Goal: align the class probability distributions from teacher and student networks
 
-##What to Match
+## What to Match
 
-**Logits**
+### Logits
 
 Compare the logits of teacher and student model, respectively. Two possible error functions:
 
@@ -70,25 +70,23 @@ Compare the logits of teacher and student model, respectively. Two possible erro
 * L2(teacher logits, student logits)
 
 
-**Intermediate weights**
-
+### Intermediate Weights
 
 Have a distillation loss function for Layer_i for i = 1...N
 
 An FC layer is used to align the shapes of teacher and student weights
 
-
-**Intermediate Features**
+### Intermediate Features
 
 Intuition: teacher and student networks should have similar feature distributions and not just similar output probability distributions
 
-Some choices for calculating error:
+Choices for calculating error:
 
 * Mininmize the maximum mean discrepancy between feature maps
 
 * Minimize the L2 distance between feature maps
 
-**Gradients**
+### Gradients
 
 Aka Intermediate attention maps
 
@@ -99,7 +97,7 @@ Attention = gradient of learning objective ($L$) with respect to the feature map
 When attention is large, small perturbations at pos $(i,j)$ of the feature significantly affect final output -> network learns to pay more "attention on $(i,j)$
 
 
-**Matching Sparsity Patterns**
+### Matching Sparsity Patterns
 
 Intuition: teacher and student network should have similar sparsity patterns after the ReLU activation
 
@@ -107,19 +105,19 @@ Let $p(x) = 1[x >0]$
 
 Minimize $L(I) = ||p(T(I)) - p(S(I))||$, where S and T corresponds to student and teacher networks
 
-**Matching Relational Information**
+### Matching Relational Information
 
 Conventional Knowledge Distillation (KD) focuses on matching features/logits for *one* input, but relational KD looks at relations between intermediate features from *multiple* inputs
 
 ![Individual vs Relational](figures/lecture-10/armdave/relationVsIndividual.png)
 
-##Self and Online Distillation
+## Self and Online Distillation
 
 Conventionally, teacher model is larger than student model and is fixed (trained beforehand)
 
 Disadvantage: must pay this training overhead before beginning to train student model
 
-**Self Distillation**
+### Self Distillation
 
 Train some "edge" model T
 
@@ -133,7 +131,7 @@ Repeat for S_2....S_k
 
 Best accuracy is actually is an ensemble of all models
 
-**Online Distillation**
+### Online Distillation
 
 Aka Deep mutual learning
 
@@ -143,7 +141,7 @@ For both teacher and student networks, we want to add a distillation objective t
 
 Works best on small datasets
 
-**Combined**
+### Combined
 
 Aka ONE: On-the-Fly Native Ensemble as the teacher network
 
@@ -151,11 +149,11 @@ Use deeper layers to distill knowledge to shallower layers
 
 ![self and online combined](figures/lecture-10/armdave/combined.png)
 
-##Distillation for Other Applications
+## Distillation for Other Applications
 
 Beyond classification
 
-**KD for Object Detection**
+### KD for Object Detection
 
 Use different weights for foreground and background classes to handle the class imbalance
 
@@ -165,13 +163,13 @@ Simply discretize the x and y axis
 
 ![Bounding Box Classification](figures/lecture-10/armdave/boundingBoxClassification.png)
 
-**KD for Semantic Segmentation**
+### KD for Semantic Segmentation
 
 Add a discriminator network to provide the adversarial loss: the student is trained to fool the discriminator network
 
 ![Discriminator Network](figures/lecture-10/armdave/discriminator.png)
 
-**KD for NLP**
+### KD for NLP
 
 Aka attention transfer
 
@@ -197,7 +195,7 @@ NetAug: Training Process
 
 ^These techniques improve large NN performance but HURT tiny NN performance
 
-**NetAug: Training Process**
+### NetAug: Training Process
 
 Build an augmented model that shares weights with original tiny NN model
 
