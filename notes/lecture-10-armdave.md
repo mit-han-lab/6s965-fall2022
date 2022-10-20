@@ -92,9 +92,9 @@ Aka Intermediate attention maps
 
 Gradients of feature maps are used to characterize **attention** of DNNs
 
-Attention = gradient of learning objective ($L$) with respect to the feature map, $x$
+Attention = gradient of learning objective $L$ with respect to the feature map, $x$
 
-When attention is large, small perturbations at pos $(i,j)$ of the feature significantly affect final output -> network learns to pay more "attention on $(i,j)$
+When attention is large, small perturbations at pos $(i,j)$ of the feature significantly affect final output -> network learns to pay more "attention" on $(i,j)$
 
 
 ### Matching Sparsity Patterns
