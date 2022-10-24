@@ -47,9 +47,9 @@ NOTE: This implies that we not only need to reduce the size of the network but a
 ## How to solve these challenges?
 Existing work either focuses on finding the best Architecture given a library or finds the best library given the architecture. Here we need to do both, we need to find the best architecture with the best library, known as MCUnet. MCUnet has a tinyNAS (for finding the best architecture) and a tinyEngine (for finding the best library).
 ![MCUNet](figures/lecture-11/nazishn/figure2-mcunet.png)
-### TinyNAS:
+## TinyNAS:
 TinyNAS is an automatic search for neural architectures.
-####Step1: 
+#### Step1: 
 First step to start with is to determine the best search space for searching the best network. We first design the best search space knowing the memory and energy constraints of our device. Number of FLOPs, width multiplier, and resolution help in determining the best search space for the network.
 The figure below shows how the best configuration (width multiplier and resolution) is found for a specific combination of SRAM and FLASH. We can see that for different sizes of SRAM and flash
 - As FLASH memory increases with the same SRAM, we can increase the width multiplier but the resolution should decrease
@@ -66,7 +66,7 @@ The following graph shows the performance of MCUnet
 ![MCUNet Performance](figures/lecture-11/nazishn/figure5-mcunet-performance.png)
 
 
-### Patch-based Inference:
+## Patch-based Inference:
 Since SRAM use is dynamic, we care about peak SRAM the most. From the following example, we can see that the initial stages of the network use the most memory.
 ![Network SRAM usage without patch convolution](figures/lecture-11/nazishn/figure6-no-patch.png)
 If we can reduce the memory usage of the initial stage, we can reduce the overall memory. We can save memory by breaking the memory bottleneck with patch-based inference. In patch-based inference, not all input is processed at once but a patch of input is processed at a time as shown in the figure below.
@@ -80,7 +80,7 @@ This overlap gets larger as the receptive field grows. One of the solutions is t
 ![Model Architecture](figures/lecture-11/nazishn/figure11-architecture.png)
 Another solution is the Joint Automated Search to find the optimized inference scheduling for a given neural architecture or vice versa. 
 ![MCUnet](figures/lecture-11/nazishn/figure12-mcunet.png)
-### RNN-Pool:
+## RNN-Pool:
 There are certain layers in a Neural Network that have high activations and high receptive fields that are hard to perform patch-based inference on, as shown below:
 ![Example Network](figures/lecture-11/nazishn/figure13-RNNPoolIntro.png)
 Typical CNNs have large intermediate activation maps and linear pooling operators or stride convolution are limited to small receptive fields, e.g., < 3x3, due to significant loss of accuracy. RNN-pool is another technique to reduce the peak SRAM. It is a non-linear pooling for RAM constrained inference.RNN Pool is a more refined aggregation over a large receptive field of the activation map. The figure below shows a detailed structure an RNN-Pool layer.
