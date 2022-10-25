@@ -116,13 +116,13 @@ Disadvantage: must pay this training overhead before beginning to train student 
 
 ### Self Distillation
 
-Train some "edge" model T
+Train some "edge" model $T$
 
-Then create another "edge" model S_1 with same architecture as T and distill T to S_1 in regular teacher -> student model
+Then create another "edge" model $S_1$ with same architecture as $T$ and distill $T$ to $S_1$ in regular teacher -> student model
 
-Then create "edge" model S2, distill S_1 to S_2
+Then create "edge" model $S_2$, distill $S_1$ to $S_2$
 
-Repeat for S_2....S_k
+Repeat for $S_2, ..., S_k$
 
 * Network accuracy: $T < S_1 < S_2 < ... < S_k$
 
