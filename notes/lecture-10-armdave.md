@@ -178,11 +178,11 @@ Conventional approach:
 
 1) Data augmentation during training to avoid overfitting
 
-- cutout
+- [cutout](https://arxiv.org/abs/1708.04552)
 
-- mixup
+- [mixup](https://arxiv.org/abs/1710.09412)
 
-- AutoAugment
+- [AutoAugment](https://arxiv.org/abs/1805.09501)
 
 2) Dropout (of neurons) during training to avoid overfitting
 
