@@ -1,5 +1,14 @@
 # Lecture 8: Neural Architecture Search (Part II)
 
+## Note Information
+
+| Title       | Introduction to TinyML and Efficient Deep Learning Computing                                                    |
+|-------------|-----------------------------------------------------------------------------------------------------------------|
+| Lecturer    | Song Han                                                                                                        |
+| Date        | 10/04/2022                                                                                                      |
+| Note Author | Daniel Liu (dansl)                                                                                              |
+| Description | Further deep dive into Neural Architecture Search, focusing on the evaluation aspect of architectures.          |
+
 Recall that the general structure of Neural Architecture search consists of three parts: choosing an architecture search space, choosing a model from the architecture space, and evaluating the performance of that model for feedback and further iteration. 
 
 In this lecture, we will be going over:
@@ -74,7 +83,7 @@ Surprisingly, we can get many sub-networks from a single Once for All network, o
 
 ## Progressive Pruning
 
-If we want to create a sub-network with a smaller kernel size, depth, or channel width, we can use progressive pruning. We can reduce 
+If we want to create a sub-network with a smaller kernel size, depth, or channel width as we are training the model, we can use progressive pruning. We can reduce either the kernel size, depth, or channel width one step at a time. For example, we can reduce the depth by taking the output of the model before going through the last layer and using that as the final output. Or, we can reduce the channel width by analysing which channel contributes the least to the activations so far, and remove that channel.
 
 ## Roofline Analysis
 
