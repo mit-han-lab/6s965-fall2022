@@ -9,9 +9,6 @@
 | Note Author | Arman Dave (armdave)                                                                                            |
 | Description | Introduce knowledge distillation, including self and online distillation, as well as distillation for different tasks; introduces network augmentation, a training technique for tiny ML models |
 
-[Slides](https://hanlab.mit.edu/files/course/slides/MIT-TinyML-Lec10-Knowledge-Distillation.pdf)
-
-[Video](https://www.youtube.com/watch?v=tT9Lnt6stwA&feature=youtu.be&ab_channel=MITHANLab)
 
 ## Outline of this lecture
 
