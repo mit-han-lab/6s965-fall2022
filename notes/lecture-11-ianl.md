@@ -24,7 +24,7 @@
     * low-cost: low income people can afford access = Democratize AI.
     * Low-power: green AI because it is so small = reduce carbon.
     * And ubiquitous = everywhere.
-* Therefore, we have a need to "sqeeze" deep learning into these devices to reach our original goals.
+* Therefore, we have a need to "squeeze" deep learning into these devices to reach our original goals.
 
 * General IoT devices coupled with deep learning have wide range of applications:
     * Smart home monitoring.
