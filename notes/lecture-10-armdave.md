@@ -52,7 +52,7 @@ A temperature loss function smooths the probability output
 
 **Formal Definition of Knowledge Distillation**
 
-* $p(z_i, T) = \frac{exp(z_i/T)}{\sum{exp(z_j/T)}}$. i,j = 0,1,2...,C-1 where C is the number of classes and T is the temperature (normally set to 1)
+* $p(z_i, T) = \frac{exp(z_i/T)}{\sum{exp(z_j/T)}}$, for $i,j = 0,1,2...,C-1$ where C is the number of classes and T is the temperature (normally set to 1)
 
 * Goal: align the class probability distributions from teacher and student networks
 
