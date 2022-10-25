@@ -154,9 +154,7 @@ Beyond classification
 
 Use different weights for foreground and background classes to handle the class imbalance
 
-How do we convert bounding box regression to a classification problem?
-
-Simply discretize the x and y axis
+How do we convert bounding box regression to a classification problem? Simply discretize the x and y axis!
 
 ![Bounding Box Classification](figures/lecture-10/armdave/boundingBoxClassification.png)
 
