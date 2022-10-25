@@ -188,7 +188,6 @@ Conventional approach:
 
 2) Dropout (of neurons) during training to avoid overfitting
 
-NetAug: Training Process
 
 ^These techniques improve large NN performance but HURT tiny NN performance
 
