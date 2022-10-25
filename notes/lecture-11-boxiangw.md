@@ -11,7 +11,8 @@
 
 ## What is tinyML?
 
-TinyMl and Green AI with **low energy**, **low latency**, **low cost** and **better privacy** are needed.
+TinyML and Green AI with **low energy**, **low latency**, **low cost** and **better privacy** are needed.
+
 
 Deep Learning situations:
 
