@@ -7,7 +7,7 @@
 | Lecturer    | Song Han                                                                                               |
 | Date        | 10/18/2022                                                                                             |
 | Note Author | Ian Lee (ianl)                                                                                         |
-| Description | Introduces tinyML, challenges, designs, and applications.                                              |
+| Description | Introduces MCUNet, challenges, designs, and applications.                                              |
 
 ### Lecture overview
 1. TinyML and motivation
