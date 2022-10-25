@@ -53,7 +53,7 @@ TinyNAS will design and auto-optimize NN model and pass it to TinyEngine, TinyNA
 
 ### Problem: what is the right search space?
 
-- Serach space largely determines models' performance
+- Search space largely determines models' performance
 - Option 1: reuse the carefully designed mobile search space (e.g., MnasNet space) for tinyML
   - Problem: Even the smallest sub-network cannot fit the hardware
 - **Option 2: pick a search space for the IoT device** （explained below)
