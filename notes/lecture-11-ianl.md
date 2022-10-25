@@ -1,4 +1,4 @@
-# Lecture 07: Neural Architecture Search (Part I)
+# Lecture 11: MCUNet - Tiny Neural Network Design for 
 
 ## Note Information
 
