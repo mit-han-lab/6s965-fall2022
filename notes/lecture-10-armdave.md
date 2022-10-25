@@ -132,7 +132,7 @@ Best accuracy is actually is an ensemble of all models
 
 Aka Deep mutual learning
 
-The teacher model is not pre-trained. Rather, both models are training at the same time
+The teacher model is not pre-trained. Rather, both models are trained at the same time
 
 For both teacher and student networks, we want to add a distillation objective that minimizes the output distribution of the other party
 
