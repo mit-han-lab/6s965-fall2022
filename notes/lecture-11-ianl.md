@@ -1,4 +1,4 @@
-# Lecture 11: MCUNet - Tiny Neural Network Design for 
+# Lecture 11: MCUNet - Tiny Neural Network Design for Microcontrollers
 
 ## Note Information
 
