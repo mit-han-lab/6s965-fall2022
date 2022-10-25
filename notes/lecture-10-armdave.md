@@ -203,10 +203,8 @@ Build an augmented model that shares weights with original tiny NN model
 
 - Step 3: Choose different subnetworks in the augmmented model for auxillary loss
 
-For a tiny NN, NetAug improves both training and val accuracy
+Results:
+- For tiny NNs, NetAug improves both training and val accuracy
+- For large NNs, NetAug improves training but hurts val accuracy
 
-For large NN, NetAug improves training but hurts val accuracy
-
-For the right task, NetAug can outpeform KD
-
-NetAug is **orthogonal** to KD
+NetAug is **orthogonal** to KD. For the right task, NetAug can outperform KD. 
