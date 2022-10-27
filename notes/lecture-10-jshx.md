@@ -96,3 +96,5 @@ Instead, we can augment the network itself by building an augmented model that s
 We go forwards and backwards on both models, we calculate the gradient using the sum of the base and the auxilary. For each iteration, we can use a different subset of the augmented network to calculate the loss.
 
 NetAug improves the training accuracy and validation accuracy for tiny networks, and improves the training accuracy for large networks, but hurts the validation accuracy for large networks.
+
+NetAug also provides better transfer learning performances than Knowledge Distillation and 4x training schedule
