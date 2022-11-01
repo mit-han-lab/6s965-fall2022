@@ -103,7 +103,7 @@ sub_model = nas.search(
  ### Deploy:
 
 ```
-from Omnimizer import engine 
+from omnimizer import engine 
 device_model = engine.compile(sub_model)
 device_model.get_latency()
 out = device_model(sample_input)
