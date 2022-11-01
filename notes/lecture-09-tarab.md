@@ -1,4 +1,4 @@
-# Lecture 09:  Neural Architecture Search Part III
+# Lecture 09:  Neural Architecture Search (Part III)
 
 ## Note Information
 
