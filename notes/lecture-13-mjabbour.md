@@ -24,16 +24,16 @@ The most accurate machine learning models have become increasingly large. Making
 
 For example, GPT-3 contains 175 Billion parameters. Even if they were each 8-bit quantized, this would amount to 1.7 TB, which is more than what most accelerators can fit in memory.
 
-![Increase in model size](figures/lecture-11/mjabbour/figure1-modelsize.png) 
+![Increase in model size](./figures/lecture-11/mjabbour/figure1-modelsize.png) 
 
 
 Clearly, the increase in size makes training a bottle-neck for machine learning professionals. As illustrated by the following table of estimates for the training time of different models on single NVIDEA A100 GPU:
 
 
-![Increase in training time](figures/lecture-11/mjabbour/figure2-trainingtime.png) 
+![Increase in training time](./figures/lecture-11/mjabbour/figure2-trainingtime.png) 
 
 
-![Impact on the industry](figures/lecture-11/mjabbour/figure3-meme.png)
+![Impact on the industry](./figures/lecture-11/mjabbour/figure3-meme.png)
 
 
 ### 2. Data and Model Parallelism
