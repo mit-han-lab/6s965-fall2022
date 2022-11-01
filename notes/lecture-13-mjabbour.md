@@ -9,7 +9,7 @@
 | Note Author | Mark Jabbour (mjabbour)                                                                                         |
 | Description | Introduces approaches to distribute the workload of training ML models accross different machines, and the trade-offs between them. 
 
-### Lecture overview
+## Lecture overview
 1. Motivation for distributed training
 2. Data and Model Parallelism
 3. Data parallelism in depth
@@ -37,6 +37,39 @@ Clearly, the increase in size makes training a bottle-neck for machine learning 
 
 
 ### 2. Data and Model Parallelism
+
+To allow researches to iterate on designs of large models in a reasonable fashion, the industry turned into distributed training. A recent example of this at MIT is the training of the vision model in  [[Lin *et al.*, 2019]](https://arxiv.org/pdf/1811.08383.pdf), where researches distributed the work on 256 SUMMIT Nodes to reduce the training time from 49h 50min to 14min.
+
+There are two general flavors of parallelism we can exploit to distribute training. Data parallelism, and model parallelism.
+
+#### Data Parallelism
+
+Data Parallelism is when every node has a local copy of the model parameters, and is responsible for training on a subset of the data set. The different GPUs need to periodically synchronize to keep their local copies in tune, as we will discuss later. A high level view of Data Parallelism is illustrated in the image below [[Jia *et al.*, 2022]](https://www.cs.cmu.edu/~zhihaoj2/15-849/):
+
+![Data Parallelism](./figures/lecture-13/mjabbour/figure4-dataparallelism.png)
+
+
+
+#### Model Parallelism
+
+Model Parallelism is when every node is responsible for the forward and back propagations steps of a few layers in the model. A high level view of Data Parallelism is illustrated in the image below [[Jia *et al.*, 2022]](https://www.cs.cmu.edu/~zhihaoj2/15-849/):
+
+
+![Model Parallelism](./figures/lecture-13/mjabbour/figure5-modelparallelism.png)
+
+#### Trade-offs
+
+We will dive deeper into the details of each. However, on a high level we can observe the following:
+
+|Data Parallelism |Model Parallelism|
+|-----|--------|
+|Splits the data |splits the model |
+|same model accross devices  |Move activations between devices      |
+
+|Easy to exploit, high utilization  |Hard to exploit, load balancing issues      |
+|N copies of the model  |one copy of the model      |
+|Model is bounded by a node's memory  |Layer is bounded by a node's memory      |
+
 
 ### 3. Data parallelism in depth
 
