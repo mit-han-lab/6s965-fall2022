@@ -82,7 +82,6 @@ Uses FastNAS (Faster but smaller search space) or AutoNAS (Slower but larger sea
 from Omnimizer import nas
 omni_model = nas.omnimize(model)
 train(omni_model, dataloader)
- 
 ```
 
 ### Search:
