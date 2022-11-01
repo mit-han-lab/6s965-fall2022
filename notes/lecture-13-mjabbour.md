@@ -62,10 +62,9 @@ Model Parallelism is when every node is responsible for the forward and back pro
 We will dive deeper into the details of each. However, on a high level we can observe the following:
 
 |Data Parallelism |Model Parallelism|
-|-----|--------|
+|----------|----------|
 |Splits the data |splits the model |
 |same model accross devices  |Move activations between devices      |
-
 |Easy to exploit, high utilization  |Hard to exploit, load balancing issues      |
 |N copies of the model  |one copy of the model      |
 |Model is bounded by a node's memory  |Layer is bounded by a node's memory      |
