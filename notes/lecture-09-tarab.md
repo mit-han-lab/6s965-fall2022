@@ -20,7 +20,7 @@
 ### Edge AI applications:
 - Autonomous driving and Advanced driver assistance systems 
 - Robotics
-- Internet of 
+- Internet of Things (IoT)
 - Augmented Reality and Virtual Reality Headsets
 
 ### What is the problem that Omnimizer is trying to solve?
