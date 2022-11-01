@@ -72,6 +72,29 @@ We will dive deeper into the details of each. However, on a high level we can ob
 
 ### 3. Data parallelism in depth
 
+To better understand data parallelism we explore a simplified version of [[Mu Li et al. 2014]](https://web.eecs.umich.edu/~mosharaf/Readings/Parameter-Server.pdf). In our system, nodes take on one of two roles:
+
+1. **Parameter Server:** Responsible of synchronizing local copies by receiving local gradients, aggregating them, and pushing the aggregate to workers
+2. **Workers:** Responsible for computing a gradient based on their part of the dataset (and local portion of the dataset). 
+
+
+![Data parallelism Architecture](./figures/lecture-13/mjabbour/figure6-datapararch.png)
+
+The workers run the procedure as follows:
+
+For iteration i in 0..T,
+1. Replicate / Pull gradients from parameter server
+2. Get a random subset of the data
+3. Compute a gradient based on the subset
+4. Send the gradients to the parameter server, and wait for it to aggregate other gradients
+5. Receive the aggregate gradient, and update the parameters accordingly
+
+
+Notice that this looks almost identical to what training on what device looks like, except for steps 1 and 4. The process is summarized with the following diagram from [[Lin et al. 2018]](https://openreview.net/pdf?id=SkhQHMW0W).
+
+![Data parallelism Architecture](./figures/lecture-13/mjabbour/figure7-datapardetail.png)
+
+
 ### 4. Distributed Communication Primitives
 
 ### 5. Model Parallelism in depth
