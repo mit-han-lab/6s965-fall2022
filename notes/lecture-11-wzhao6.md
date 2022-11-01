@@ -1,17 +1,13 @@
-# Lecture 11: MCUNet
+# Lecture 11: MCUNet: Tiny Neural Network Design for Microcontrollers
 
 # Note Information
 
-| Title | MCUNet |
+| Title | MCUNet: Tiny Neural Network Design for Microcontrollers |
 | --- | --- |
 | Lecturer | Song Han |
 | Date | Oct 20, 2022 |
 | Note Author | William Zhao (wzhao6) |
-Lecture Plan
- 1. What is tinyML?
-2. Understanding the challenges of tinyML
-3. Tiny neural network design
-4. Application: tiny vision, tiny audio, tiny anomaly detection |
+| Description | In this lecture, we introduce tinyML and the challenges associated with them. We also explain different approaches to designing neural networks to tackle these challenges. Lastly, we give some applications of tinyML.|
 
 ![Untitled](figures/lecture-11/wzhao6/Untitled.png)
 
@@ -76,7 +72,7 @@ The **entirety of the model’s weights** must be stored in the storage.
 When doing inference with an ML model, at each layer we only store the **input and output activations** for the layer, due to the sequential method for inference. Weight storage can be mitigated by only loading the part of weights needed for computation from the storage. The compiled code needs to be stored in memory as well. Lastly, we must have enough memory for every layer during inference, so the required memory is the **peak** **need** over all layers. Summarizing, we have:
 
 $$
-\text{Memory} = max_{\text{layer}}(\text{Input Activation} + \text{Output Activation}) + \text{Code}
+\text{Memory} = \max_{\text{layer}}(\text{Input Activation} + \text{Output Activation}) + \text{Code}
 $$
 
 ## Size of current CNNs
