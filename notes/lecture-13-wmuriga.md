@@ -1,5 +1,14 @@
 #  Lecture 13: Distributed Training and Gradient Compression (Part I)
 
+## Note Information
+
+| Title       | Distributed Training and Gradient Compression (Part I)                                                          |
+|-------------|-----------------------------------------------------------------------------------------------------------------|
+| Lecturer    | Song Han                                                                                                        |
+| Date        | 10/25/2022                                                                                                      |
+| Note Author | Veronica Muriga (wmuriga)                                                                                       |
+| Description | Leveraging data and model parallelism to reduce training times and alleviate computational demands on training infrastructure   |
+
 ## What are the techniques that enable us to train NN faster?
 - Background and motivation of distributed training
 - Basic concepts of distributed training
