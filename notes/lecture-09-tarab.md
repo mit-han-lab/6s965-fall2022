@@ -48,7 +48,7 @@ Omnimizer can be added to Pytorch and enables the ML engineer to deploy and test
 
 ### Google (Vertex AI):
 - A black box design
-- Works good only on well-known benchmarks such as ImageNet
+- Works well only on established benchmarks such as ImageNet
 
 ### Omnimizer: 
 - Automatic optimization and adaptation
@@ -60,7 +60,7 @@ Omnimizer can be added to Pytorch and enables the ML engineer to deploy and test
 ### Setup:
 OmniML has several actual hardwares that their server deploys and measures latency.
 ```
-from Omnimizer import engine
+from omnimizer import engine
 deployment = {
     "device": "S888",
     "precision": "int8",
@@ -79,7 +79,7 @@ engine.profile(adapted_model, deployment)
 ### Train and Optimize:
 Uses FastNAS (Faster but smaller search space) or AutoNAS (Slower but larger search space).
 ```
-from Omnimizer import nas
+from omnimizer import nas
 omni_model = nas.omnimize(model)
 train(omni_model, dataloader)
 ```
@@ -88,7 +88,7 @@ train(omni_model, dataloader)
 Searches for the subnet that meets the required latency restrictions and has the optimal accuracy. 
 
 ```
-from Omnimizer import nas
+from omnimizer import nas
 constraints = {
     "latency": 3.0,  # ms
 }
