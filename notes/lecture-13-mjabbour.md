@@ -150,8 +150,67 @@ Now that we have established why reduce-all is important for us, we study differ
 
 ### 5. Model Parallelism in depth
 
+#### Motivation
+
+As we mentioned earlier, Model parallelism is tricker due to load ballancing issues. However, when models are too large to fit in a GPU it is our only choice.
+
+GPT3 has 175B paraneters. Even if they were each 16bits, our model size is 350GB, which is more than 4 times the memory if Nvidia A100! 
+
+
+#### Workflow
+
+
+Every set of consecutive layers is stored on a GPU, and activations as well as backwork propagations data are sent through the sequence of GPUs. The following diagram illustrates the flow for a model spread over $4$ GPUs.
+
+
+![Model Parallelism](./figures/lecture-13/mjabbour/figure16-model.png)
+
+
+
+
+
+#### Pipeline optimisation 
+
+We notice in the workflow above that each GPU is idle most of the time. How do we deal with this? Note that while training on a single batch we, we do not need to update the model. Hence, [[Huang et al. 2018]](https://arxiv.org/abs/1811.06965) proposes that we can break our batch into nano-batches, and propagate the activations of nano-batches to allow GPUs responsible for subsequent layers to start working sooner. This is illustrated with the following diagram.
+
+
+![pipeline optimisation](./figures/lecture-13/mjabbour/figure17-pipe.png)
 
 
 
 ### 6. Beyond model parallelism
+
+#### Motivation
+
+There are two tricky aspects that our discussion of model parallelism overlooked:
+
+1. How to best split the layers between GPUs? the pipeline diagram suggest that having each GPU do an equal amount of work is desirable. However, we also should minimize the amount of activations flowing between GPUs. This makes it not clear where to place boundaries, and means that the optimal answer can be different for different devices. This is known as *inter-op parallelism*
+
+![inter-op parallelism](./figures/lecture-13/mjabbour/figure18-inter.png)
+
+
+2. Our layers can be so large, that they do not entirely fit in one GPU. This is known as *intra-op parallelism*
+
+![intera parallelism](./figures/lecture-13/mjabbour/figure19-intra.png)
+
+
+#### Alpa: a unified compiler for distributed training
+
+ [[Zheng et al. 2022]](https://arxiv.org/abs/2201.12023) Notices that these two optimisation problems can be tackled seperately. Resulting in a model that exploits both intra and inter operation parallelism. Their systems works in three stages as presented in the diagram below:
+
+ ![ALPA](./figures/lecture-13/mjabbour/figure20-alpa.png)
+
+ 1. **Inter op optimisation:** Using this step, the algorithm can find an optimal distribution. It searches through the different choices for  prallelisation algorithms for each tensor, and finds the optimal one using a linear programming approach that considers both the communication complexity for a single tensor, as well the communication complexity of distributing the output from previous tensor multiplication. We refer the reader to the paper for details.
+
+
+ 2. **Intra op optimisation:**
+ 
+ This phase uses the results of the previous stage to find a pipleline with minimal latency. They design the pipeline using a dynamic programming approach (since optimal pipelines achieve the optimal substrucre property where any prefix of the pipeline is optimal).
+ 
+ 3. **Runtime orchestration:** Generate code to implement the optimized design automatically
+
+
+
+
+
 
