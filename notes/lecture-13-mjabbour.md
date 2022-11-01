@@ -95,7 +95,34 @@ Notice that this looks almost identical to what training on what device looks li
 ![Data parallelism Architecture](./figures/lecture-13/mjabbour/figure7-datapardetail.png)
 
 
+
+One issue with the architecture above, is that *it is limited by the bandwidth of the paramater server* .  For example, i we train ResNet50 on 256 nodes, with the goal of achieving 3 iterations per second. Note that if we assume 32 bit precision for the gradient, then it's size based on the number of parameters would be 97.5MB. Then we would require $256 \times 3 \times 97.5 = 73.1 GB/s$. This is an unreasonably large bandwidth. When even some of the most cutting edge adapters like Mellanox ininitteband connectx-5 are limited 12.5GB. In the following section we look for ways to get rid of the parameter server to resolve the issue.
+
 ### 4. Distributed Communication Primitives
+
+
+#### Networking Primitives
+
+We start by looking into various known networking primitives:
+
+1. **Point to point and send and Recv:** These are the fundemental building blocks for other primitive, and all implemented in Socket / MPI / Gloo / NCCL.
+![Send and Receive](./figures/lecture-13/mjabbour/figure8-send.png)
+2. **Scatter and Gather:** send a tensor to every other node in the network, or receive one from each other node.
+![Gather and Scatter](./figures/lecture-13/mjabbour/figure9-gather.png)
+3. **Reduce and All-Reduce:** Reduce is the same as gather, but computes a (usually commutative and assosciative) aggregate on the data. Reduce all produces the same result as running reduce on each node.
+![Reduce and Reduce-all](./figures/lecture-13/mjabbour/figure10-reduce.png)
+
+
+
+#### Networking primitives and our Data Parallelism system
+
+
+
+#### All-Reduce mechanisms
+
+
+#### Summary
+
 
 ### 5. Model Parallelism in depth
 
