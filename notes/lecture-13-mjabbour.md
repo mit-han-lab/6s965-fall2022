@@ -116,12 +116,37 @@ We start by looking into various known networking primitives:
 
 #### Networking primitives and our Data Parallelism system
 
+Note that our systems requires network operations in two steps:
+1. *step 1* Replicate and Pull. This is effectively a **broadcast** operation from the server. 
+2. *step 4* Push and Sum: THis is essentially a **gather** operation
+
+These operations if implemented naively require $O(n)$ bandwidth from the parameter server, and $O(1)$ from workers. How can we replace the parameter server? If we think about the end result of these two steps, we notice that it is equivelant to a **reduce-all** operation, where we sum the gradients.
 
 
 #### All-Reduce mechanisms
 
+Now that we have established why reduce-all is important for us, we study different ways to implement it:
+
+1. **Naive Parallel All Reduce:** Every node sends it's tensor to every other node. Sum is computed locally. Bandwidth is $O(N^2)$, time is $O(1)$
+![Parallel Reduce-all](./figures/lecture-13/mjabbour/figure11-naiveparallel.png)
+
+2. **Naive Sequential All Reduce:** Same as above, but we broadcase from each node in $N$ stepss. (Each node broadcasts in a different step). Bandwidth $O(N)$, time is $O(N)$
+
+![Sequential Reduce-all](./figures/lecture-13/mjabbour/figure12-naiveseq.png)
+
+3. **Ring All Reduce:** Nodes are ordered in a ring, in the first step each node sends its tensor to the next one. In all other steps, each node sends the tensor it received in the previous step to the one after it. Sums are computed locally. Badnwidth is $O(N)$, time is $O(N)$
+
+![Ring reduce all](./figures/lecture-13/mjabbour/figure13-ring.png)
+
+4. **Recursive halving all reduce:** This works in a way similar to the recursion in merege sort In Step $i$ (starting from step $0$). We break our nodes into chunks if size $2^{i}$, pair up nodes nodes consecutives chunks. Each such pair send the other the current sum, and add the value they received to the current sum.  Badnwidth is $O(N)$, time is $O(\log n)$
+
+![halving reduce all](./figures/lecture-13/mjabbour/figure14-halving.png)
+
 
 #### Summary
+
+![Summary](./figures/lecture-13/mjabbour/figure15-summary.png)
+
 
 
 ### 5. Model Parallelism in depth
