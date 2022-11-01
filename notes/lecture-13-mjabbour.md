@@ -22,8 +22,6 @@
 
 The most accurate machine learning models have become increasingly large. Making the models much slower to evaluate, and much harder to train. This has led to increased interest in effecient machine learning. While techniques like quantization and pruning help reduce the inference time, most of them are not as effective for training. Furthermore, models that contains tens of billions of parameters would not fit in a single GPU even if quantized.
 
-For example, GPT-3 contains 175 Billion parameters. Even if they were each 8-bit quantized, this would amount to 1.7 TB, which is more than what most accelerators can fit in memory.
-
 ![Increase in model size](./figures/lecture-13/mjabbour/figure1-modelsize.png) 
 
 
@@ -151,6 +149,9 @@ Now that we have established why reduce-all is important for us, we study differ
 
 
 ### 5. Model Parallelism in depth
+
+
+
 
 ### 6. Beyond model parallelism
 
