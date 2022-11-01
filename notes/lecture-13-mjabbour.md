@@ -128,6 +128,7 @@ These operations if implemented naively require $O(n)$ bandwidth from the parame
 Now that we have established why reduce-all is important for us, we study different ways to implement it:
 
 1. **Naive Parallel All Reduce:** Every node sends it's tensor to every other node. Sum is computed locally. Bandwidth is $O(N^2)$, time is $O(1)$
+
 ![Parallel Reduce-all](./figures/lecture-13/mjabbour/figure11-naiveparallel.png)
 
 2. **Naive Sequential All Reduce:** Same as above, but we broadcase from each node in $N$ stepss. (Each node broadcasts in a different step). Bandwidth $O(N)$, time is $O(N)$
