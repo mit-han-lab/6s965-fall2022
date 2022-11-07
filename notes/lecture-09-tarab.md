@@ -1,4 +1,4 @@
-# Lecture 09:  Neural Architecture Search Part III
+# Lecture 09:  Neural Architecture Search (Part III)
 
 ## Note Information
 
@@ -20,7 +20,7 @@
 ### Edge AI applications:
 - Autonomous driving and Advanced driver assistance systems 
 - Robotics
-- Internet of 
+- Internet of Things (IoT)
 - Augmented Reality and Virtual Reality Headsets
 
 ### What is the problem that Omnimizer is trying to solve?
@@ -48,7 +48,7 @@ Omnimizer can be added to Pytorch and enables the ML engineer to deploy and test
 
 ### Google (Vertex AI):
 - A black box design
-- Works good only on well-known benchmarks such as ImageNet
+- Works well only on established benchmarks such as ImageNet
 
 ### Omnimizer: 
 - Automatic optimization and adaptation
@@ -82,7 +82,6 @@ Uses FastNAS (Faster but smaller search space) or AutoNAS (Slower but larger sea
 from omnimizer import nas
 omni_model = nas.omnimize(model)
 train(omni_model, dataloader)
- 
 ```
 
 ### Search:
