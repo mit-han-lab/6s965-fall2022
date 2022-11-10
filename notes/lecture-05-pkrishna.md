@@ -81,9 +81,42 @@ The second main type of Quantization is Linear Quantization - where you want an 
 $$r = S(q - z)$$
 In this equation, $S$ is the scale factor, and is generally a floating-point number; $q$ is the quantized version of $r$, and therefore an integer; and $Z$ is an integer of the same type that is chosen such that it maps to zero.
 
-### Finding the Values
+### Finding the Values (Asymmetric Quantization)
 
 Let $r_\min, r_\max$ be the minimum and maximum of all the original weights; and let $q_\min, q_\max$ be the minimum and maximum of the quantized range (which is generally $-2^n, 2^n-1$ for some $n$). Then, we would approximately want $r_\min = S(q_\min - Z)$ and $r_\max = S(q_\max - Z)$. Subtracting the second from the first gives $r_\max - r_\min = S(q_\max - q_\min)$, which gives us:
 $$S = \frac{r_\max - r_\min}{q_\max - q_\min}$$
 
-For the zero offset, we would like
+For the zero offset, we would like our quantization scheme to be able to represent zero exactly. So, even though from the equation $r_\min = S(q_\min - Z)$, we could get $Z = q_\min - \frac{r_\min}{S}$, we change this to $Z = \text{round}\left(q_\min - \frac{r_\min}{S}\right)$.
+
+### Symmetric Quantization
+
+The first scheme covered was asymmetric quantization, named for the inherent asymmetry between the positive and negative values it can represent. Another scheme that can be used is symmetric quantization; in this case, the $Z$ value is fixed at $0$, while the new scaling factor becomes $S = \frac{\lvert r \rvert_\max}{-q_{\min}}$, using similar notation to the previous section.
+
+While the implementation is easier, and the logic for handling zero is cleaner, this causes the quantized range to be wasted effectively (i.e. there are a range of values that can be represented by our scheme but do not need to be); this is especially true after any ReLU operation, in which we know the values are to be nonnegative, which essentially loses a whole bit of information! In general, this means we don't use this scheme to quantify activations, but we could for quantifying weights
+
+### The Math
+
+Now, suppose we have a linear layer (with no bias) in our model - $Y = WX$; with our quantization scheme, this becomes:
+    $Y = WX$ \\
+    $S_Y(q_Y - Z_Y) = S_W(q_W - z_W) \cdot S_X(q_X - Z_x)$ \\
+    $q_Y = \frac{S_WS_X}{S_Y}(q_W - z_W)(q_X - Z_X) + Z_Y$ \\
+    $q_Y = \frac{S_WS_X}{S_Y}(q_Wq_X - z_Wq_X - Z_Xq_W + Z_WZ_X) + Z_Y$ \\
+
+Note here that the term $Z_Xq_W + Z_WZ_X$ can be precomputed, as this is not dependent on the specific input ($Z_X$ is dependent on only our quantization scheme, determined through global statistics across the input dataset); and, we can set $Z_W = 0$ via choosing a symmetric quantization scheme.
+
+#### Adding Bias
+
+If we add bias, with $b = S_b(q_b - Z_b)$, we should also set $Z_b = 0$ to match $W$, and to make computations simpler, we can just make the scaling factor $S_WS_X$ (this works well in practice). Then, we would have:
+
+  $Y = WX + b$ \\
+  $S_Y(q_Y - Z_Y) = S_W(q_W - z_W) \cdot S_X(q_X - Z_x) + S_b(q_b - Z_b)$ \\
+  $q_Y = \frac{S_WS_X}{S_Y}(q_W - z_W)(q_X - Z_X) + Z_Y + \frac{S_b}{S_Y}(q_b - Z_b)$ \\
+  $q_Y = \frac{S_WS_X}{S_Y}(q_Wq_X - z_Wq_X - Z_Xq_W + Z_WZ_X + q_b - Z_b) + Z_Y$ \\
+  $q_Y = \frac{S_WS_X}{S_Y}(q_Wq_X + q_b - Z_Xq_W) + Z_Y$ \\
+  $q_Y = \frac{S_WS_X}{S_Y}(q_Wq_X + q_{\text{bias}}) + Z_Y$ \\
+
+where we define $q_{\text{bias}} = q_b - Z_Xq_W$, as this can be precomputed, through a similar argument as before.
+
+#### Convolutions
+
+It turns out that, because convolutions are also essentially a linear operator, the derivation for its quantization is extremely similar to that for a linear layer. Through similar definitions (i.e. $Z_W = Z_b = 0, S_b = S_WS_X$), we would get $q_Y = \frac{S_WS_X}{S_Y}\left(\text{Conv}(q_W, q_X) + q_{\text{bias}}\right) + Z_Y$, where $q_{\text{bias}} = q_b - \text{Conv}(q_W, Z_X)$.
