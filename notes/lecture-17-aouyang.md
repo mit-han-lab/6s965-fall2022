@@ -101,7 +101,7 @@ Loop unrolling improves the data locality of caches. Since data movement (cache 
 
 ### Loop Tiling
 
-**A loop transformation technique that reduces memory access by partitioning a loop's iteration space into smaller chunks or blocks. **
+**A loop transformation technique that reduces memory access by partitioning a loop's iteration space into smaller chunks or blocks.**
 
 Like loop reordering, loop tiling can be used to reduce cache misses. If the data is much larger than the cache size, data in the cache will be evicted before reuse, resulting in an increase in cache misses. Loop tiling reduces cache misses by partitioning the loop iteration space, therefore fitting accessed elements in the loop into the cache and ensures that the data stays in the cache until it is reused. 
 
@@ -127,7 +127,7 @@ SIMD programming results in a constant factor speedup due to parallelism. The fa
 
 ### Image to Column (im2col) Convolution
 
-**Rearranges input data to directly utilize matrix multiplication kernels. **
+**Rearranges input data to directly utilize matrix multiplication kernels.**
 
 It converts the image in a form such that Generalized Matrix Multiplication (GEMMs) calls can be used instead of the convolution operations. There's a benefit to this since there are many optimized implementations of GEMM. On the other hand, one con is using more memory. However, the implicit GEMM can solve the problem of using additional memory. The implicit GEMM is a variant of direct convolution, and operates directly on the input weight and activation tensors.
 
