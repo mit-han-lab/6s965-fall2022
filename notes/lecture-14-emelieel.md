@@ -13,10 +13,10 @@
 ## 1. Problems of Distributed Training
 
 
-• 1) Requires Synchronization, High Communication Frequency
-• 2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
-• 3) More Training Nodes, More Communication Steps, Longer Latency
-• 4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
+* 1) Requires Synchronization, High Communication Frequency
+* 2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
+* 3) More Training Nodes, More Communication Steps, Longer Latency
+* 4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
 
 ### 1) Requires Synchronization, High Communication Frequency
 
