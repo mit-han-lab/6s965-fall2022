@@ -137,7 +137,7 @@ We can address this problem through <strong>Delayed Gradient Averaging</strong> 
 ![](figures/lecture-14/emelieel/delayedcomp.png)
 
 
-If we directly updates weights, we will hurt the model's performance with stale gradients. However, if we apply gradients with correction terms ($w_{(i, j)} = w_{(i, j)} - \eta( \nabla w_{(i, j)} - \nabla w_{(i-D, j)} + \overline{\nabla w_{(i-D)}})$), we will protect the accuracy. With vision and language, we can speed up training by up to 7x. 
+If we directly updates weights, we will hurt the model's performance with stale gradients. However, if we apply gradients with correction terms $w_{(i, j)} = w_{(i, j)} - \eta( \nabla w_{(i, j)} - \nabla w_{(i-D, j)} + \overline{\nabla w_{(i-D)}})$, we will protect the accuracy. With vision and language, we can speed up training by up to 7x. 
 
 
 
