@@ -13,44 +13,44 @@
 ## 1. Problems of Distributed Training
 
 
-* 1) Requires Synchronization, High Communication Frequency
-* 2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
-* 3) More Training Nodes, More Communication Steps, Longer Latency
-* 4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
+* (1) Requires Synchronization, High Communication Frequency
+* (2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
+* (3) More Training Nodes, More Communication Steps, Longer Latency
+* (4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
 
-### 1) Requires Synchronization, High Communication Frequency
+### (1) Requires Synchronization, High Communication Frequency
 
 ![](figures/lecture-14/emelieel/requires_sync.png)
 
 As we push and sum local gradients to the server gradients, we create a bottleneck. The synchronization required to update gradients efficiently and correctly at high volume leads to challenges. 
 
-### 2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
+### (2) Larger Model, Larger Transfer Data Size, Longer Transfer Time
 
 A normal ethernet cable that we plug in has a bandwidth of <strong>1Gb/s</strong>. Larger models like Swin-Large possess a bandwidth over 3x that amount. As we increase the size of the model we're training, we have more gradients we need to communicate on our bandwidth.
 
-### 3) More Training Nodes, More Communication Steps, Longer Latency
+### (3) More Training Nodes, More Communication Steps, Longer Latency
 
 ![](figures/lecture-14/emelieel/more_training_nodes.png)
 
 Training using more worker nodes means there's a larger overhead in communication (i.e. more worker nodes == longer latency == more communication time needed). Even though we've lowered computation latency, that massive increase in communication takes a hit on speed. 
 
-### 4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
+### (4) Poor Network Bandwidth & Intermittent Connection for Cellular Networ
 
 In order to communicate and update gradients, we need network connection. When that gets spotty, the high freqency communication can't properly go through. We potentially lose computation in this connectivity bottleneck. 
 
 ## 2. Gradient Compression: Reduce the Gradient Size
 
-• 1) Gradient Pruning
-• 2) Gradient Quantization
+* (1) Gradient Pruning
+* (2) Gradient Quantization
 
-### 1) Gradient Pruning: Sparse Communication
+### (1) Gradient Pruning: Sparse Communication
 
 ![](figures/lecture-14/emelieel/sparse_comm.png)
 
 One way to cut down on communication time is to only send the gradients that have the highest impact. This means only transfering gradients with top-k magnitude. In this solution, we keep the un-pruned part as error feedback (residual) for local gradients. We accumulate pruned gradients in local buffers. Overall, training speed will increase with sparse communication but only for simple neural nets. We will have a relatively low sparsity ratio. Once we build bigger modern models,like ResNet, we face poor performance through dropping accuracy. This occurs due to <strong>momentum</strong>. 
 
 
-### 1) Gradient Pruning: Deep Gradient Compression
+### (1) Gradient Pruning: Deep Gradient Compression
 
 ![](figures/lecture-14/emelieel/deep_grad_compression.png)
 
@@ -89,7 +89,7 @@ Compared to Gradient Sparsification, we will have a higher sparsity ratio (99.9%
 
 But we still have a problem: sparse gradients gets denser during all-reduce in Deep Gradient Compression.
 
-### 1) Gradient Pruning: PowerSGD
+### (1) Gradient Pruning: PowerSGD
 
 ![](figures/lecture-14/emelieel/PowerSGD.png) 
 
@@ -101,7 +101,7 @@ As we increase the #num workers, we see a direct linear <strong>speedup</strong>
 
 As for simplicity, PowerSGD is integrated into pytorch. 
 
-### 2) Gradient Quantization: 1-Bit SGD
+### (2) Gradient Quantization: 1-Bit SGD
 
 ![](figures/lecture-14/emelieel/1bit.png) 
 
@@ -111,7 +111,7 @@ We perform 1-bit SGD through a column-wise scaling factor and quantization error
 
 We could also perform threshold quantization using a value other than 0 [[Nikko, 2015]](https://www.amazon.science/publications/scalable-distributed-dnn-training-using-commodity-gpu-cloud-computing). $\tau$ is used for both the threshold and reconstruction value and is chosen empirically in advance. Similarly to the 1-bit process above, the quantized gradient consists of the three values $\{-\tau, 0, \tau\}$. Once again, we accumulate the quantization error in the local gradient to account for the difference in values. 
 
-### 2) Gradient Quantization: TernGrad
+### (2) Gradient Quantization: TernGrad
 
 ![](figures/lecture-14/emelieel/terngrad.png) 
 
