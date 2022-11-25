@@ -121,7 +121,7 @@ Next Sentence Prediction
 
 Binarized next sentence prediction task
 
-When choosing the setnences A and B for each pretriang texample: 
+When choosing the sentences A and B for each pre-training example: 
 
 50% is the actual next sentence
 
@@ -186,7 +186,7 @@ Attention with dilated sliding window (analogous to dilated CNNs):
 
 - Dilate the sliding window with gaps of size dilation $D$.
 
-- The receptive field is enlarged from $W$ to $W x D$, with the same complexity.
+- The receptive field is enlarged from $W$ to $W * D$, with the same complexity.
 
 Global attention added on a few pre-selected input locations:
 
