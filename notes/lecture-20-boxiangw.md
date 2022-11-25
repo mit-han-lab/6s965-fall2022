@@ -11,6 +11,8 @@
 
 ## Transformer Basics
 
+<hr>
+
 It is a neural network architecture that is based on attention mechanism. It is a sequence-to-sequence model that can be used for many NLP tasks. It is also used for computer vision tasks.
 
 ### Natural Language Processing
@@ -29,9 +31,11 @@ It is a neural network architecture that is based on attention mechanism. It is 
     - Limited context information, resulting in worse modeling capability.
 - **Transformer**
   
+<br>
+
 ### Transformer
 
-![1.png](./figures/lecture-20/boxiangw/1.png)
+<hr>
 
 - Each encoder block has two sub-layers:
   - The first is a **multi-head self-attention** mechanism.
@@ -42,32 +46,36 @@ It is a neural network architecture that is based on attention mechanism. It is 
   $$LayerNorm(x+Sublayer(x))$$
 - The decoder generates the output sequence of symbols one element at a time in an auto-regressive manner.
 
+![1.png](./figures/lecture-20/boxiangw/1.png)
+
 **Multi-Head Self-Attention (MHSA)**:
-![2.png](./figures/lecture-20/boxiangw/2.png)
 
 - Project Q, K and V with h different, learned linear projections.
 - Perform the scaled dot-product attention function on each of these projected versions of Q, K and V in parallel.
 - Concatenate the output values.
 - Project the output values again, resulting in the final values.
 
+![2.png](./figures/lecture-20/boxiangw/2.png)
+
 **Feed-Forward Network (FFN)**:
-![3.png](./figures/lecture-20/boxiangw/3.png)
 
 - Each block in our encoder and decoder contains a fully connected feed-forward network, which is applied to each position separately and identically.
 - This consists of two linear transformations with a ReLU activation in between.
   $$FFN(x) = max(0,xW_1+b_1)W_2+b_2$$
 - The middle hidden size is usually larger than and input and output size (inverted bottleneck).
 
+![3.png](./figures/lecture-20/boxiangw/3.png)
+
 **Position Embedding (PE)**:
-![4.png](./figures/lecture-20/boxiangw/4.png)
 
 - Positional embedding: Information to each word about its position in the sentence.
   - Unique encoding for each word’s position in a sentence.
   - Distance between any two positions is consistent across sentences with different lengths.
   - Deterministic and generalize to longer sentences.
 
+![4.png](./figures/lecture-20/boxiangw/4.png)
+
 **Layer Normalization (LN)**:
-![5.png](./figures/lecture-20/boxiangw/5.png)
 
 - The statistics of NLP data across the batch dimension exhibit large fluctuations during training.
 - Batch normalization (BN) is more efficient as it can be fused into the linear layer.
@@ -75,17 +83,19 @@ It is a neural network architecture that is based on attention mechanism. It is 
   - PowerNorm: Rethinking Batch Normalization in Transformers [Shen et al., 2020]
   - Leveraging Batch Normalization for Vision Transformers [Yao et al., 2021]
 
+![5.png](./figures/lecture-20/boxiangw/5.png)
+
 ### Language Models
 
 **Casual Language Models (CLM) — GPT**:
-![6.png](./figures/lecture-20/boxiangw/6.png)
 
 - System works in two stages:
   - First, pre-train a transformer model on a very large amount of data in an unsupervised manner (language modeling).
   - Then, fine-tune this model on much smaller supervised datasets to solve specific tasks.
 
+![6.png](./figures/lecture-20/boxiangw/6.png)
+
 **Masked Language Models (MLM) — BERT**:
-![7.png](./figures/lecture-20/boxiangw/7.png)
 
 - Masked language modeling (MLM) is a pre-training task that is similar to CLM, but it is more challenging.
 - Task #1: Masked Language Model (MLM) 
@@ -97,34 +107,36 @@ It is a neural network architecture that is based on attention mechanism. It is 
     - 50% of the time, B is the actual next sentence that follows A.
     - 50% of the time it is a random sentence from the corpus (NotNext).
 
+![7.png](./figures/lecture-20/boxiangw/7.png)
 
 ## Applications
 
 **Image Transformer — ViT**:
-![8.png](./figures/lecture-20/boxiangw/8.png)
 
 - Vision Transformer (ViT) is a transformer-based model for image classification.
 - Split an image into fixed-size patches, linearly embed each of them, add position embeddings, and feed the resulting sequence of vectors to a standard Transformer encoder
 
+![8.png](./figures/lecture-20/boxiangw/8.png)
+
 **Video Transformer — ViViT**:
-![9.png](./figures/lecture-20/boxiangw/9.png)
 
 - Extract spatiotemporal tokens from the video, then encoded by a series of transformer layers.
 - Factorize the spatial- and temporal-dimensions of the input to handle the long sequences.
 
+![9.png](./figures/lecture-20/boxiangw/9.png)
 
 **Audio Transformer — AST**:
-![10.png](./figures/lecture-20/boxiangw/10.png)
 
 - Split the 2D audio spectrogram a sequence of 16×16 patches with overlap, and then linearly projected to a sequence of 1-D patch embeddings.
 
+![10.png](./figures/lecture-20/boxiangw/10.png)
 
 **Multi-Modal Transformer — VATT**:
-![11.png](./figures/lecture-20/boxiangw/11.png)
 
 - The VATT model is a multi-modal transformer that can be used for multimodal tasks.
 - Linearly project each modality into a feature vector and feed it into a Transformer encoder.
 
+![11.png](./figures/lecture-20/boxiangw/11.png)
 
 ## Efficient Transformers
 
@@ -177,7 +189,8 @@ sequence attend to it.
     - Decompose a 3x3 conv into 1x3 and 3x1 convs.
 - The complexity is reduced from O(H2W2) to O(H2 + W2).
 
-**Sparse Attention - Reformer**: 
+**Sparse Attention - Reformer**:
+
 *Learned Bucket-wise Attention*:
 
 - Assumption: Q (queries) = K (keys)
@@ -193,11 +206,12 @@ sequence attend to it.
 - It projects the length dimension (not the feature dimension) of keys and values to a lowerdimensional representation (from N to k).
 - Low-rank method reduces the memory complexity problem of self-attention (from N N to N×k).
 
-
 **Kernelization — Linear Transformer**:
 
 - Generalized attention can be formulated as
+  
   ![12.png](./figures/lecture-20/boxiangw/12.png)
+
 - Softmax attention is a special case with
   $$Sim(Q, K) = exp(\frac{QK^T}{\sqrt{d}})$$
 - Linearized attention is defined with
@@ -218,11 +232,12 @@ sequence attend to it.
 - Dynamically allocate resources to more promising architectures according to their fitness.
 
 **Neural Architecture Search — HAT**: Hardware-Aware Transformers
-![13.png](./figures/lecture-20/boxiangw/13.png)
 
 - FLOPs does not reflect the real measured latency.
 - Latency influencing factors of different hardware are contrasting.
 - Need hardware latency feedback to design specialized models for different hardware!
+
+![13.png](./figures/lecture-20/boxiangw/13.png)
 
 **Knowledge Distillation — DistilBERT/TinyBERT**: Feature Distillation + Attention Distillation
 
@@ -238,6 +253,7 @@ sequence attend to it.
 ## System Support
 
 **FlashAttention**:
-![14.png](./figures/lecture-20/boxiangw/14.png)
 
 - Uses tiling to reduce the number of memory reads/writes between high bandwidth memory (HBM) and on-chip SRAM (which is very expensive).
+
+![14.png](./figures/lecture-20/boxiangw/14.png)
