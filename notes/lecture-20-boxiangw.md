@@ -1,4 +1,4 @@
-# Lecture 20: MCUNet: Efficient Transformers
+# Lecture 20: Efficient Transformers
 
 ## Note Information
 
