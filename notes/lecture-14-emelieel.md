@@ -2,7 +2,7 @@
 
 ## Note Information
 
-| Title       | Neural Architecture Search - Part II                                                                            |
+| Title       | Distributed Training and Gradient Compression (Part II)                                                                            |
 |-------------|-----------------------------------------------------------------------------------------------------------------|
 | Lecturer    | Song Han                                                                                                        |
 | Date        | 10/27/2022                                                                                                      |
