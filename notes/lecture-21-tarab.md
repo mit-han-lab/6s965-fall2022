@@ -98,9 +98,11 @@ $$ X=
 \begin{bmatrix} 
 0 & 1 \\ 
 1 & 0 
-\end{bmatrix}
+\end{bmatrix}$$
 
-X|0\rangle =
+![figure](figures/lecture-21/tarab/example.png)
+
+<!-- $$ X|0\rangle =
 \begin{bmatrix}
 0 & 1 \\
 1 & 0
@@ -115,7 +117,7 @@ X|0\rangle =
 0 \\
 1
 \end{bmatrix}
-$$
+$$ -->
 
 
 
