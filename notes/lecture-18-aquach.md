@@ -1,4 +1,4 @@
-# Lecture 07: Neural Architecture Search (Part I)
+# Lecture 18: Efficient Point Cloud Recognition
 
 ## Note Information
 
