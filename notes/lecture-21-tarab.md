@@ -14,7 +14,7 @@
 
 - The number of qubits in quantum devices are increasing exponentially over time. Since the computing power increases exponentially with the number of qubits, the computing power has a doubly exponential growth.
 
-- Qubit x is shown with $|x\rangle$ which is called ket notation (column vector). Qubit x is shown with $$\langle x|$$ which is called bra notation (row vector). $\langle x|$ is conjugate transpose of $|x\rangle$.
+- Qubit x is shown with $|x\rangle$ which is called ket notation (column vector). Qubit x is shown with $\langle x|$ which is called bra notation (row vector). $\langle x|$ is conjugate transpose of $|x\rangle$.
 
 - $|0\rangle,|1\rangle$ are orthonormal basis formulated as:
   
@@ -106,15 +106,19 @@ $$ X|0\rangle =
 0 & 1 \\ 
 1 & 0 
 \end{bmatrix}  
+
 \begin{bmatrix} 
 1 \\
- 0
- \end{bmatrix}
+0
+\end{bmatrix}
+
 = 
+
 \begin{bmatrix}
- 0 \\ 
- 1 
- \end{bmatrix}$$
+0 \\ 
+1 
+\end{bmatrix}
+$$
 
 
 
