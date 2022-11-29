@@ -17,13 +17,15 @@
 - Qubit x is shown with $|x>$ which is called ket notation (column vector). Qubit x is shown with $<x|$ which is called bra notation (row vector). $<x|$ is conjugate transpose of $|x>$.
 
  $|0>,|1>$ are orthonormal basis formulated as:
-
+  
 $$ |0>= \begin{bmatrix} 1 \\ 0 \end{bmatrix} $$
+
 $$ |1>= \begin{bmatrix} 0 \\ 1 \end{bmatrix} $$
 
 - $|q>$ can be shown as a linear combination of $|0>$ and $|1>$.
 
 - Probability of measuring a state $|\psi>$ in the state $|x>$ is formulated as:
+
 $$P(|x>) = |<x|\psi>|^2 $$  
 
 - $|<0|\psi>|^2 + |<1|\psi>|^2 = 1$
@@ -35,7 +37,9 @@ $$P(|x>) = |<x|\psi>|^2 $$
 - If we measure a quantum state, it will collapse to a classical state. It means the output is either 0 or 1 (our bases). This means that measuring a quantum state results in the loss of information.
 
 - There are 2 free variables in a state. 
+
 $$ |q> = \cos(\theta)|0> +e^{i\phi}\sin(\theta)|1>$$ $$\theta, \phi \in \mathbb{R}$$
+
 $\theta, \phi$ are the spherical coordinates. Any qubit state is on the surface of this sphere (Bloch sphere).
 
 - All the quantum gates are reversible (no information is lost). The gates are rotations around the Bloch sphere. 
