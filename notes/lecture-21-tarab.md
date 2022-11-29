@@ -14,9 +14,9 @@
 
 - The number of qubits in quantum devices are increasing exponentially over time. Since the computing power increases exponentially with the number of qubits, the computing power has a doubly exponential growth.
 
-- Qubit x is shown with $|x\rangle$ which is called ket notation (column vector). Qubit x is shown with $$\langlex|$$ which is called bra notation (row vector). $\langlex|$ is conjugate transpose of $|x\rangle$.
+- Qubit x is shown with $|x\rangle$ which is called ket notation (column vector). Qubit x is shown with $$\langle x|$$ which is called bra notation (row vector). $\langle x|$ is conjugate transpose of $|x\rangle$.
 
- $|0\rangle,|1\rangle$ are orthonormal basis formulated as:
+- $|0\rangle,|1\rangle$ are orthonormal basis formulated as:
   
 $$ |0\rangle= 
 \begin{bmatrix} 
@@ -34,13 +34,13 @@ $$ |1\rangle=
 
 - Probability of measuring a state $|\psi\rangle$ in the state $|x\rangle$ is formulated as:
 
-$$P(|x\rangle) = |\langlex|\psi\rangle|^2 $$  
+$$P(|x\rangle) = |\langle x|\psi\rangle|^2 $$  
 
 - $|\langle0|\psi\rangle|^2 + |\langle1|\psi\rangle|^2 = 1$
 
 - We can measure qubit's basis other than $|0\rangle,|1\rangle$. There are infinite pairs of bases.
 
-- $i|1\rangle$ and $|1\rangle$ are equivalent in all ways that are physically relevant. Because: $|\langlex|(i|1\rangle)\rangle|^2=|i\langlex|1\rangle|^2 = |\langlex|1\rangle|^2 $
+- $i|1\rangle$ and $|1\rangle$ are equivalent in all ways that are physically relevant. Because: $|\langle x|(i|1\rangle)\rangle|^2=|i\langle x|1\rangle|^2 = |\langle x|1\rangle|^2 $
 
 - If we measure a quantum state, it will collapse to a classical state. It means the output is either 0 or 1 (our bases). This means that measuring a quantum state results in the loss of information.
 
