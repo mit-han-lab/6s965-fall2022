@@ -47,22 +47,36 @@ $\theta, \phi$ are the spherical coordinates. Any qubit state is on the surface 
 - Pauli Gates:
 
   Z gate : 
-$$ Z= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} = |0><0|-|1><1| $$
-  $|0>$ and $|1>$ are eigen-states of Z since if we apply gate Z to them, they stay the same.
+  
+$$ Z= \begin{bmatrix} 1 & 0 \\ 
+0 & -1 \end{bmatrix} = |0><0|-|1><1| $$
 
-  X gate : 
-$$ X= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} = |0><1|+|1><0| $$
+$|0>$ and $|1>$ are eigen-states of Z since if we apply gate Z to them, they stay the same.
 
-  $|+>$  and $|->$ are eigen-states of X.
+X gate : 
 
-  Y gate : 
-$$ Y= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} = -i|0><1|+i|1><0| $$
-  $|R>$  and $|L>$ are eigen-states of Y. $|R>$ is the most right point on Bloch sphere and $|L>$ is the most left point.
+$$ X= \begin{bmatrix} 0 & 1 \\ 
+1 & 0 
+\end{bmatrix} = |0><1|+|1><0| $$
+
+$|+>$  and $|->$ are eigen-states of X.
+
+Y gate : 
+
+$$ Y= \begin{bmatrix} 0 & -i \\ 
+i & 0 
+\end{bmatrix} = -i|0><1|+i|1><0| $$
+
+$|R>$  and $|L>$ are eigen-states of Y. $|R>$ is the most right point on Bloch sphere and $|L>$ is the most left point.
 
 
 - Hadamard Gate: 
 
-$$ H= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} $$
+$$ H= \frac{1}{\sqrt{2}} 
+\begin{bmatrix} 1 & 1 \\ 
+1 & -1 
+\end{bmatrix} $$
+
 $$ H|0> = |+>$$
 $$ H|1> = |->$$
 
@@ -70,8 +84,26 @@ $$ H|1> = |->$$
 ![figure](figures/lecture-21/tarab/eq1.png)
 
 - Example: Applying a gate on a single qubit:
-$$ X= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$$
-$$ X|0> = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}  \begin{bmatrix} 1 \\ 0\end{bmatrix} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$$
+$$ X= 
+\begin{bmatrix} 
+0 & 1 \\ 
+1 & 0 
+\end{bmatrix}$$
+
+$$ X|0> = 
+\begin{bmatrix} 
+0 & 1 \\ 
+1 & 0 
+\end{bmatrix}  
+\begin{bmatrix} 
+1 \\
+ 0
+ \end{bmatrix}
+= 
+\begin{bmatrix}
+ 0 \\ 
+ 1 
+ \end{bmatrix}$$
 
 
 
@@ -79,9 +111,10 @@ $$ X|0> = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}  \begin{bmatrix} 1 \\ 0\e
 
 - n bits will have $2^n$ states vector length.
 - Example: Applying gates X and H on multiple qubit state:
-$$ X|q_1>  \otimes H|q_0> = (X \otimes H)|q_1q_0>
-$$
-  $ \otimes$ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
+
+$$ X|q_1>  \otimes H|q_0> = (X \otimes H)|q_1q_0>$$
+
+$ \otimes$ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
 
 - CNOT gate: If the $q_0$ is 1, we apply a NOT on $q_1$. If the $q_0$ is 0, no change is made.
 
