@@ -100,23 +100,20 @@ $$ X=
 1 & 0 
 \end{bmatrix}$$
 
+$$ X|0\rangle =
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
 
-$$ X|0\rangle = 
-\begin{bmatrix} 
-0 & 1 \\ 
-1 & 0 
-\end{bmatrix}  
-
-\begin{bmatrix} 
+\begin{bmatrix}
 1 \\
 0
 \end{bmatrix}
-
-= 
-
+=
 \begin{bmatrix}
-0 \\ 
-1 
+0 \\
+1
 \end{bmatrix}
 $$
 
