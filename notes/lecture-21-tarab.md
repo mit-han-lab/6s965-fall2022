@@ -14,31 +14,39 @@
 
 - The number of qubits in quantum devices are increasing exponentially over time. Since the computing power increases exponentially with the number of qubits, the computing power has a doubly exponential growth.
 
-- Qubit x is shown with $|x>$ which is called ket notation (column vector). Qubit x is shown with $$<x|$$ which is called bra notation (row vector). $<x|$ is conjugate transpose of $|x>$.
+- Qubit x is shown with $|x\rangle$ which is called ket notation (column vector). Qubit x is shown with $$\langlex|$$ which is called bra notation (row vector). $\langlex|$ is conjugate transpose of $|x\rangle$.
 
- $|0>,|1>$ are orthonormal basis formulated as:
+ $|0\rangle,|1\rangle$ are orthonormal basis formulated as:
   
-$$ |0>= \begin{bmatrix} 1 \\ 0 \end{bmatrix} $$
+$$ |0\rangle= 
+\begin{bmatrix} 
+1 \\
+0 
+\end{bmatrix} $$
 
-$$ |1>= \begin{bmatrix} 0 \\ 1 \end{bmatrix} $$
+$$ |1\rangle= 
+\begin{bmatrix} 
+0 \\ 
+1 
+\end{bmatrix} $$
 
-- $|q>$ can be shown as a linear combination of $|0>$ and $|1>$.
+- $|q\rangle$ can be shown as a linear combination of $|0\rangle$ and $|1\rangle$.
 
-- Probability of measuring a state $|\psi>$ in the state $|x>$ is formulated as:
+- Probability of measuring a state $|\psi\rangle$ in the state $|x\rangle$ is formulated as:
 
-$$P(|x>) = |<x|\psi>|^2 $$  
+$$P(|x\rangle) = |\langlex|\psi\rangle|^2 $$  
 
-- $|<0|\psi>|^2 + |<1|\psi>|^2 = 1$
+- $|\langle0|\psi\rangle|^2 + |\langle1|\psi\rangle|^2 = 1$
 
-- We can measure qubit's basis other than $|0>,|1>$. There are infinite pairs of bases.
+- We can measure qubit's basis other than $|0\rangle,|1\rangle$. There are infinite pairs of bases.
 
-- $i|1>$ and $|1>$ are equivalent in all ways that are physically relevant. Because: $|<x|(i|1>)>|^2=|i<x|1>|^2 = |<x|1>|^2 $
+- $i|1\rangle$ and $|1\rangle$ are equivalent in all ways that are physically relevant. Because: $|\langlex|(i|1\rangle)\rangle|^2=|i\langlex|1\rangle|^2 = |\langlex|1\rangle|^2 $
 
 - If we measure a quantum state, it will collapse to a classical state. It means the output is either 0 or 1 (our bases). This means that measuring a quantum state results in the loss of information.
 
 - There are 2 free variables in a state. 
 
-$$ |q> = \cos(\theta)|0> +e^{i\phi}\sin(\theta)|1>$$ $$\theta, \phi \in \mathbb{R}$$
+$$ |q\rangle = \cos(\theta)|0\rangle +e^{i\phi}\sin(\theta)|1\rangle$$ $$\theta, \phi \in \mathbb{R}$$
 
 $\theta, \phi$ are the spherical coordinates. Any qubit state is on the surface of this sphere (Bloch sphere).
 
@@ -49,25 +57,25 @@ $\theta, \phi$ are the spherical coordinates. Any qubit state is on the surface 
   Z gate : 
   
 $$ Z= \begin{bmatrix} 1 & 0 \\ 
-0 & -1 \end{bmatrix} = |0><0|-|1><1| $$
+0 & -1 \end{bmatrix} = |0\rangle\langle0|-|1\rangle\langle1| $$
 
-$|0>$ and $|1>$ are eigen-states of Z since if we apply gate Z to them, they stay the same.
+$|0\rangle$ and $|1\rangle$ are eigen-states of Z since if we apply gate Z to them, they stay the same.
 
 X gate : 
 
 $$ X= \begin{bmatrix} 0 & 1 \\ 
 1 & 0 
-\end{bmatrix} = |0><1|+|1><0| $$
+\end{bmatrix} = |0\rangle\langle1|+|1\rangle\langle0| $$
 
-$|+>$  and $|->$ are eigen-states of X.
+$|+\rangle$  and $|-\rangle$ are eigen-states of X.
 
 Y gate : 
 
 $$ Y= \begin{bmatrix} 0 & -i \\ 
 i & 0 
-\end{bmatrix} = -i|0><1|+i|1><0| $$
+\end{bmatrix} = -i|0\rangle\langle1|+i|1\rangle\langle0| $$
 
-$|R>$  and $|L>$ are eigen-states of Y. $|R>$ is the most right point on Bloch sphere and $|L>$ is the most left point.
+$|R\rangle$  and $|L\rangle$ are eigen-states of Y. $|R\rangle$ is the most right point on Bloch sphere and $|L\rangle$ is the most left point.
 
 
 - Hadamard Gate: 
@@ -77,8 +85,8 @@ $$ H= \frac{1}{\sqrt{2}}
 1 & -1 
 \end{bmatrix} $$
 
-$$ H|0> = |+>$$
-$$ H|1> = |->$$
+$$ H|0\rangle = |+\rangle$$
+$$ H|1\rangle = |-\rangle$$
 
 - U gate can implement all possible gates with three parameters.
 ![figure](figures/lecture-21/tarab/eq1.png)
@@ -93,7 +101,7 @@ $$ X=
 \end{bmatrix}$$
 
 
-$$ X|0> = 
+$$ X|0\rangle = 
 \begin{bmatrix} 
 0 & 1 \\ 
 1 & 0 
@@ -116,9 +124,9 @@ $$ X|0> =
 - Example: Applying gates X and H on multiple qubit state:
 
 
-$$ X|q_1>  \otimes H|q_0> = (X \otimes H)|q_1q_0>$$
+$$ X|q_1\rangle  \otimes H|q_0\rangle = (X \otimes H)|q_1q_0\rangle$$
 
-the $ \otimes$ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
+the $ \otimes $ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
 
 - CNOT gate: If the $q_0$ is 1, we apply a NOT on $q_1$. If the $q_0$ is 0, no change is made.
 
