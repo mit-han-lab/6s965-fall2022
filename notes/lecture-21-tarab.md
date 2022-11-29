@@ -98,9 +98,9 @@ $$ X=
 \begin{bmatrix} 
 0 & 1 \\ 
 1 & 0 
-\end{bmatrix}$$
+\end{bmatrix}
 
-$$ X|0\rangle =
+X|0\rangle =
 \begin{bmatrix}
 0 & 1 \\
 1 & 0
