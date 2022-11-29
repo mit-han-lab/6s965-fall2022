@@ -14,7 +14,7 @@
 
 - The number of qubits in quantum devices are increasing exponentially over time. Since the computing power increases exponentially with the number of qubits, the computing power has a doubly exponential growth.
 
-- Qubit x is shown with $|x>$ which is called ket notation (column vector). Qubit x is shown with $<x|$ which is called bra notation (row vector). $<x|$ is conjugate transpose of $|x>$.
+- Qubit x is shown with $|x>$ which is called ket notation (column vector). Qubit x is shown with $$<x|$$ which is called bra notation (row vector). $<x|$ is conjugate transpose of $|x>$.
 
  $|0>,|1>$ are orthonormal basis formulated as:
   
@@ -84,11 +84,14 @@ $$ H|1> = |->$$
 ![figure](figures/lecture-21/tarab/eq1.png)
 
 - Example: Applying a gate on a single qubit:
+
+
 $$ X= 
 \begin{bmatrix} 
 0 & 1 \\ 
 1 & 0 
 \end{bmatrix}$$
+
 
 $$ X|0> = 
 \begin{bmatrix} 
@@ -112,9 +115,10 @@ $$ X|0> =
 - n bits will have $2^n$ states vector length.
 - Example: Applying gates X and H on multiple qubit state:
 
+
 $$ X|q_1>  \otimes H|q_0> = (X \otimes H)|q_1q_0>$$
 
-$ \otimes$ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
+the $ \otimes$ is called a tensor product. More information [here](https://en.wikipedia.org/wiki/Tensor_product).
 
 - CNOT gate: If the $q_0$ is 1, we apply a NOT on $q_1$. If the $q_0$ is 0, no change is made.
 
