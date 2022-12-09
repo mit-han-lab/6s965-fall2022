@@ -58,7 +58,7 @@ The more right we go, the more expressive the circuit
 
 The Meyer-Wallach measure tells us how entangled a given state is from unentangled (0) to full entangled (1). We can use averaged MW to measure the entanglement capability of a quantum circuit
 
-## Hardware Eggiciency
+## Hardware Efficiency
 
 We should consider the hardware efficiency to make sure noise is low when designing circuits. Qubit Connectivity is important in hardware efficiency.
 
