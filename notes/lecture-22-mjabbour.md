@@ -86,7 +86,16 @@ For instance below is a selection of circuit, and their average Meyer-wallach me
 
 
 
+#### Hardware Effeciency consideration
+
+
+Optimizing quantum circuits is a tricky problem. one thing that we try to do is minimie the number of swap gates. Another thing that matters is whether the gates we are applying are native to the machine we are deploying on or not.
+
+
+
 #### Encoding
+
+
 
 
 
