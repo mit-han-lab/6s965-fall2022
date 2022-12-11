@@ -54,14 +54,27 @@ Quantum computers are currently in what's known as the noisy interemediate-scale
 
 #### Definition of a Parametrized Quantum Circuit
 
-Quantum algorithms can be described as quantum circuits. In which some gates are fixed like the Hadamard or swap gates, and others are tunable like rotations. Below is an example:
+Quantum algorithms can be described as quantum circuits. In which some gates are fixed like the Hadamard or swap gates, and others have tunable parameters like rotations. Below is an example:
 
 ![An example circuit](./figures/lecture-22/mjabbour/circuit.png) 
 
 
 #### Expressivity of a Quantum circuit
 
+Similar to how we study the power of a traditional model by it's ability to approximate other functions. One way to study the power of a quantum model is by it's expressivity; how much of the Hilbert space it covers. More specifically we measure the KL divergence of the output of 1 when given to a random model from a uniformly random point on the Hilbert space. See some examples below:
+
+
+
+![An example circuit](./figures/lecture-22/mjabbour/expressivity.png) 
+
+
+
+
 #### Entanglement capability of a Quantum circuit
+
+
+
+
 
 #### Encoding
 
