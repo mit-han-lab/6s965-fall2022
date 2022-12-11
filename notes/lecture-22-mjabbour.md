@@ -157,7 +157,7 @@ However, this suffers from accuracy issues as in classical machines. It also doe
 * **Parameter-Shift Gradients**: It turns out that we do not need to approximate gradients! If we look closely at a function of the output of a parametrized gate $f$ (the gate is parametrized by $\theta$), we see that $\frac{\partial }{\partial \theta}f(\theta) = \frac{1}{2}(f(\theta + \frac{\pi}{2}) - f(\theta - \frac{\pi}{2}))$. Since most of our gates are rotational, this is allows us to compute explicit gradients for most gates. The proof is beyond the scope of this lecture, but we invite the interested reader to look at [[Crooks, 2019]](https://arxiv.org/abs/1905.13311) to learn more. The process is illustrated in the diagram below:
 
 
-![An example circuit](./figures/lecture-22/mjabbour/par-shift.png) 
+![An example circuit](./figures/lecture-22/mjabbour/par-shift2.png) 
 
 
 
