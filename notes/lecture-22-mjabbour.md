@@ -192,3 +192,14 @@ We see in the diagram below that this has very similar performance to gradient d
 Similar to the vanishing gradients problem that we face when training large models. Quantum machine learning has to deal with **Barren Plateaus** in which the variance of the gradient decreases a lot. Dealing with this is still an active area of research.
 
 ![An example circuit](./figures/lecture-22/mjabbour/barren.png)
+
+
+### 3. Quantum classifiers
+
+PQCs have been trained as MNIST classifiers using SPSA. the model is illustrated below:
+
+![An example circuit](./figures/lecture-22/mjabbour/mnist.png)
+
+
+
+They have also demonstrated success in other applications including Variational Quantum eigensolver and Quantum Approximate Optimization Algorithm (QAOA)
