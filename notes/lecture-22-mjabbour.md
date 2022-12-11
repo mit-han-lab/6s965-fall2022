@@ -73,6 +73,16 @@ Similar to how we study the power of a traditional model by it's ability to appr
 #### Entanglement capability of a Quantum circuit
 
 
+An altertnative measurement for the power of a quantum model is it's entanglment capacity. The Meyer-wallach measure tells how entangled a given state is with a number in [0, 1], with unentangled state being 0, and entangled state being 1. We use the average   Meyer-wallach (**averaged MW**)  to measure the entanglement capability of circuit.
+
+For instance below is a selection of circuit, and their average Meyer-wallach measures with different accross a different number of layers L. As we can see increasing the numebr of layers increases entanglment.
+
+
+
+![An example circuit](./figures/lecture-22/mjabbour/entabglement-circuits.png) 
+
+
+![An example circuit](./figures/lecture-22/mjabbour/entabglement-chart.png) 
 
 
 
