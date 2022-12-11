@@ -113,8 +113,17 @@ The numbers are encoded as the statevector of the qubits. That way For N feature
 ![An example circuit](./figures/lecture-22/mjabbour/amp.png) 
 
 
+It is also possible to encoder multiple data points together using circuits as below. However, a disadvantage of this is that the circuits tend to be a little too much for NISQ era machines.
+
+![An example circuit](./figures/lecture-22/mjabbour/encoder.png) 
+
 
 * **Angle Encoding**:
+
+We can encode the data in the rotation angles of the qubit gates. The main advantage of this is that the circuits are simpler. For instance for the vector $\[0, \frac{\pi}{4}, \frac{\pi}{2} \]$ we get the following circuit
+
+
+![An example circuit](./figures/lecture-22/mjabbour/angle.png) 
 
 
 
