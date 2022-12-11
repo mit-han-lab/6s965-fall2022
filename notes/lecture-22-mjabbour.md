@@ -22,10 +22,10 @@
 
 Quantum computers are currently in what's known as the noisy interemediate-scale (NISQ) ERA. They are charecterised by the following limitations:
 
-1. **Noisy:** Current Qubit gates have a very high error rate, on the order of $10^{-3}$.  This makes this somewhat unreliable, and makes training models challenging
-1. **Limited Number of Qubits:** Modern Quantum computers have Quits on the order of hundreds. While some of the most interesting applications like factorisation require millions of Qubits
+1. **Noisy:** Current Qubit gates have a very high error rate, on the order of $10^{-3}$.  This makes quantum computing somewhat unreliable, and makes training models challenging
+1. **Limited Number of Qubits:** Modern Quantum computers have Qubits on the order of hundreds. While some of the most interesting applications like factorization require millions of Qubits
 ![Limited number of Qubits](./figures/lecture-22/mjabbour/numqubits.png) 
-1. **Limited Connectivity:**  Having less connections between Quits dictates having to add swap operation whenever we wish to perform an operation on neighboring QBits. This complicates the issue of deceiding which logical Qubits are stored in which physical Qubits, also knows as Qubit mapping. See an example below:
+1. **Limited Connectivity:**  Having less connections between Qubits dictates having to add swap operation whenever we wish to perform an operation on none-neighboring Qubits. This complicates the issue of deceiding which logical Qubits are stored in which physical Qubits, also known as Qubit mapping. See an example below:
 
 
 
