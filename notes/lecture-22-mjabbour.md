@@ -129,5 +129,10 @@ We can encode the data in the rotation angles of the qubit gates. The main advan
 
 * **Arbitrary Encoding**: 
 
+Design **arbitrary** parameterized quantum circuit and let input data as the rotation angles
 
+![An example circuit](./figures/lecture-22/mjabbour/arb.png) 
+
+
+### 3. PQC training
 
