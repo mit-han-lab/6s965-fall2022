@@ -107,7 +107,16 @@ There are four kinds of popular encoding of numbers in quantum machines:
 
 * **Amplitude Encoding**: 
 
+The numbers are encoded as the statevector of the qubits. That way For N features, need logN qubits
+
+
+![An example circuit](./figures/lecture-22/mjabbour/amp.png) 
+
+
+
 * **Angle Encoding**:
+
+
 
 * **Arbitrary Encoding**: 
 
