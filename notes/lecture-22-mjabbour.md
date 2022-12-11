@@ -194,7 +194,7 @@ Similar to the vanishing gradients problem that we face when training large mode
 ![An example circuit](./figures/lecture-22/mjabbour/barren.png)
 
 
-### 3. Quantum classifiers
+### 4. Quantum classifiers
 
 PQCs have been trained as MNIST classifiers using SPSA. the model is illustrated below:
 
@@ -203,3 +203,103 @@ PQCs have been trained as MNIST classifiers using SPSA. the model is illustrated
 
 
 They have also demonstrated success in other applications including Variational Quantum eigensolver and Quantum Approximate Optimization Algorithm (QAOA)
+
+### 5. Noise Aware On-Chip Training (QOC)
+
+As we have mentioned earlier, contemporary quantum computers suffer from noise problems. This has severe impact on training as the model below which compares the performance of the training on simulation and reality illustrates:
+
+![An example circuit](./figures/lecture-22/mjabbour/gap.png)
+
+Fortunately, when we investigate the data we notice that small gradients are a lot more noisy than large gradients. Hence, if we choose to prone, or ignore, the small components of the gradient. We might suffer less impact from noise.
+
+![An example circuit](./figures/lecture-22/mjabbour/prune.png)
+
+
+Impirically, we observe that probablistically pruning gradients based on their magnitude performs better than setting a threshhold and determinstically pruning based on it. This is known as **Probabilistic Gradient Pruning (PGC)**. It works by itteratively repeating the following two steps:
+
+
+1. Accumelate the magnitudes of the gradients for a few iterations (*the accumelation window*).
+2. Normalize the accumelated gradients, and used the normalized values as the probablity of using coordinates of the gradient to update (*the pruning window*)
+
+![An example circuit](./figures/lecture-22/mjabbour/pgc.png)
+
+This method has been evaluated on the MNIST classifier above, and shown to perform similar to classical simulation. In fact it has even performed 2-4% better. Demonstrating it's efficacy in dealing with noise. 
+
+![An example circuit](./figures/lecture-22/mjabbour/perf.png)
+
+It has also been shown to half the training time by accelarating convergence
+
+![An example circuit](./figures/lecture-22/mjabbour/conv.png)
+
+
+### 6. TorchQuantum
+
+Finally, we conclude by showing a tool for using PQC for quantum machine learning developed at the Hanlab at MIT. This library has been designed to enable ML-assisted hardware-aware quantum algorithm design. It is great to use to simulate PGCs on classical computers as it is fast, convenient to use due to it being Pytorch native, scalable. It has features that makes it easy to do the following:
+
+* Study noise impact on PQCs
+* Develop ML model for quantum optimization
+* Supports automatic gradient computation for training parameterized quantum circuit
+* Supports GPU-accelerated tensor processing with batch mode support
+* Density matrix and state vector simulators
+* Supports construction of hybrid classical and quantum neural networks
+* Supports gate level and pulse level simulation 
+* Supports converting to other frameworks such as IBM Qiskit
+
+Below is an annotated example taken from the project's readme. We encourage the curious reader to check their [Repo](https://github.com/mit-han-lab/torchquantum)
+
+```
+import torch.nn as nn
+import torch.nn.functional as F 
+import torchquantum as tq
+import torchquantum.functional as tqf
+
+class QFCModel(nn.Module):
+  def __init__(self):
+    super().__init__()
+    self.n_wires = 4
+    self.q_device = tq.QuantumDevice(n_wires=self.n_wires) #initialize quantum device
+    self.measure = tq.MeasureAll(tq.PauliZ)
+    
+    self.encoder_gates = [tqf.rx] * 4 + [tqf.ry] * 4 + \ #specify encoder gates
+                         [tqf.rz] * 4 + [tqf.rx] * 4
+    self.rx0 = tq.RX(has_params=True, trainable=True) #  specify trainable gates
+    self.ry0 = tq.RY(has_params=True, trainable=True)
+    self.rz0 = tq.RZ(has_params=True, trainable=True)
+    self.crx0 = tq.CRX(has_params=True, trainable=True)
+
+  def forward(self, x):
+    bsz = x.shape[0]
+    # down-sample the image
+    x = F.avg_pool2d(x, 6).view(bsz, 16)
+    
+    # reset qubit states
+    self.q_device.reset_states(bsz)
+    
+    # encode the classical image to quantum domain
+    for k, gate in enumerate(self.encoder_gates):
+      gate(self.q_device, wires=k % self.n_wires, params=x[:, k])
+    
+    # add some trainable gates (need to instantiate ahead of time)
+    self.rx0(self.q_device, wires=0)
+    self.ry0(self.q_device, wires=1)
+    self.rz0(self.q_device, wires=3)
+    self.crx0(self.q_device, wires=[0, 2])
+    
+    # add some more non-parameterized gates (add on-the-fly)
+    tqf.hadamard(self.q_device, wires=3)
+    tqf.sx(self.q_device, wires=2)
+    tqf.cnot(self.q_device, wires=[3, 0])
+    tqf.qubitunitary(self.q_device0, wires=[1, 2], params=[[1, 0, 0, 0],
+                                                           [0, 1, 0, 0],
+                                                           [0, 0, 0, 1j],
+                                                           [0, 0, -1j, 0]])
+    
+    # perform measurement to get expectations (back to classical domain)
+    x = self.measure(self.q_device).reshape(bsz, 2, 2)
+    
+    # classification
+    x = x.sum(-1).squeeze()
+    x = F.log_softmax(x, dim=1)
+
+    return x
+```
