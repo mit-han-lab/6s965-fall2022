@@ -136,3 +136,24 @@ Design **arbitrary** parameterized quantum circuit and let input data as the rot
 
 ### 3. PQC training
 
+Similar to neural nets, we can try to train PQCs and optimize their parameters to perform data driven tasks.
+
+#### Gradients
+
+Our favorite optimization algorithm, gradient descent, requires that we compute gradients. We exploe two ways to do that below:
+
+* **Finite Difference Gradient**: We can always resort to what we usually do on classical computers
+
+![An example circuit](./figures/lecture-22/mjabbour/grad.png) 
+
+
+However, this suffers from accuracy issues as in classical machines. It also does not use the advantages of quantum computers.
+
+
+![An example circuit](./figures/lecture-22/mjabbour/noisy-grad.png) 
+
+
+
+* **Parameter-Shift Gradients**:
+
+
