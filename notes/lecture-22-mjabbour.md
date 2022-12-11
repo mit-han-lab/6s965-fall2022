@@ -187,3 +187,8 @@ Now that we have our gradients we can explore how to use them to train! We can a
 We see in the diagram below that this has very similar performance to gradient descent:
 
 ![An example circuit](./figures/lecture-22/mjabbour/training.png)
+
+
+Similar to the vanishing gradients problem that we face when training large models. Quantum machine learning has to deal with **Barren Plateaus** in which the variance of the gradient decreases a lot. Dealing with this is still an active area of research.
+
+![An example circuit](./figures/lecture-22/mjabbour/barren.png)
