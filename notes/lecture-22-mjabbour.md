@@ -120,7 +120,7 @@ It is also possible to encoder multiple data points together using circuits as b
 
 * **Angle Encoding**:
 
-We can encode the data in the rotation angles of the qubit gates. The main advantage of this is that the circuits are simpler. For instance for the vector $\[0, \frac{\pi}{4}, \frac{\pi}{2} \]$ we get the following circuit
+We can encode the data in the rotation angles of the qubit gates. The main advantage of this is that the circuits are simpler. This is th one we most commonly use. For instance for the vector $\[0, \frac{\pi}{4}, \frac{\pi}{2} \]$ we get the following circuit
 
 
 ![An example circuit](./figures/lecture-22/mjabbour/angle.png) 
@@ -140,7 +140,7 @@ Similar to neural nets, we can try to train PQCs and optimize their parameters t
 
 #### Gradients
 
-Our favorite optimization algorithm, gradient descent, requires that we compute gradients. We exploe two ways to do that below:
+Our favorite optimization algorithm, gradient descent, requires that we compute gradients. We exploe a few ways to do that below:
 
 * **Finite Difference Gradient**: We can always resort to what we usually do on classical computers
 
@@ -154,6 +154,30 @@ However, this suffers from accuracy issues as in classical machines. It also doe
 
 
 
-* **Parameter-Shift Gradients**:
+* **Parameter-Shift Gradients**: It turns out that we do not need to approximate gradients! If we look closely at a function of the output of a parametrized gate $f$ (the gate is parametrized by $\theta$), we see that $\frac{\partial }{\partial \theta}f(\theta) = \frac{1}{2}(f(\theta + \frac{\pi}{2}) - f(\theta - \frac{\pi}{2}))$. Since most of our gates are rotational, this is allows us to compute explicit gradients for most gates. The proof is beyond the scope of this lecture, but we invite the interested reader to look at [[Crooks, 2019]](https://arxiv.org/abs/1905.13311) to learn more. The process is illustrated in the diagram below:
 
 
+![An example circuit](./figures/lecture-22/mjabbour/par-shift.png) 
+
+
+
+* **Back propagation**: Finally, we can also use backpropagation. Though unfortunately this can not be done on actual machine as we can not measure a qubit without affecting it. This needs to take place on a simulator. The process follows the following steps:
+
+**A Full system:**
+
+We can combine the different approaches above to get gradients as follows:
+
+1. Run on QC without shift to obtain f (on quantum device)
+2. Use a classical device to get the loss Loss 
+3. Back propagate on the classical deevice to get $\frac{\partial loss}{\partial f}$
+4. use shift twice to compute $\frac{\partial f(\theta_i)}{\partial \theta_i}$ on quantum device (or use finite difference approximation)
+5. Apply the chain rule to get $\frac{\partial Loss}{\partial \theta_i}$ from the above
+
+This is summarized in the following diagram:
+
+![An example circuit](./figures/lecture-22/mjabbour/flow.png) 
+
+
+#### Training techniques:
+
+Now that we have our gradients we can explore how to use them to train!
