@@ -180,4 +180,6 @@ This is summarized in the following diagram:
 
 #### Training techniques:
 
-Now that we have our gradients we can explore how to use them to train!
+Now that we have our gradients we can explore how to use them to train! We can always use gradient descent. However, as you can see above, the derivative with respect to each parameter requires running the circuit two extra times. So for $N$ parameters we need to run it $2N + 1$ time per iteration. This can be prohibitively ineffecient. Therefore, we approximate the gradient from the two-phase shift, by shifting all the parameters simultaneously. Also known as **Simultaneous Perturbation Stochastic Approximation (SPSA)** as illustrated below:
+
+![An example circuit](./figures/lecture-22/mjabbour/spsa.png) 
