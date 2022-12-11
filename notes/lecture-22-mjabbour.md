@@ -103,7 +103,7 @@ There are four kinds of popular encoding of numbers in quantum machines:
 
 * **Basis Encoding**: Same the encoding used in classical data, where to represent an integer of size at most $2^n$ we require $n$ bits. For instance if $x = 2$ is reprented as $10$ on a classical machine we represent as $|10>$. This is clearly ineffecient as it does use the advantages of quantum computers.
 
-![An example circuit](./figures/lecture-22/mjabbour/binary.png =100x20) 
+![An example circuit](./figures/lecture-22/mjabbour/binary.png) 
 
 * **Amplitude Encoding**: 
 
