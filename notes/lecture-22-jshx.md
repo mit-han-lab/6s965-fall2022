@@ -52,7 +52,7 @@ We define the *Expressivity* of a quantum circuit as how much it covers the Hilb
 
 The more right we go, the more expressive the circuit
 
-![Expressivity of different circuits](figures/lecture-22/jshx/expressivity.png)
+![Expressivity of different circuits](figures/lecture-22/jshx/expressivity.PNG)
 
 ## Entanglement Capability
 
@@ -83,13 +83,13 @@ We just design an arbitrary parameterized quantum circuit and use input data as 
 
 Train parameters in PQC to perform data-driven tasks. Similar to a classical approach, we train parameters and compute a cost function, in the quantum case, we are iteratively updating the parameters using gradients or compute some function. We can even utilize gradient descent.
 
-![Training and Gradient Descent](figures/lecture-22/jshx/tgd.png)
+![Training and Gradient Descent](figures/lecture-22/jshx/tgd.PNG)
 
 We can use Finite Difference Gradient to compute any arbitrary gradients. However, it's only an approximation.
 
 We can use Parameter-Shift Gradient to compute analytical gradients.
 
-![Parameter-Shift Circuit](figures/lecture-22/jshx/psc.png)
+![Parameter-Shift Circuit](figures/lecture-22/jshx/psc.PNG)
 
 To parameter-shift, we first calculate the gradient of $\theta$ with respect to $f(\theta)$, then we shift $\theta$ in the positive direction by $\pi/2$, then in the negative direction by $\pi/2$ we get the analytical value of the gradient.
 
