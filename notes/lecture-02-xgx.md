@@ -25,7 +25,7 @@ $y_i = \sum_j w_{ij}x_j+b_i$, where $n$ is the batch size, $c_i$ is the number o
 
 | Tensors             | Shapes       |
 | ------------------- | ------------ |
-| Input Features $X$  | $(n, c_i)$  |
+| Input Features $X$  | $(n, c_i)$   |
 | Output Features $Y$ | $(n, c_o)$   |
 | Weights $W$         | $(c_o, c_i)$ |
 | Bias $b$            | $(c_o, )$    |
@@ -44,7 +44,7 @@ The output neuron is only connected to input neurons in the receptive field.
 - Multiplications needed to calculate a single output element equals the size of the convolution kernels.
 
 - How to calculate output height and width?
-
+  
   $h_o = h_i - k_h + 1$
 
 #### Padding
@@ -73,7 +73,7 @@ $h_o = \frac{h_i + 2p-k_h}{s}+1$, where s is the stride and p is the padding.
 
 #### Group convolution layer
 
-A group of narrower convolutions.
+A **Grouped Convolution** uses a group of convolutions - multiple kernels per layer - resulting in multiple channel outputs per layer. This leads to wider networks helping a network learn a varied set of low level and high level features.
 
 Weights W: $(c_o, c_i, k_h, k_w) \rightarrow (g \times c_o/g, c_i/g, k_h, k_w)$  
 
@@ -139,9 +139,11 @@ Latency = $max(T_{operation}, T_{memory})$
 
 ### Energy consumption
 
-Data movement -> more memory reference -> more energys
+Memory accesses are more energy-consuming than computations. Below is a ranking of energy consumption:
 
 DRAM Access > SRAM Access > FP Mult > INT Mult > Register File > FP Add > INT Add
+
+Therefore, we should avoid data movement, since the more data movement, the more memory references will lead to more energy consumption.
 
 ### Memory-related metrics
 
