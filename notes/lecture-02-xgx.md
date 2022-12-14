@@ -55,7 +55,7 @@ Padding keeps the output feature map size the same as the input feature map size
   
   $h_o = h_i + 2p-k_h + 1$
 
-- Other: reflection padding, replication padding, constant padding.
+- Other: Reflection Padding, replication padding, constant padding.
 
 #### Receptive field
 
